@@ -32,10 +32,10 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    const updated = await Product.update(req.body, {
+    const [ number, updated ] = await Product.update(req.body, {
       where: { id: req.params.productId }
     });
-    res.json(updated);
+    res.json(updated[0]);
   } catch (err) {
     next(err);
   }
@@ -44,9 +44,9 @@ router.put('/:productId', async (req, res, next) => {
 router.delete('/:productId', async (req, res, next) => {
   try {
     await Product.destroy({
-      where: {id: req.params.productId}
-    })
-    res.sendStatus(204)
+      where: { id: req.params.productId }
+    });
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
