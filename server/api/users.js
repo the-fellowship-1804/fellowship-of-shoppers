@@ -52,7 +52,7 @@ router.put('/:id', (req, res, next) => {
       plain: true,
     }
   )
-    .then(updatedUser => res.json(updatedUser))
+    .then(updatedUser => res.json(updatedUser[1].dataValues))
     .catch(next)
 })
 
@@ -68,7 +68,7 @@ router.put(`/cart/:id`, (req, res, next) => {
       plain: true,
     }
   )
-    .then(updatedUser => res.json(updatedUser))
+    .then(updatedUser => res.json(updatedUser[1].dataValues))
     .catch(next)
 })
 
