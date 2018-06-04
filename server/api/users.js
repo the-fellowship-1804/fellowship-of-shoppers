@@ -37,37 +37,11 @@ router.get('/:id', (req, res, next) => {
 
 //Update a user's info
 router.put('/:id', (req, res, next) => {
-  User.update(
-    {
-      email: req.body.email,
-      password: req.body.password,
-      lastName: req.body.lastName,
-      firstName: req.body.firstName,
-      address: req.body.address,
-      paymentInfo: req.body.paymentInfo,
-    },
-    {
-      where: {id: req.params.id},
-      returning: true,
-      plain: true,
-    }
-  )
-    .then(updatedUser => res.json(updatedUser[1].dataValues))
-    .catch(next)
-})
-
-//Update a user's cart
-router.put(`/cart/:id`, (req, res, next) => {
-  User.update(
-    {
-      cart: req.body.cart,
-    },
-    {
-      where: {id: req.params.id},
-      returning: true,
-      plain: true,
-    }
-  )
+  User.update(req.body, {
+    where: {id: req.params.id},
+    returning: true,
+    plain: true,
+  })
     .then(updatedUser => res.json(updatedUser[1].dataValues))
     .catch(next)
 })
