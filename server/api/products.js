@@ -33,7 +33,8 @@ router.post('/', async (req, res, next) => {
 router.put('/:productId', async (req, res, next) => {
   try {
     const [ number, updated ] = await Product.update(req.body, {
-      where: { id: req.params.productId }
+      where: { id: req.params.productId },
+      returning: true
     });
     res.json(updated[0]);
   } catch (err) {
