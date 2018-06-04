@@ -10,3 +10,13 @@ router.get('/', (req, res, next) => {
     next(err);
   }
 });
+
+router.get('/:productid', (req, res, next) => {
+  try {
+    const productId = req.params.productid;
+    const product = Product.findById(productId);
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
