@@ -30,6 +30,15 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// router put
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const updated = await Product.update(req.body, {
+      where: { id: req.params.productId }
+    });
+    res.json(updated);
+  } catch (err) {
+    next(err);
+  }
+});
 
 // router delete
