@@ -24,7 +24,7 @@ router.get('/:productid', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body);
-    res.setStatus(201).json(newProduct);
+    res.status(201).json(newProduct);
   } catch (err) {
     next(err);
   }
