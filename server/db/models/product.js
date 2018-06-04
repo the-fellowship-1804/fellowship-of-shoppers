@@ -13,7 +13,8 @@ const Product = db.define("product", {
   depth: Sequelize.DECIMAL,
   topSpeed: Sequelize.DECIMAL,
   acceleration: Sequelize.DECIMAL,
-  class: Sequelize.STRING
+  class: Sequelize.STRING,
+  productDescription: Sequelize.TEXT
   //crew??
   //passengers??
 });
