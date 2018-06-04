@@ -41,4 +41,13 @@ router.put('/:productId', async (req, res, next) => {
   }
 });
 
-// router delete
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    await Product.destroy({
+      where: {id: req.params.productId}
+    })
+    res.sendStatus(204)
+  } catch (err) {
+    next(err);
+  }
+});
