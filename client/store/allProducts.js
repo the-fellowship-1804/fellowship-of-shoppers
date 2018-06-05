@@ -9,21 +9,15 @@ const [UNASKED, LOADING,  LOADED, ERROR] = [
 ]
 
 const LOADING_PRODUCTS = "LOADING_PRODUCTS"
-
 const loadingAllProducts = () => ({
   type: LOADING_PRODUCTS
 })
 
+const LOADED_PRODUCTS = "LOADED_PRODUCTS"
 const gotProducts = (products) => ({
-  type: LOADED,
+  type: LOADED_PRODUCTS,
   products
 })
-
-const errorProducts = (error) => ({
-  type: ERROR,
-  error
-})
-
 export const getProducts = () => {
   return async (dispatch) => {
     try {
@@ -36,6 +30,11 @@ export const getProducts = () => {
   }
 }
 
+const ERROR_PRODUCTS = "ERROR_PRODUCTS"
+const errorProducts = (error) => ({
+  type: ERROR_PRODUCTS,
+  error
+})
 const initialState = {
   products: [],
   status: UNASKED
@@ -48,12 +47,19 @@ const allProductsRed = (state = initialState, action) => {
         ...state,
         status: LOADING
       })
-    case LOADED:
+    case LOADED_PRODUCTS:
       return ({
         ...state,
         products: action.products,
         status: LOADED
       })
-    default: state
+    case ERROR_PRODUCTS:
+      return ({
+        ...state,
+        status: ERROR
+      })
+    default: return state
   }
 }
+
+export default allProductsRed;
