@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
-const OrderHistory = (props) => {
-  const { email, orderHistory } = props.user;
+const OrderHistory = props => {
   return (
-    <h2>{email}'s Order History: </h2>
-  )
-}
+    <div>
+      <h2>{props.user.email}'s Order History: </h2>
+      {props.productInfo.map(product => (
+        <ProductCard product={product} key={product.id} />
+      ))}
+    </div>
+  );
+};
 
 export default OrderHistory;

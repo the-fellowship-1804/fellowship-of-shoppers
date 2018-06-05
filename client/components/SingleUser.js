@@ -10,12 +10,14 @@ class SingleUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayHistory: false
+      displayHistory: false,
+      productInfo: []
     };
   }
 
   handleClick = () => {
     this.setState({ displayHistory: true });
+    // dispatch thunk to grab all the product info based on id in order history
   };
 
   render() {
@@ -32,7 +34,7 @@ class SingleUser extends React.Component {
         <button onClick={this.handleClick} type="button">
           Show Order History
         </button>
-        {this.state.displayHistory ? <OrderHistory user={this.props.user} /> : null}
+        {this.state.displayHistory ? <OrderHistory productInfo={this.state.productInfo} user={this.props.user} /> : null}
       </div>
     );
   }
