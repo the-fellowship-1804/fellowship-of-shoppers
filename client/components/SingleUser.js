@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import OrderHistory from './OrderHistory';
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import OrderHistory from "./OrderHistory";
 
-/**
- * COMPONENT
- */
+import getProducts from "../store/allProducts";
+
 class SingleUser extends React.Component {
   constructor(props) {
     super(props);
@@ -15,9 +14,18 @@ class SingleUser extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.state.props.getProducts().catch(err => console.log(err));
+  }
+
   handleClick = () => {
     this.setState({ displayHistory: true });
-    // dispatch thunk to grab all the product info based on id in order history
+    const tempProductInfo = this.state.props.allProducts.products.filter(
+      product => this.state.props.user.OrderHistory.includes(product.id)
+    );
+    this.setState({
+      productInfo: tempProductInfo
+    });
   };
 
   render() {
@@ -50,8 +58,18 @@ class SingleUser extends React.Component {
  */
 const mapState = state => {
   return {
-    user: state.singleUser
+    user: state.singleUser,
+    allProducts: state.allProducts
   };
 };
 
-export default connect(mapState)(SingleUser);
+const mapProps = dispatch => {
+  return {
+    getProducts: () => dispatch(getProducts())
+  };
+};
+
+export default connect(
+  mapState,
+  mapProps
+)(SingleUser);

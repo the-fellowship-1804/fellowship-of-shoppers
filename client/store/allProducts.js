@@ -8,9 +8,12 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   "ERROR"
 ];
 
+//Action types
 const LOADING_PRODUCTS = "LOADING_PRODUCTS";
 
 const LOADED_PRODUCTS = "LOADED_PRODUCTS";
+
+const ERROR_PRODUCTS = "ERROR_PRODUCTS";
 
 export const getProducts = () => {
   return async dispatch => {
@@ -24,14 +27,12 @@ export const getProducts = () => {
   };
 };
 
-const ERROR_PRODUCTS = "ERROR_PRODUCTS";
-
 const initialState = {
   products: [],
   status: UNASKED
 };
 
-const allProductsRed = (state = initialState, action) => {
+const allProductsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOADING_PRODUCTS:
       return {
@@ -54,4 +55,4 @@ const allProductsRed = (state = initialState, action) => {
   }
 };
 
-export default allProductsRed;
+export default allProductsReducer;
