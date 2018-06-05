@@ -5,15 +5,19 @@ import {
   Switch,
   withRouter
 } from "react-router-dom";
-import { Navbar } from "./components";
+// import { Navbar } from "./components";
 import Routes from "./routes";
+import AllProducts from "./components/AllProducts";
+import SingleProduct from "./components/SingleProduct";
 
 const App = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div id="body-root">
         <Switch>
+          <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/products/:productId" component={SingleProduct} />
           {/* <Route exact path="/" component={WinterJokes} />
           <Route exact path="/campuses" component={AllCampuses} />
           <Route exact path="/campuses/add" component={AddCampus} />
@@ -29,7 +33,7 @@ const App = () => {
           <Route exact path="/students/:studentId" component={SingleStudent} />
           <Route component={Raven} /> */}
         </Switch>
-        <FootBar />
+        {/* <FootBar /> */}
       </div>
     </div>
   );
