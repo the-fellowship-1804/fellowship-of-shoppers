@@ -32,7 +32,7 @@ class SingleUser extends React.Component {
         <button onClick={this.handleClick} type="button">
           Show Order History
         </button>
-        {this.state.displayHistory ? <OrderHistory orderHistory={orderHistory}/> : null}
+        {this.state.displayHistory ? <OrderHistory user={this.props.user} /> : null}
       </div>
     );
   }
