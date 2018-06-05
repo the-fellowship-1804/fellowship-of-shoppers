@@ -14,20 +14,6 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-//Create new user
-router.post('/', (req, res, next) => {
-  User.create({
-    email: req.body.email,
-    password: req.body.password,
-    lastName: req.body.lastName,
-    firstName: req.body.firstName,
-    address: req.body.address,
-    paymentInfo: req.body.paymentInfo,
-  })
-    .then(newUser => res.json(newUser))
-    .catch(next)
-})
-
 //Get one user
 router.get('/:id', (req, res, next) => {
   User.findById(req.params.id)

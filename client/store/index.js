@@ -13,7 +13,7 @@ export const aCC = (type, payload) => ({ type, payload });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
+
 const store = createStore(reducer, middleware);
 
 export default store;
-// export * from "./user";
