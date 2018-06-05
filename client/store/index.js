@@ -7,10 +7,14 @@ import singleProduct from "./singleProduct.js";
 import allProducts from "./allProducts.js";
 
 const reducer = combineReducers({ singleUser, allProducts, singleProduct });
+
+export const aCC = (type, payload) => ({ type, payload });
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
+
 const store = createStore(reducer, middleware);
 
+export { auth } from "./singleUser.js";
 export default store;
-export * from "./user";
