@@ -21,7 +21,7 @@ class SingleUser extends React.Component {
   };
 
   render() {
-    const { email, imageUrl, address, orderHistory } = this.props.user;
+    const { email, imageUrl, address } = this.props.user;
     return (
       <div>
         <h3>Welcome, {email}</h3>
@@ -34,7 +34,12 @@ class SingleUser extends React.Component {
         <button onClick={this.handleClick} type="button">
           Show Order History
         </button>
-        {this.state.displayHistory ? <OrderHistory productInfo={this.state.productInfo} user={this.props.user} /> : null}
+        {this.state.displayHistory ? (
+          <OrderHistory
+            productInfo={this.state.productInfo}
+            user={this.props.user}
+          />
+        ) : null}
       </div>
     );
   }
@@ -45,7 +50,7 @@ class SingleUser extends React.Component {
  */
 const mapState = state => {
   return {
-    user: state.user
+    user: state.singleUser
   };
 };
 
