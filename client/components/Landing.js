@@ -14,13 +14,9 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
 class Landing extends Component {
   componentDidMount() {
     this.props.getProducts();
-
   }
 
   render() {
-    const deathStar = this.props.products.find((ship) => {
-      ship.productName === 'the Death Star'
-    })
 
     switch (this.props.status) {
       case UNASKED: {
@@ -30,13 +26,17 @@ class Landing extends Component {
         return <p>LOADING...</p>;
       }
       case LOADED: {
+        const deathStar = this.props.products.find((ship) => {
+          return ship.productName === 'the Death Star'
+        })
+
         return (
 
           <div>
             <h1>FLASH SALE!</h1>
             <ProductCard product={deathStar} />
             <h6>A message from the Dealers....</h6>
-              <p>Chris is happy and calm. The sky is blue, Matt wears cool socks, the stars are shining, and the galaxy awaits. Choose a ship and let the journey begin!</p>
+              <p>Chris is happy and calm. The sky is blue, the stars are shining, and the galaxy awaits. Choose a ship and let the journey begin! *wink*!</p>
           </div>
         );
       }
