@@ -29,16 +29,22 @@ const User = db.define('user', {
     type: Sequelize.STRING,
   },
   address: Sequelize.STRING,
-  paymentInfo: Sequelize.JSON,
+  paymentInfo: {
+    type: Sequelize.JSON,
+    //I don't know well this will work, but mimicking the method the boilerplate uses for pw and salt
+    get() {
+      return () => this.getDataValue('paymentInfo')
+    },
+  },
   cart: {
     type: Sequelize.ARRAY(Sequelize.INTEGER),
     defaultValue: [],
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
-});
+})
 
 module.exports = User
 
