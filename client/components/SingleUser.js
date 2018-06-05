@@ -1,34 +1,50 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import OrderHistory from './OrderHistory';
 
 /**
  * COMPONENT
  */
-export const SingleUser = (props) => {
-  const {email} = props
+class SingleUser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayHistory: false
+    };
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+  handleClick = () => {
+    this.setState({ displayHistory: true });
+  };
+
+  render() {
+    const { email, imageUrl, address, orderHistory } = this.props.user;
+    return (
+      <div>
+        <h3>Welcome, {email}</h3>
+        <img src={imageUrl} />
+        <h4>Your Address: {address}</h4>
+        <button type="button">
+          View Cart
+          <Link to="/cart" />
+        </button>
+        <button onClick={this.handleClick} type="button">
+          Show Order History
+        </button>
+        {this.state.displayHistory ? <OrderHistory orderHistory={orderHistory}/> : null}
+      </div>
+    );
+  }
 }
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = state => {
   return {
-    email: state.user.email
-  }
-}
+    user: state.user
+  };
+};
 
-export default connect(mapState)(SingleUser)
-
-/**
- * PROP TYPES
- */
-SingleUser.propTypes = {
-  email: PropTypes.string
-}
+export default connect(mapState)(SingleUser);
