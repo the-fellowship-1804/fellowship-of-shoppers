@@ -16,4 +16,5 @@ const middleware = composeWithDevTools(
 
 const store = createStore(reducer, middleware);
 
+export { auth } from "./singleUser.js";
 export default store;

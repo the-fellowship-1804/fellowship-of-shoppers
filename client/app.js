@@ -11,6 +11,7 @@ import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import Landing from "./components/Landing";
 import { Navbar, SingleUser } from "./components";
+import { Signup, Login } from "./components/auth-form";
 
 const App = () => {
   return (
@@ -23,6 +24,8 @@ const App = () => {
           <Route exact path="/products/:productId" component={SingleProduct} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/user" component={SingleUser} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
           {/* <Route exact path="/" component={WinterJokes} />
           <Route exact path="/campuses" component={AllCampuses} />
           <Route exact path="/campuses/add" component={AddCampus} />

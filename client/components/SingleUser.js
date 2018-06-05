@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import OrderHistory from "./OrderHistory";
-
-import getProducts from "../store/allProducts";
+import { getProducts } from "../store/allProducts";
 
 class SingleUser extends React.Component {
   constructor(props) {
@@ -15,7 +14,9 @@ class SingleUser extends React.Component {
   }
 
   componentDidMount() {
-    this.state.props.getProducts().catch(err => console.log(err));
+    console.log(this.props);
+    console.log(this.state);
+    this.props.getProducts().catch(err => console.log(err));
   }
 
   handleClick = () => {
@@ -63,11 +64,7 @@ const mapState = state => {
   };
 };
 
-const mapProps = dispatch => {
-  return {
-    getProducts: () => dispatch(getProducts())
-  };
-};
+const mapProps = { getProducts };
 
 export default connect(
   mapState,
