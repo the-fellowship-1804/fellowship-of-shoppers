@@ -10,13 +10,14 @@ import Routes from "./routes";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import Landing from "./components/Landing";
-
+import { Navbar } from "./components";
 
 const App = () => {
   return (
     <div>
       {/* <Navbar /> */}
       <div id="body-root">
+        <Navbar />
         <Switch>
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:productId" component={SingleProduct} />
