@@ -8,6 +8,7 @@ import allProducts from "./allProducts.js";
 
 const reducer = combineReducers({ singleUser, allProducts, singleProduct });
 
+export const aCC = (type, payload) => ({ type, payload });
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

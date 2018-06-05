@@ -30,7 +30,7 @@ class AllProducts extends Component {
           <div>
             <h1>All Products</h1>
             {allProducts.map(product => {
-              return <ProductCard product={product} />;
+              return <ProductCard key={product.id} product={product} />;
             })}
           </div>
         );

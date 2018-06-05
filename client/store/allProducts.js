@@ -1,65 +1,57 @@
-import axios from 'axios';
+import axios from "axios";
+import { aCC } from "./index.js";
 
-
-const [UNASKED, LOADING,  LOADED, ERROR] = [
+const [UNASKED, LOADING, LOADED, ERROR] = [
   "UNASKED",
   "LOADING",
   "LOADED",
   "ERROR"
-]
+];
 
-const LOADING_PRODUCTS = "LOADING_PRODUCTS"
-const loadingAllProducts = () => ({
-  type: LOADING_PRODUCTS
-})
+const LOADING_PRODUCTS = "LOADING_PRODUCTS";
 
-const LOADED_PRODUCTS = "LOADED_PRODUCTS"
-const gotProducts = (products) => ({
-  type: LOADED_PRODUCTS,
-  products
-})
+const LOADED_PRODUCTS = "LOADED_PRODUCTS";
+
 export const getProducts = () => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
-      dispatch(loadingAllProducts())
-      const { data } = await axios.get('api/products')
-      dispatch(gotProducts(data))
+      dispatch(aCC(LOADING_PRODUCTS));
+      const { data } = await axios.get("/api/products");
+      dispatch(aCC(LOADED_PRODUCTS, data));
     } catch (err) {
-      dispatch(errorProducts(err))
+      dispatch(aCC(ERROR_PRODUCTS, err));
     }
-  }
-}
+  };
+};
 
-const ERROR_PRODUCTS = "ERROR_PRODUCTS"
-const errorProducts = (error) => ({
-  type: ERROR_PRODUCTS,
-  error
-})
+const ERROR_PRODUCTS = "ERROR_PRODUCTS";
+
 const initialState = {
   products: [],
   status: UNASKED
-}
+};
 
 const allProductsRed = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOADING_PRODUCTS:
-      return ({
+      return {
         ...state,
         status: LOADING
-      })
+      };
     case LOADED_PRODUCTS:
-      return ({
+      return {
         ...state,
-        products: action.products,
+        products: action.payload,
         status: LOADED
-      })
+      };
     case ERROR_PRODUCTS:
-      return ({
+      return {
         ...state,
         status: ERROR
-      })
-    default: return state
+      };
+    default:
+      return state;
   }
-}
+};
 
 export default allProductsRed;
