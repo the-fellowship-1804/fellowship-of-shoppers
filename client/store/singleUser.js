@@ -1,11 +1,14 @@
 import axios from 'axios';
 import history from '../history';
+import { aCC } from '.';
 
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
+const ADD_TO_CART = 'ADD_TO_CART';
+const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 /**
  * INITIAL STATE
@@ -52,6 +55,22 @@ export const logout = () => dispatch =>
     })
     .catch(err => console.log(err));
 
+export const addToCart = (userId, product) => async dispatch => {
+  try {
+    await axios.put(`/api/users/${userId}`, { addProductToCart: product });
+    dispatch(aCC(ADD_TO_CART, product));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const removeFromCart = (userId, cart) => dispatch =>
+  axios
+    .put(`/api/user/${userId}`, cart)
+    .then(_ => {
+      dispatch(aCC(REMOVE_FROM_CART, cart));
+    })
+    .catch(err => console.log(err));
 /**
  * REDUCER
  */
@@ -61,6 +80,10 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser;
+    case ADD_TO_CART:
+      return { ...state, cart: [...state.cart, action.payload] };
+    case REMOVE_FROM_CART:
+      return { ...state, cart: action.payload };
     default:
       return state;
   }

@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getProducts } from "../store/allProducts";
-import { withRouter, Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getProducts } from '../store/allProducts';
+import { addToCart } from '../store/singleUser';
+import { withRouter, Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
-  "UNASKED",
-  "LOADING",
-  "LOADED",
-  "ERROR"
+  'UNASKED',
+  'LOADING',
+  'LOADED',
+  'ERROR'
 ];
 
 class SingleProduct extends Component {
@@ -16,11 +17,18 @@ class SingleProduct extends Component {
     this.props.getProducts();
   }
 
+  handleClick = () => {
+    const updatedCart = [
+      ...this.props.user.cart,
+      this.props.match.params.productId
+    ];
+    this.props
+      .addToCart(this.props.user.id, updatedCart)
+      .catch(err => console.log(err));
+  };
+
   render() {
-    const productId = this.props.match.params.productId;
-    const product = this.props.products.find(
-      product => product.id == productId
-    );
+    const product = this.props.product;
     switch (this.props.status) {
       case UNASKED: {
         return <p>we dont want this</p>;
@@ -37,7 +45,7 @@ class SingleProduct extends Component {
               {product.weight ? (
                 <li id="single-product-weight">Weight: {product.weight}</li>
               ) : (
-                ""
+                ''
               )}
               <li id="single-product-height"> Height: {product.height} </li>
               <li id="single-product-width">Width: {product.width}</li>
@@ -59,21 +67,29 @@ class SingleProduct extends Component {
             <Link to="/products">
               <button type="button">back to the future~~</button>
             </Link>
+            <button type="button" onClick={this.handleClick}>
+              Add to cart
+            </button>
           </div>
         );
       }
+      default:
+        return <div> sorry man; mistakes were made </div>;
     }
   }
 }
 
 const mapSTP = state => {
   return {
-    products: state.allProducts.products,
-    status: state.allProducts.status
+    product: state.allProducts.products.find(
+      product => product.id == this.props.match.params.productId
+    ),
+    status: state.allProducts.status,
+    user: state.singleUser
   };
 };
 
-const mapDTP = { getProducts };
+const mapDTP = { getProducts, addToCart };
 
 export default withRouter(
   connect(
