@@ -14,18 +14,16 @@ class SingleUser extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
-    console.log(this.state);
     this.props.getProducts().catch(err => console.log(err));
   }
 
   handleClick = () => {
-    this.setState({ displayHistory: true });
     const tempProductInfo = this.state.props.allProducts.products.filter(
       product => this.state.props.user.OrderHistory.includes(product.id)
     );
     this.setState({
-      productInfo: tempProductInfo
+      productInfo: tempProductInfo,
+      displayHistory: true
     });
   };
 

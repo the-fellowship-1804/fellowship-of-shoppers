@@ -1,9 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Route, Switch } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { Login, Signup, SingleUser, Landing, AllProducts, SingleProduct } from './components';
-import { me } from './store';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch } from "react-router-dom";
+import PropTypes from "prop-types";
+import {
+  Login,
+  Signup,
+  SingleUser,
+  Landing,
+  AllProducts,
+  SingleProduct,
+  Checkout
+} from "./components";
+import { me } from "./store";
 
 /**
  * COMPONENT
@@ -22,6 +30,7 @@ class Routes extends Component {
         <Route exact path="/" component={Landing} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route exact path="/cart" component={Checkout} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
@@ -42,7 +51,6 @@ class Routes extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey

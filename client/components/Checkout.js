@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
+import ProductCard from "./ProductCard";
+import { removeFromCart } from "../store/singleUser";
 
-import { removeFromCart } from '../store/singleUser';
-
-class SingleUser extends React.Component {
+class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -29,21 +29,22 @@ class SingleUser extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <h3>Checkout</h3>
         <button type="button" onClick={this.handleCheckout}>
           Checkout!
         </button>
-        <button onClick={this.handleClick} type="button">
-          Show Order History
-        </button>
-        {this.state.displayHistory ? (
-          <OrderHistory
-            productInfo={this.state.productInfo}
-            user={this.props.user}
-          />
-        ) : null}
+        {this.props.user.id
+          ? this.props.user.cart.map(product => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onCheckoutPage={true}
+              />
+            ))
+          : null}
       </div>
     );
   }
@@ -54,14 +55,13 @@ class SingleUser extends React.Component {
  */
 const mapState = state => {
   return {
-    user: state.singleUser,
-    allProducts: state.allProducts
+    user: state.singleUser
   };
 };
 
-const mapProps = { getProducts, removeFromCart };
+const mapProps = { removeFromCart };
 
 export default connect(
   mapState,
   mapProps
-)(SingleUser);
+)(Checkout);

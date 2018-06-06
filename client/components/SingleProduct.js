@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getProducts } from '../store/allProducts';
-import { addToCart } from '../store/singleUser';
-import { withRouter, Link } from 'react-router-dom';
-import ProductCard from './ProductCard';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getProducts } from "../store/allProducts";
+import { addToCart } from "../store/singleUser";
+import { withRouter, Link } from "react-router-dom";
+import ProductCard from "./ProductCard";
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
-  'UNASKED',
-  'LOADING',
-  'LOADED',
-  'ERROR'
+  "UNASKED",
+  "LOADING",
+  "LOADED",
+  "ERROR"
 ];
 
 class SingleProduct extends Component {
@@ -18,17 +18,18 @@ class SingleProduct extends Component {
   }
 
   handleClick = () => {
-    const updatedCart = [
-      ...this.props.user.cart,
-      this.props.match.params.productId
-    ];
+    const product = this.props.products.find(
+      product => product.id == this.props.match.params.productId
+    );
     this.props
-      .addToCart(this.props.user.id, updatedCart)
+      .addToCart(this.props.user.id, product)
       .catch(err => console.log(err));
   };
 
   render() {
-    const product = this.props.product;
+    const product = this.props.products.find(
+      product => product.id == this.props.match.params.productId
+    );
     switch (this.props.status) {
       case UNASKED: {
         return <p>we dont want this</p>;
@@ -45,7 +46,7 @@ class SingleProduct extends Component {
               {product.weight ? (
                 <li id="single-product-weight">Weight: {product.weight}</li>
               ) : (
-                ''
+                ""
               )}
               <li id="single-product-height"> Height: {product.height} </li>
               <li id="single-product-width">Width: {product.width}</li>
@@ -67,6 +68,7 @@ class SingleProduct extends Component {
             <Link to="/products">
               <button type="button">back to the future~~</button>
             </Link>
+            <p> this should be here </p>
             <button type="button" onClick={this.handleClick}>
               Add to cart
             </button>
@@ -81,9 +83,7 @@ class SingleProduct extends Component {
 
 const mapSTP = state => {
   return {
-    product: state.allProducts.products.find(
-      product => product.id == this.props.match.params.productId
-    ),
+    products: state.allProducts.products,
     status: state.allProducts.status,
     user: state.singleUser
   };
