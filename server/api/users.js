@@ -1,6 +1,6 @@
-const router = require('express').Router()
-const {User} = require('../db/models')
-module.exports = router
+const router = require('express').Router();
+const { User } = require('../db/models');
+module.exports = router;
 
 //Get all users
 router.get('/', (req, res, next) => {
@@ -11,26 +11,38 @@ router.get('/', (req, res, next) => {
     attributes: ['id', 'email'],
   })
     .then(users => res.json(users))
-    .catch(next)
-})
+    .catch(next);
+});
 
 //Get one user
 router.get('/:id', (req, res, next) => {
   User.findById(req.params.id)
     .then(user => res.json(user))
-    .catch(next)
-})
+    .catch(next);
+});
 
 //Update a user's info
 router.put('/:id', (req, res, next) => {
-  User.update(req.body, {
-    where: {id: req.params.id},
-    returning: true,
-    plain: true,
-  })
-    .then(updatedUser => res.json(updatedUser[1].dataValues))
-    .catch(next)
-})
+  if (req.body.addProductToCart) {
+    User.findById(req.params.id)
+      .then(user =>
+        user.update({
+          cart: [...user.cart, req.body.addProductToCart],
+        })
+      )
+      .then(res.end())
+      .catch(next);
+  } else {
+    console.log(req.body);
+    User.update(req.body, {
+      where: { id: req.params.id },
+      returning: true,
+      plain: true,
+    })
+      .then(updatedUser => res.json(updatedUser[1].dataValues))
+      .catch(next);
+  }
+});
 
 //Delete a user
 router.delete('/:id', (req, res, next) => {
@@ -40,5 +52,5 @@ router.delete('/:id', (req, res, next) => {
     },
   })
     .then(res.end())
-    .catch(next)
-})
+    .catch(next);
+});

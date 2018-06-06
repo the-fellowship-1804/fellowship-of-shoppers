@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getProducts } from "../store/allProducts";
-import { withRouter, Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getProducts } from '../store/allProducts';
+import { addToCart } from '../store/singleUser';
+import { withRouter, Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
-  "UNASKED",
-  "LOADING",
-  "LOADED",
-  "ERROR"
+  'UNASKED',
+  'LOADING',
+  'LOADED',
+  'ERROR',
 ];
 
 class SingleProduct extends Component {
@@ -16,10 +17,18 @@ class SingleProduct extends Component {
     this.props.getProducts();
   }
 
-  render() {
-    const productId = this.props.match.params.productId;
+  handleClick = () => {
     const product = this.props.products.find(
-      product => product.id == productId
+      product => product.id == this.props.match.params.productId
+    );
+    this.props
+      .addToCart(this.props.user.id, product)
+      .catch(err => console.log(err));
+  };
+
+  render() {
+    const product = this.props.products.find(
+      product => product.id == this.props.match.params.productId
     );
     switch (this.props.status) {
       case UNASKED: {
@@ -37,7 +46,7 @@ class SingleProduct extends Component {
               {product.weight ? (
                 <li id="single-product-weight">Weight: {product.weight}</li>
               ) : (
-                ""
+                ''
               )}
               <li id="single-product-height"> Height: {product.height} </li>
               <li id="single-product-width">Width: {product.width}</li>
@@ -59,9 +68,15 @@ class SingleProduct extends Component {
             <Link to="/products">
               <button type="button">back to the future~~</button>
             </Link>
+            <p> this should be here </p>
+            <button type="button" onClick={this.handleClick}>
+              Add to cart
+            </button>
           </div>
         );
       }
+      default:
+        return <div> sorry man; mistakes were made </div>;
     }
   }
 }
@@ -69,11 +84,12 @@ class SingleProduct extends Component {
 const mapSTP = state => {
   return {
     products: state.allProducts.products,
-    status: state.allProducts.status
+    status: state.allProducts.status,
+    user: state.singleUser,
   };
 };
 
-const mapDTP = { getProducts };
+const mapDTP = { getProducts, addToCart };
 
 export default withRouter(
   connect(

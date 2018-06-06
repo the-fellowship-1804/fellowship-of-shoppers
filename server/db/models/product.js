@@ -1,8 +1,8 @@
-const crypto = require("crypto");
-const Sequelize = require("sequelize");
-const db = require("../db");
+const crypto = require('crypto');
+const Sequelize = require('sequelize');
+const db = require('../db');
 
-const Product = db.define("product", {
+const Product = db.define('product', {
   productName: Sequelize.STRING,
   //seller = user?
   productImageUrl: Sequelize.STRING,
@@ -14,7 +14,7 @@ const Product = db.define("product", {
   topSpeed: Sequelize.DECIMAL,
   acceleration: Sequelize.DECIMAL,
   class: Sequelize.STRING,
-  productDescription: Sequelize.TEXT
+  productDescription: Sequelize.TEXT,
   //crew??
   //passengers??
 });

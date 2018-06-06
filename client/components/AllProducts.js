@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getProducts } from "../store/allProducts";
-import { withRouter, Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getProducts } from '../store/allProducts';
+import { withRouter, Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
-  "UNASKED",
-  "LOADING",
-  "LOADED",
-  "ERROR"
+  'UNASKED',
+  'LOADING',
+  'LOADED',
+  'ERROR',
 ];
 
 class AllProducts extends Component {
@@ -42,7 +42,7 @@ class AllProducts extends Component {
 const mapSTP = state => {
   return {
     products: state.allProducts.products,
-    status: state.allProducts.status
+    status: state.allProducts.status,
   };
 };
 
