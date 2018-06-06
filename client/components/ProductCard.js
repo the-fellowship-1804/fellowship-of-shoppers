@@ -7,26 +7,33 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
   'LOADING',
   'LOADED',
-  'ERROR',
+  'ERROR'
 ];
 
-const ProductCard = props => (
-  <div key={props.product.id}>
-    {
-      <Link to={`/products/${props.product.id}`}>
-        <img src={props.product.productImageUrl} />
-        <p>{props.product.productName}</p>
-      </Link>
-    }
-    <p>{props.product.price ? props.product.price : 'Free'}</p>
-    {props.onCheckoutPage ? (
-      <button
-        type="button"
-        onClick={event => props.handleClickRemove(event, props.product.id)}>
-        Remove from Cart
-      </button>
-    ) : null}
-  </div>
-);
+const ProductCard = props => {
+  const product = props.productObj ? props.productObj.product : props.product;
+  return (
+    <div>
+      {
+        <Link to={`/products/${product.id}`}>
+          <img src={product.productImageUrl} />
+          <p>{product.productName}</p>
+        </Link>
+      }
+      <p>Price: {product.price ? product.price : 'Free'}</p>
+      {props.onCheckoutPage ? (
+        <div>
+          <div>Quantity: {props.productObj.quantity} </div>
+          <button
+            type="button"
+            onClick={event => props.handleClickRemove(event, product.id)}
+          >
+            Remove from Cart
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
 export default ProductCard;

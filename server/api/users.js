@@ -23,14 +23,14 @@ router.get('/:id', (req, res, next) => {
 
 //Update a user's info
 router.put('/:id', async (req, res, next) => {
-  const addedProduct = req.body.productObj.product;
+  const addedProduct = req.body.addProductToCart.product;
   try {
     if (req.body.addProductToCart) {
       const user = await User.findById(req.params.id);
       const matchedProduct = user.cart.filter(
         productObj => productObj.product.id === addedProduct.id
       );
-      if (matchedProduct.length) {
+      if (matchedProduct.length === 0) {
         await user.update({
           cart: [...user.cart, req.body.addProductToCart]
         });

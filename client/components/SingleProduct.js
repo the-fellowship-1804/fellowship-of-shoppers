@@ -9,21 +9,35 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
   'LOADING',
   'LOADED',
-  'ERROR',
+  'ERROR'
 ];
 
 class SingleProduct extends Component {
+  constructor() {
+    super();
+    this.state = {
+      quantity: 1
+    };
+  }
   componentDidMount() {
     this.props.getProducts();
   }
 
   handleClick = () => {
     const product = this.props.products.find(
-      product => product.id == this.props.match.params.productId
+      indivProduct => indivProduct.id == this.props.match.params.productId
     );
+    console.log(product);
     this.props
-      .addToCart(this.props.user.id, product)
+      .addToCart(this.props.user.id, product, this.state.quantity)
+      .then(this.props.history.push('/cart'))
       .catch(err => console.log(err));
+  };
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: !event.target.value ? '' : event.target.value * 1
+    });
   };
 
   render() {
@@ -69,7 +83,20 @@ class SingleProduct extends Component {
               <button type="button">back to the future~~</button>
             </Link>
             <p> this should be here </p>
-            <button type="button" onClick={this.handleClick}>
+            <label htmlFor="quantity">Quantity:</label>
+            <input
+              type="number"
+              name="quantity"
+              step="1"
+              min="1"
+              value={this.state.quantity}
+              onChange={this.handleChange}
+            />
+            <button
+              type="button"
+              onClick={this.handleClick}
+              disabled={!this.state.quantity}
+            >
               Add to cart
             </button>
           </div>
@@ -85,7 +112,7 @@ const mapSTP = state => {
   return {
     products: state.allProducts.products,
     status: state.allProducts.status,
-    user: state.singleUser,
+    user: state.singleUser
   };
 };
 

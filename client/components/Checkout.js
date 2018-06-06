@@ -7,7 +7,7 @@ class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
-      checkedOut: false,
+      checkedOut: false
     };
   }
 
@@ -37,10 +37,10 @@ class Checkout extends React.Component {
           Checkout!
         </button>
         {this.props.user.id
-          ? this.props.user.cart.map((product, index) => (
+          ? this.props.user.cart.map((productObj, index) => (
               <ProductCard
-                key={product.id + '' + index}
-                product={product}
+                key={productObj.product.id}
+                productObj={productObj}
                 onCheckoutPage={true}
                 handleClickRemove={this.handleClickRemove}
               />
@@ -56,7 +56,7 @@ class Checkout extends React.Component {
  */
 const mapState = state => {
   return {
-    user: state.singleUser,
+    user: state.singleUser
   };
 };
 
