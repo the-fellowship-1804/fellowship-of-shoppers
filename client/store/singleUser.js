@@ -65,6 +65,22 @@ export const addToCart = (userId, product, quantity) => async dispatch => {
   }
 };
 
+const cartUpdate = (newProductObj, cart) => {
+  const matchedProduct = cart.filter(
+    productObj => productObj.product.id === newProductObj.id
+  );
+  if (!matchedProduct.length) return [...cart, newProduct];
+  else
+    return cart.map(productObj => {
+      if (productObj.product.id === newProductObj.product.id) {
+        return {
+          ...productObj,
+          quantity: productObj.quantity + action.payload.quantity,
+        };
+      } else return productObj;
+    });
+};
+
 export const removeFromCart = (userId, cart) => dispatch =>
   axios
     .put(`/api/users/${userId}`, { cart })
@@ -85,16 +101,7 @@ export default function(state = defaultUser, action) {
     case ADD_TO_CART:
       return {
         ...state,
-        cart: state.cart.map(productObj => {
-          if (productObj.product.id === action.payload.product.id) {
-            return {
-              ...productObj,
-              quantity: productObj.quantity + action.payload.quantity,
-            };
-          } else {
-            return productObj;
-          }
-        }),
+        cart: cartUpdate(action.payload, state.cart),
       };
     case REMOVE_FROM_CART:
       return { ...state, cart: action.payload };

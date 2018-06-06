@@ -31,24 +31,19 @@ router.put('/:id', async (req, res, next) => {
         productObj => productObj.product.id === addedProduct.id
       );
       if (matchedProduct.length === 0) {
-        console.log('matched product length is 00000!!!');
         await user.update({
           cart: [...user.cart, req.body.addProductToCart],
         });
       } else {
-        console.log('reached the route where stuff is > 0');
         await user.update({
           cart: user.cart.map(productObj => {
-            // console.log(productObj, req.body);
             if (productObj.product.id === addedProduct.id) {
               return {
                 ...productObj,
                 quantity:
                   productObj.quantity + req.body.addProductToCart.quantity,
               };
-            } else {
-              return productObj;
-            }
+            } else return productObj;
           }),
         });
       }
