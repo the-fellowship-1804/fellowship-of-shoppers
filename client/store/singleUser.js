@@ -82,7 +82,8 @@ const cartUpdate = (newProductObj, cart) => {
     });
 };
 
-export const removeFromCart = (userId, cart) => dispatch =>
+export const removeFromCart = (userId, cart) => dispatch => {
+  console.log(cart);
   axios
     .put(`/api/users/${userId}`, { cart })
     .then(_ => {
@@ -90,6 +91,7 @@ export const removeFromCart = (userId, cart) => dispatch =>
       dispatch(aCC(REMOVE_FROM_CART, cart));
     })
     .catch(err => console.log(err));
+};
 /**
  * REDUCER
  */

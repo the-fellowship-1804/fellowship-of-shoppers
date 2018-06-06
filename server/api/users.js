@@ -23,9 +23,9 @@ router.get('/:id', (req, res, next) => {
 
 //Update a user's info
 router.put('/:id', async (req, res, next) => {
-  const addedProduct = req.body.addProductToCart.product;
   try {
     if (req.body.addProductToCart) {
+      const addedProduct = req.body.addProductToCart.product;
       const user = await User.findById(req.params.id);
       const matchedProduct = user.cart.filter(
         productObj => productObj.product.id === addedProduct.id
@@ -49,12 +49,14 @@ router.put('/:id', async (req, res, next) => {
       }
       res.end();
     } else {
+      console.log(req.body);
       const [, user] = await User.update(req.body, {
         where: { id: req.params.id },
         returning: true,
         plain: true,
       });
       res.json(user[0]);
+      console.log(user);
     }
   } catch (error) {
     console.log(error);

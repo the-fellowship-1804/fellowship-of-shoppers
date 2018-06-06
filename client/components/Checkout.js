@@ -13,7 +13,7 @@ class Checkout extends React.Component {
 
   handleClickRemove = (event, productId) => {
     const updatedCart = this.props.user.cart.filter(
-      product => product.id !== productId
+      productObj => productObj.product.id !== productId
     );
     this.props.removeFromCart(this.props.user.id, updatedCart);
   };
