@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getProducts } from "../store/allProducts";
-import { withRouter, Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getProducts } from '../store/allProducts';
+import { withRouter, Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
-  "UNASKED",
-  "LOADING",
-  "LOADED",
-  "ERROR"
+  'UNASKED',
+  'LOADING',
+  'LOADED',
+  'ERROR',
 ];
 
 class Landing extends Component {
@@ -17,7 +17,6 @@ class Landing extends Component {
   }
 
   render() {
-
     switch (this.props.status) {
       case UNASKED: {
         return <p>we dont want this</p>;
@@ -26,17 +25,20 @@ class Landing extends Component {
         return <p>LOADING...</p>;
       }
       case LOADED: {
-        const deathStar = this.props.products.find((ship) => {
-          return ship.productName === 'the Death Star'
-        })
-
+        const deathStar = this.props.products.find(ship => {
+          return ship.productName === 'the Death Star';
+        });
+        if (!deathStar.id) return <h3>No seed</h3>;
         return (
-
           <div>
             <h1>FLASH SALE!</h1>
             <ProductCard product={deathStar} />
             <h6>A message from the Dealers....</h6>
-              <p>Chris is happy and calm. The sky is blue, the stars are shining, and the galaxy awaits. Choose a ship and let the journey begin! *wink*!</p>
+            <p>
+              Chris is happy and calm. The sky is blue, the stars are shining,
+              and the galaxy awaits. Choose a ship and let the journey begin!
+              *wink*!
+            </p>
           </div>
         );
       }
@@ -47,7 +49,7 @@ class Landing extends Component {
 const mapSTP = state => {
   return {
     products: state.allProducts.products,
-    status: state.allProducts.status
+    status: state.allProducts.status,
   };
 };
 

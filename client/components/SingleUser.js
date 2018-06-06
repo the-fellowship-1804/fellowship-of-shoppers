@@ -1,15 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import OrderHistory from "./OrderHistory";
-import { getProducts } from "../store/allProducts";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import OrderHistory from './OrderHistory';
+import { getProducts } from '../store/allProducts';
 
 class SingleUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       displayHistory: false,
-      productInfo: []
+      productInfo: [],
     };
   }
 
@@ -23,7 +23,7 @@ class SingleUser extends React.Component {
     );
     this.setState({
       productInfo: tempProductInfo,
-      displayHistory: true
+      displayHistory: true,
     });
   };
 
@@ -58,7 +58,7 @@ class SingleUser extends React.Component {
 const mapState = state => {
   return {
     user: state.singleUser,
-    allProducts: state.allProducts
+    allProducts: state.allProducts,
   };
 };
 

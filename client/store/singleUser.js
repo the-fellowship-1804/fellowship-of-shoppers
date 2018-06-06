@@ -1,14 +1,14 @@
-import axios from "axios";
-import history from "../history";
-import { aCC } from ".";
+import axios from 'axios';
+import history from '../history';
+import { aCC } from '.';
 
 /**
  * ACTION TYPES
  */
-const GET_USER = "GET_USER";
-const REMOVE_USER = "REMOVE_USER";
-const ADD_TO_CART = "ADD_TO_CART";
-const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+const GET_USER = 'GET_USER';
+const REMOVE_USER = 'REMOVE_USER';
+const ADD_TO_CART = 'ADD_TO_CART';
+const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 /**
  * INITIAL STATE
@@ -26,7 +26,7 @@ const removeUser = () => ({ type: REMOVE_USER });
  */
 export const me = () => dispatch =>
   axios
-    .get("/auth/me")
+    .get('/auth/me')
     // .then(data => {console.log(data); return data})
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err));
@@ -37,7 +37,7 @@ export const auth = (email, password, method) => dispatch =>
     .then(
       res => {
         dispatch(getUser(res.data));
-        history.push("/home");
+        history.push('/home');
       },
       authError => {
         // rare example: a good use case for parallel (non-catch) error handler
@@ -48,19 +48,16 @@ export const auth = (email, password, method) => dispatch =>
 
 export const logout = () => dispatch =>
   axios
-    .post("/auth/logout")
+    .post('/auth/logout')
     .then(_ => {
       dispatch(removeUser());
-      history.push("/login");
+      history.push('/login');
     })
     .catch(err => console.log(err));
 
 export const addToCart = (userId, product) => async dispatch => {
   try {
-    console.log("hello");
-    console.log(product);
     await axios.put(`/api/users/${userId}`, { addProductToCart: product });
-    console.log(product);
     dispatch(aCC(ADD_TO_CART, product));
   } catch (err) {
     console.log(err);
@@ -69,9 +66,10 @@ export const addToCart = (userId, product) => async dispatch => {
 
 export const removeFromCart = (userId, cart) => dispatch =>
   axios
-    .put(`/api/user/${userId}`, cart)
+    .put(`/api/users/${userId}`, { cart })
     .then(_ => {
       dispatch(aCC(REMOVE_FROM_CART, cart));
+      console.log(cart);
     })
     .catch(err => console.log(err));
 /**

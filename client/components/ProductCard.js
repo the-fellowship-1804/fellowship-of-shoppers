@@ -7,7 +7,7 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
   'LOADING',
   'LOADED',
-  'ERROR'
+  'ERROR',
 ];
 
 const ProductCard = props => (
@@ -22,8 +22,7 @@ const ProductCard = props => (
     {props.onCheckoutPage ? (
       <button
         type="button"
-        onClick={event => props.handleClickRemove(event, props.product.id)}
-      >
+        onClick={event => props.handleClickRemove(event, props.product.id)}>
         Remove from Cart
       </button>
     ) : null}

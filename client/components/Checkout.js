@@ -1,13 +1,13 @@
-import React from "react";
-import { connect } from "react-redux";
-import ProductCard from "./ProductCard";
-import { removeFromCart } from "../store/singleUser";
+import React from 'react';
+import { connect } from 'react-redux';
+import ProductCard from './ProductCard';
+import { removeFromCart } from '../store/singleUser';
 
 class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
-      checkedOut: false
+      checkedOut: false,
     };
   }
 
@@ -37,11 +37,12 @@ class Checkout extends React.Component {
           Checkout!
         </button>
         {this.props.user.id
-          ? this.props.user.cart.map(product => (
+          ? this.props.user.cart.map((product, index) => (
               <ProductCard
-                key={product.id}
+                key={product.id + '' + index}
                 product={product}
                 onCheckoutPage={true}
+                handleClickRemove={this.handleClickRemove}
               />
             ))
           : null}
@@ -55,7 +56,7 @@ class Checkout extends React.Component {
  */
 const mapState = state => {
   return {
-    user: state.singleUser
+    user: state.singleUser,
   };
 };
 
