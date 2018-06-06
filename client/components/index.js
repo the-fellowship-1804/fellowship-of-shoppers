@@ -4,5 +4,10 @@
  * having to figure out which file they belong to!
  */
 export { default as Navbar } from "./Navbar";
-export { default as SingleUser } from "./SingleUser";
+export { SingleUser } from "./SingleUser";
 export { Login, Signup } from "./auth-form";
+export {Landing} from "./Landing"
+export {AllProducts} from "./AllProducts"
+export {SingleProduct} from "./SingleProduct"
+
+
