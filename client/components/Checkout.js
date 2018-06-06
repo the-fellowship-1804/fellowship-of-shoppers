@@ -7,7 +7,7 @@ class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
-      checkedOut: false
+      checkedOut: false,
     };
   }
 
@@ -29,7 +29,6 @@ class Checkout extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <h3>Checkout</h3>
@@ -56,7 +55,7 @@ class Checkout extends React.Component {
  */
 const mapState = state => {
   return {
-    user: state.singleUser
+    user: state.singleUser,
   };
 };
 

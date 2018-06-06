@@ -67,15 +67,16 @@ export const addToCart = (userId, product, quantity) => async dispatch => {
 
 const cartUpdate = (newProductObj, cart) => {
   const matchedProduct = cart.filter(
-    productObj => productObj.product.id === newProductObj.id
+    productObj => productObj.product.id === newProductObj.product.id
   );
-  if (!matchedProduct.length) return [...cart, newProduct];
-  else
+  if (!matchedProduct.length) {
+    return [...cart, newProductObj];
+  } else
     return cart.map(productObj => {
       if (productObj.product.id === newProductObj.product.id) {
         return {
           ...productObj,
-          quantity: productObj.quantity + action.payload.quantity,
+          quantity: productObj.quantity + newProductObj.quantity,
         };
       } else return productObj;
     });
@@ -85,8 +86,8 @@ export const removeFromCart = (userId, cart) => dispatch =>
   axios
     .put(`/api/users/${userId}`, { cart })
     .then(_ => {
-      dispatch(aCC(REMOVE_FROM_CART, cart));
       console.log(cart);
+      dispatch(aCC(REMOVE_FROM_CART, cart));
     })
     .catch(err => console.log(err));
 /**
