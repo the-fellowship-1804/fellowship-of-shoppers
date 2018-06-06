@@ -59,7 +59,7 @@ export const addToCart = (userId, product, quantity) => async dispatch => {
   const productObj = { product, quantity };
   try {
     await axios.put(`/api/users/${userId}`, { addProductToCart: productObj });
-    dispatch(aCC(ADD_TO_CART, product));
+    dispatch(aCC(ADD_TO_CART, productObj));
   } catch (err) {
     console.log(err);
   }
@@ -83,7 +83,19 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return defaultUser;
     case ADD_TO_CART:
-      return { ...state, cart: [...state.cart, action.payload] };
+      return {
+        ...state,
+        cart: state.cart.map(productObj => {
+          if (productObj.product.id === action.payload.product.id) {
+            return {
+              ...productObj,
+              quantity: productObj.quantity + action.payload.quantity,
+            };
+          } else {
+            return productObj;
+          }
+        }),
+      };
     case REMOVE_FROM_CART:
       return { ...state, cart: action.payload };
     default:
