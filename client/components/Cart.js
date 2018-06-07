@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CheckoutCard from './CheckoutCard';
 import { removeFromCart } from '../store/singleUser';
 
-class Checkout extends React.Component {
+class Cart extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -63,4 +63,4 @@ const mapProps = { removeFromCart };
 export default connect(
   mapState,
   mapProps
-)(Checkout);
+)(Cart);
