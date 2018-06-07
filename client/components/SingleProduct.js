@@ -27,7 +27,6 @@ class SingleProduct extends Component {
     const product = this.props.products.find(
       indivProduct => indivProduct.id == this.props.match.params.productId
     );
-    console.log(product);
     this.props
       .addToCart(this.props.user.id, product, this.state.quantity)
       .then(this.props.history.push('/cart'))

@@ -48,7 +48,6 @@ class CheckoutCard extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const product = this.props.productObj.product;
     return (
       <div>

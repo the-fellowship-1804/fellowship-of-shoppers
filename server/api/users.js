@@ -43,13 +43,14 @@ router.put('/:id', async (req, res, next) => {
                 quantity:
                   productObj.quantity + req.body.addProductToCart.quantity
               };
-            } else {return productObj;}
+            } else {
+              return productObj;
+            }
           })
         });
       }
       res.end();
     } else {
-      console.log(req.body);
       const [, user] = await User.update(req.body, {
         where: { id: req.params.id },
         returning: true,
