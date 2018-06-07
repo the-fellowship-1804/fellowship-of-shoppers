@@ -87,7 +87,6 @@ class SingleProduct extends Component {
             <Link to="/products">
               <button type="button">back to the future~~</button>
             </Link>
-            <p> this should be here </p>
             <label htmlFor="quantity">Quantity:</label>
             <input
               type="number"
