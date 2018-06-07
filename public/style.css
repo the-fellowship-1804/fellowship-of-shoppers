@@ -25,6 +25,38 @@ form div {
 
 /* base image styling */
 
+.centercontainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rowcontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.rowcontainer > * {
+  padding-left: 10vw;
+}
+
+#single-product-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#single-product-description > h6 {
+  margin-left: 11vw;
+}
+
+#single-product-description > button {
+  margin-bottom: 100px;
+}
+
 img {
   width: 33vw;
   height: 40vh;
@@ -62,19 +94,27 @@ a {
   color: white;
 }
 
-/* Landing Page */
+/* Landing Page and Product Views*/
 
 .mainlanding {
   margin-left: 20px;
 }
 
-.centercontainer {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .header1 {
   align-self: flex-start;
+}
+
+/* All products */
+
+#allproductsheading {
+  margin-left: 20px;
+}
+
+#filter {
+  margin-left: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: teal;
+  color: white;
 }

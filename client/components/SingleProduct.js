@@ -30,36 +30,37 @@ class SingleProduct extends Component {
       }
       case LOADED: {
         return (
-          <div className="centercontainer">
-            <div>
+          <div>
+            <div className="rowcontainer">
               <ProductCard product={product} />
+              <ul id="single-product-unordered-list">
+                {product.weight ? (
+                  <li id="single-product-weight">Weight: {product.weight}</li>
+                ) : (
+                  ''
+                )}
+                <li id="single-product-height"> Height: {product.height} </li>
+                <li id="single-product-width">Width: {product.width}</li>
+                <li id="single-product-length">Length: {product.depth}</li>
+                <li id="single-product-topSpeed">
+                  Top Speed: {product.topSpeed}
+                </li>
+                <li id="single-product-acceleration">
+                  Acceleration: {product.acceleration}
+                </li>
+                <li id="single-product-class">Class: {product.class}</li>
+              </ul>
             </div>
-            <ul id="single-product-unordered-list">
-              {product.weight ? (
-                <li id="single-product-weight">Weight: {product.weight}</li>
-              ) : (
-                ''
-              )}
-              <li id="single-product-height"> Height: {product.height} </li>
-              <li id="single-product-width">Width: {product.width}</li>
-              <li id="single-product-length">Length: {product.depth}</li>
-              <li id="single-product-topSpeed">
-                Top Speed: {product.topSpeed}
-              </li>
-              <li id="single-product-acceleration">
-                Acceleration: {product.acceleration}
-              </li>
-              <li id="single-product-class">Class: {product.class}</li>
-            </ul>
             <div id="single-product-description">
               <h6>Description</h6>
               <p id="single-product-description-p">
                 {product.productDescription}
               </p>
+              {/* Add a button to add to cart */}
+              <button type="button">
+                <Link to="/products">Back to All Products</Link>
+              </button>
             </div>
-            <button type="button">
-              <Link to="/products">Back to All Products</Link>
-            </button>
           </div>
         );
       }
