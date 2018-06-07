@@ -19,10 +19,24 @@ class Checkout extends React.Component {
     //
   };
 
+  caluculateTotalPrice = () => {
+    let sum = 0;
+    this.props.user.cart.forEach(productObj => {
+      sum += productObj.product.price * productObj.quantity;
+    });
+    return sum;
+  };
+
   render() {
+    console.log(this.props);
     return (
       <div>
         <h3>Checkout</h3>
+        <div>
+          Your total is:{' '}
+          {this.props.user.id ? this.caluculateTotalPrice() : 'Calculating'}{' '}
+          space-cash
+        </div>
         <button type="button" onClick={this.handleCheckout}>
           Checkout!
         </button>
