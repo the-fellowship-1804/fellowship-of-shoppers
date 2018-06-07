@@ -19,3 +19,37 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* Navbar */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 50px;
+  background-color: teal;
+}
+
+a {
+  color: white;
+}
+
+/* Landing Page */
+
+.mainlanding {
+  margin-top: 60px;
+  margin-left: 20px;
+}
+
+.centercontainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header1 {
+  align-self: flex-start;
+}

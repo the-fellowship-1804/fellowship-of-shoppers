@@ -31,12 +31,10 @@ class Landing extends Component {
 
         return (
           <div>
-            <div>
-              <h1>Welcome!</h1>
-              <h3>Let's buy some starships!</h3>
-              <img src="http://cdn2us.denofgeek.com/sites/denofgeekus/files/styles/main_wide/public/2016/10/chewbacca.jpeg?itok=sfDLqR8A" />
+            <div className="mainlanding">
+              <h1 className="header1">Welcome to the StarShip depot!</h1>
             </div>
-            <div>
+            <div className="centercontainer">
               <h2>FLASH SALE!</h2>
               <ProductCard product={deathStar} />
             </div>

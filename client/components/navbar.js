@@ -6,37 +6,31 @@ import { logout } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h1>The SpaceShip Depot</h1>
     <nav>
       {isLoggedIn ? (
         <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/">Home</Link>
-          <Link to="/products">All Products</Link>
-          <Link to="/user">User Account</Link>
-          <div id="navright">
+          <ul>
+            <Link to="/">Home</Link>
+            <Link to="/products">All Products</Link>
+            <Link to="/user">User Account</Link>
+          </ul>
+          <ul>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
             <Link to="/cart">Cart</Link>
-          </div>
+          </ul>
         </div>
       ) : (
-        <div id="navitems">
-          <div id="navleft">
-            <Link to="/">Home</Link>
-            <Link to="/products">All Products</Link>
-          </div>
-          {/* The navbar will show these links before you log in */}
-          <div id="navright">
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/cart">Cart</Link>
-          </div>
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/products">All Products</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
+          <Link to="/cart">Cart</Link>
         </div>
       )}
     </nav>
-    <hr />
   </div>
 );
 

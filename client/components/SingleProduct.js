@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getProducts } from "../store/allProducts";
-import { withRouter, Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getProducts } from '../store/allProducts';
+import { withRouter, Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
-  "UNASKED",
-  "LOADING",
-  "LOADED",
-  "ERROR"
+  'UNASKED',
+  'LOADING',
+  'LOADED',
+  'ERROR'
 ];
 
 class SingleProduct extends Component {
@@ -37,7 +37,7 @@ class SingleProduct extends Component {
               {product.weight ? (
                 <li id="single-product-weight">Weight: {product.weight}</li>
               ) : (
-                ""
+                ''
               )}
               <li id="single-product-height"> Height: {product.height} </li>
               <li id="single-product-width">Width: {product.width}</li>
