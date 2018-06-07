@@ -59,7 +59,7 @@ class CheckoutCard extends React.Component {
         }
         <p>Price: {product.price ? product.price : 'Free'}</p>
         <div>Quantity: {this.props.productObj.quantity} </div>
-        <label htmlFor="desiredQuantity">Change Quantity to:</label>
+        <label htmlFor="desiredQuantity">Change quantity:</label>
         <input
           type="number"
           name="desiredQuantity"
