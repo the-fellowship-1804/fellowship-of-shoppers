@@ -54,7 +54,7 @@ class AllProducts extends Component {
 const mapSTP = state => {
   return {
     products: state.allProducts.products,
-    status: state.allProducts.status
+    status: state.allProducts.status,
   };
 };
 

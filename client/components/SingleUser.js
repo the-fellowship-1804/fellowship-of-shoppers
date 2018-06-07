@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import OrderHistory from "./OrderHistory";
-import { getProducts } from "../store/allProducts";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import OrderHistory from './OrderHistory';
+import { getProducts } from '../store/allProducts';
 
 class SingleUser extends React.Component {
   constructor(props) {
@@ -13,19 +13,21 @@ class SingleUser extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props);
-    console.log(this.state);
-    this.props.getProducts().catch(err => console.log(err));
+  async componentDidMount() {
+    try {
+      await this.props.getProducts();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   handleClick = () => {
-    this.setState({ displayHistory: true });
     const tempProductInfo = this.state.props.allProducts.products.filter(
       product => this.state.props.user.OrderHistory.includes(product.id)
     );
     this.setState({
-      productInfo: tempProductInfo
+      productInfo: tempProductInfo,
+      displayHistory: true
     });
   };
 
