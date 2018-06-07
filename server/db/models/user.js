@@ -36,11 +36,12 @@ const User = db.define('user', {
     }
   },
   cart: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
+    type: Sequelize.ARRAY(Sequelize.JSON),
     defaultValue: []
   },
   orderHistory: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
+    type: Sequelize.ARRAY(Sequelize.JSON),
+    // type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.JSON))
     defaultValue: []
   },
   isAdmin: {

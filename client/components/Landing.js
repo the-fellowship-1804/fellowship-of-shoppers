@@ -28,7 +28,7 @@ class Landing extends Component {
         const deathStar = this.props.products.find(ship => {
           return ship.productName === 'the Death Star';
         });
-
+        if (!deathStar.id) return <h3>No seed</h3>;
         return (
           <div>
             <div>
@@ -48,6 +48,9 @@ class Landing extends Component {
             </p>
           </div>
         );
+      }
+      default: {
+        return <div>Mistakes were made</div>;
       }
     }
   }
