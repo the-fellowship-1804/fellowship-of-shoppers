@@ -46,9 +46,6 @@ class Cart extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     user: state.singleUser
