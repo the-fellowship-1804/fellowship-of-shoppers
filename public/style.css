@@ -65,8 +65,9 @@ form div {
 }
 
 img {
+  max-width: 100%;
   width: 33vw;
-  height: 40vh;
+  height: auto;
 }
 
 /* productcard styling */
