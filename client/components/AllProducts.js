@@ -8,7 +8,7 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
   'LOADING',
   'LOADED',
-  'ERROR',
+  'ERROR'
 ];
 
 class AllProducts extends Component {
@@ -20,7 +20,7 @@ class AllProducts extends Component {
     const allProducts = this.props.products;
     switch (this.props.status) {
       case UNASKED: {
-        return <p>we dont want this</p>;
+        return <p>We don't want this</p>;
       }
       case LOADING: {
         return <p>LOADING...</p>;
@@ -28,12 +28,24 @@ class AllProducts extends Component {
       case LOADED: {
         return (
           <div>
-            <h1>All Products</h1>
+            <h1 id="allproductsheading">All Products</h1>
+            <select id="filter" name="filter">
+              <option selected="selected" disabled="true">
+                Filter By Class
+              </option>
+              <option value="SpaceStation">Space Stations</option>
+              <option value="Capital">Capital Class</option>
+              <option value="Freighter">Freighters</option>
+              <option value="Fighter">Fighters</option>
+            </select>
             {allProducts.map(product => {
               return <ProductCard key={product.id} product={product} />;
             })}
           </div>
         );
+      }
+      default: {
+        return 'Nothing to see here';
       }
     }
   }
