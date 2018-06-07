@@ -38,12 +38,14 @@ class Landing extends Component {
               <h2>FLASH SALE!</h2>
               <ProductCard product={deathStar} />
             </div>
-            <h6>A message from the Dealers....</h6>
-            <p>
-              Chris is happy and calm. The sky is blue, the stars are shining,
-              and the galaxy awaits. Choose a ship and let the journey begin!
-              *wink*!
-            </p>
+            <div className="centercontainer">
+              <h6>A message from the Dealers....</h6>
+              <p>
+                Chris is happy and calm. The sky is blue, the stars are shining,
+                and the galaxy awaits. Choose a ship and let the journey begin!
+                *wink*!
+              </p>
+            </div>
           </div>
         );
       }

@@ -15,7 +15,9 @@ const ProductCard = props => (
     {
       <div className="singleproductcard centercontainer">
         <h2>{props.product.productName}</h2>
-        <p>Price: {props.product.price ? props.product.price : '0'} Credits</p>
+        <h4 id="price">
+          Price: {props.product.price ? props.product.price : '0'} Credits
+        </h4>
         <Link to={`/products/${props.product.id}`}>
           <img src={props.product.productImageUrl} />
         </Link>

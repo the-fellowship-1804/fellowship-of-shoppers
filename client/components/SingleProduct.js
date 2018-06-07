@@ -31,7 +31,9 @@ class SingleProduct extends Component {
       case LOADED: {
         return (
           <div className="centercontainer">
-            <ProductCard product={product} />
+            <div>
+              <ProductCard product={product} />
+            </div>
             <ul id="single-product-unordered-list">
               {product.weight ? (
                 <li id="single-product-weight">Weight: {product.weight}</li>

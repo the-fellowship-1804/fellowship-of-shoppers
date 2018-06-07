@@ -23,13 +23,27 @@ form div {
   display: inline-block;
 }
 
+/* base image styling */
+
+img {
+  width: 33vw;
+  height: 40vh;
+}
+
+/* productcard styling */
+
+#price {
+  color: red;
+}
+
 /* button styling */
 
 button {
   z-index: 100;
-  border-radius: 10%;
-  height: 30px;
+  border-radius: 10px;
+  height: 40px;
   background-color: teal;
+  color: white;
 }
 
 /* Navbar */
