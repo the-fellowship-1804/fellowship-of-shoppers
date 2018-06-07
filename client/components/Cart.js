@@ -33,7 +33,11 @@ class Cart extends React.Component {
             ? `${this.caluculateTotalPrice()} space-cash`
             : 'Calculating...'}
         </div>
-        <button type="button" onClick={this.handleClick}>
+        <button
+          type="button"
+          onClick={this.handleClick}
+          disabled={this.props.user.cart.length === 0}
+        >
           Checkout!
         </button>
         {this.props.user.id
