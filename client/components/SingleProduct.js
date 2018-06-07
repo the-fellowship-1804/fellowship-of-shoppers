@@ -23,15 +23,20 @@ class SingleProduct extends Component {
     this.props.getProducts();
   }
 
-  handleClick = () => {
+  handleClick = async () => {
     const product = this.props.products.find(
       indivProduct => indivProduct.id == this.props.match.params.productId
     );
-    console.log(product);
-    this.props
-      .addToCart(this.props.user.id, product, this.state.quantity)
-      .then(this.props.history.push('/cart'))
-      .catch(err => console.log(err));
+    try {
+      await this.props.addToCart(
+        this.props.user.id,
+        product,
+        this.state.quantity
+      );
+      this.props.history.push('/cart');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleChange = event => {
@@ -82,7 +87,6 @@ class SingleProduct extends Component {
             <Link to="/products">
               <button type="button">back to the future~~</button>
             </Link>
-            <p> this should be here </p>
             <label htmlFor="quantity">Quantity:</label>
             <input
               type="number"

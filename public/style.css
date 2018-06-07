@@ -1,5 +1,8 @@
 body {
   font-family: sans-serif;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: lightgray;
 }
 
 a {
@@ -18,4 +21,113 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/* base image styling */
+
+.centercontainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rowcontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rowcontainerproduct {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#single-product-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#single-product-description > h6 {
+  margin-left: 16vw;
+}
+
+#single-product-description > button {
+  margin-bottom: 100px;
+}
+
+#singleproductcard {
+  margin-left: 11vw;
+}
+
+img {
+  width: 33vw;
+  height: 40vh;
+}
+
+/* productcard styling */
+
+#price {
+  color: red;
+}
+
+/* button styling */
+
+button {
+  z-index: 100;
+  border-radius: 10px;
+  height: 40px;
+  background-color: teal;
+  color: white;
+}
+
+/* Navbar */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 40px;
+  background-color: teal;
+}
+
+a {
+  color: white;
+}
+
+/* Landing Page and Product Views*/
+
+.mainlanding {
+  margin-left: 20px;
+}
+
+.header1 {
+  align-self: flex-start;
+}
+
+/* All products */
+
+#allproductsheading {
+  margin-left: 20px;
+}
+
+#filter {
+  margin-left: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: teal;
+  color: white;
+}
+
+/* Small text */
+
+.small {
+  font-size: 1;
 }

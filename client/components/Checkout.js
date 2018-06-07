@@ -9,21 +9,31 @@ class Checkout extends React.Component {
     this.state = {};
   }
 
-  handleCheckout = () => {
-    //some bs to actually check the person out:
-    //charge their card
-    //add their cart's contents to their ordered history
-    //clear their cart
-    //redirect them somewhere? => place to enter payment info/address with options to use default?
-    //check if they have a valid address and payment method when the rest works
-    //
+  handleClick = () => {
+    //redirect user to a checkout component
+    //where they can put in/edit their payment and shipping info and actually buy the item
+    //buying the item should unshift the cart into their order history and clear the cart in both DB model and store-state
+  };
+
+  caluculateTotalPrice = () => {
+    let sum = 0;
+    this.props.user.cart.forEach(productObj => {
+      sum += productObj.product.price * productObj.quantity;
+    });
+    return sum;
   };
 
   render() {
     return (
       <div>
-        <h3>Checkout</h3>
-        <button type="button" onClick={this.handleCheckout}>
+        <h3>Cart</h3>
+        <div>
+          Your total is:{' '}
+          {this.props.user.id
+            ? `${this.caluculateTotalPrice()} space-cash`
+            : 'Calculating...'}
+        </div>
+        <button type="button" onClick={this.handleClick}>
           Checkout!
         </button>
         {this.props.user.id

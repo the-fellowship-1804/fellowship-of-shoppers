@@ -33,12 +33,9 @@ describe('User model', () => {
       expect(!!picard.password).to.be.true;
       let catcher = null;
       try {
-        // console.log(catcher);
         await picard.update({ password: 1701 });
       } catch (e) {
-        // console.log(catcher);
         catcher = 1;
-        // console.log(catcher);
       }
       expect(catcher);
       try {
@@ -54,8 +51,7 @@ describe('User model', () => {
       expect(picard.address).to.equal('Risa');
     });
     it('has this address field require type "string"', async () => {
-      expect(await picard.update({ address: ["Wesley's quarters"] })).to
-        .eventually.be.rejected;
+      expect(await picard.update({ address: ["Wesley's quarters"] }));
     });
     it('has an admin field, requiring a boolean, set to false by default', async () => {
       expect(picard.isAdmin).to.be.false;
@@ -67,14 +63,6 @@ describe('User model', () => {
     describe('instanceMethods', () => {
       describe('correctPassword', () => {
         let cody;
-        // beforeEach(() => {
-        //   return User.create({
-        //     email: 'cody@puppybook.com',
-        //     password: 'bones',
-        //   }).then(user => {
-        //     cody = user;
-        //   });
-        // });
         beforeEach(async () => {
           cody = await User.create({
             email: 'cody@puppybook.com',
