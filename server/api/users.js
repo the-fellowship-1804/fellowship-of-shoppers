@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
     // explicitly select only the id and email fields - even though
     // users' passwords are encrypted, it won't help if we just
     // send everything to anyone who asks!
-    attributes: ['id', 'email'],
+    attributes: ['id', 'email']
   })
     .then(users => res.json(users))
     .catch(next);
@@ -32,7 +32,7 @@ router.put('/:id', async (req, res, next) => {
       );
       if (matchedProduct.length === 0) {
         await user.update({
-          cart: [...user.cart, req.body.addProductToCart],
+          cart: [...user.cart, req.body.addProductToCart]
         });
       } else {
         await user.update({
@@ -41,10 +41,10 @@ router.put('/:id', async (req, res, next) => {
               return {
                 ...productObj,
                 quantity:
-                  productObj.quantity + req.body.addProductToCart.quantity,
+                  productObj.quantity + req.body.addProductToCart.quantity
               };
-            } else return productObj;
-          }),
+            } else {return productObj;}
+          })
         });
       }
       res.end();
@@ -53,7 +53,7 @@ router.put('/:id', async (req, res, next) => {
       const [, user] = await User.update(req.body, {
         where: { id: req.params.id },
         returning: true,
-        plain: true,
+        plain: true
       });
       res.json(user[0]);
       console.log(user);
@@ -67,8 +67,8 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   User.destroy({
     where: {
-      id: req.id,
-    },
+      id: req.id
+    }
   })
     .then(res.end())
     .catch(next);

@@ -8,7 +8,7 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
   'LOADING',
   'LOADED',
-  'ERROR',
+  'ERROR'
 ];
 
 class Landing extends Component {
@@ -31,8 +31,15 @@ class Landing extends Component {
         if (!deathStar.id) return <h3>No seed</h3>;
         return (
           <div>
-            <h1>FLASH SALE!</h1>
-            <ProductCard product={deathStar} />
+            <div>
+              <h1>Welcome!</h1>
+              <h3>Let's buy some starships!</h3>
+              <img src="http://cdn2us.denofgeek.com/sites/denofgeekus/files/styles/main_wide/public/2016/10/chewbacca.jpeg?itok=sfDLqR8A" />
+            </div>
+            <div>
+              <h2>FLASH SALE!</h2>
+              <ProductCard product={deathStar} />
+            </div>
             <h6>A message from the Dealers....</h6>
             <p>
               Chris is happy and calm. The sky is blue, the stars are shining,
@@ -42,6 +49,9 @@ class Landing extends Component {
           </div>
         );
       }
+      default: {
+        return <div>Mistakes were made</div>;
+      }
     }
   }
 }
@@ -49,7 +59,7 @@ class Landing extends Component {
 const mapSTP = state => {
   return {
     products: state.allProducts.products,
-    status: state.allProducts.status,
+    status: state.allProducts.status
   };
 };
 
