@@ -9,7 +9,7 @@ import {
   Landing,
   AllProducts,
   SingleProduct,
-  Checkout,
+  Cart
 } from './components';
 import { me } from './store';
 
@@ -30,7 +30,7 @@ class Routes extends Component {
         <Route exact path="/" component={Landing} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
-        <Route exact path="/cart" component={Checkout} />
+        <Route exact path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
@@ -54,7 +54,7 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.singleUser.id,
+    isLoggedIn: !!state.singleUser.id
   };
 };
 
@@ -62,7 +62,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me());
-    },
+    }
   };
 };
 
@@ -80,5 +80,5 @@ export default withRouter(
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
 };
