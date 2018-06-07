@@ -31,25 +31,29 @@ class SingleProduct extends Component {
       case LOADED: {
         return (
           <div>
-            <div className="rowcontainer">
-              <ProductCard product={product} />
-              <ul id="single-product-unordered-list">
-                {product.weight ? (
-                  <li id="single-product-weight">Weight: {product.weight}</li>
-                ) : (
-                  ''
-                )}
-                <li id="single-product-height"> Height: {product.height} </li>
-                <li id="single-product-width">Width: {product.width}</li>
-                <li id="single-product-length">Length: {product.depth}</li>
-                <li id="single-product-topSpeed">
-                  Top Speed: {product.topSpeed}
-                </li>
-                <li id="single-product-acceleration">
-                  Acceleration: {product.acceleration}
-                </li>
-                <li id="single-product-class">Class: {product.class}</li>
-              </ul>
+            <div className="rowcontainerproduct">
+              <div id="singleproductcard">
+                <ProductCard product={product} />
+              </div>
+              <div>
+                <ul id="single-product-unordered-list">
+                  {product.weight ? (
+                    <li id="single-product-weight">Weight: {product.weight}</li>
+                  ) : (
+                    ''
+                  )}
+                  <li id="single-product-height"> Height: {product.height} </li>
+                  <li id="single-product-width">Width: {product.width}</li>
+                  <li id="single-product-length">Length: {product.depth}</li>
+                  <li id="single-product-topSpeed">
+                    Top Speed: {product.topSpeed}
+                  </li>
+                  <li id="single-product-acceleration">
+                    Acceleration: {product.acceleration}
+                  </li>
+                  <li id="single-product-class">Class: {product.class}</li>
+                </ul>
+              </div>
             </div>
             <div id="single-product-description">
               <h6>Description</h6>

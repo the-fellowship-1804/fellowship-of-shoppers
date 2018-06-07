@@ -44,6 +44,9 @@ class AllProducts extends Component {
           </div>
         );
       }
+      default: {
+        return 'Nothing to see here';
+      }
     }
   }
 }

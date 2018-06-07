@@ -39,11 +39,13 @@ class Landing extends Component {
               <ProductCard product={deathStar} />
             </div>
             <div className="centercontainer">
-              <h6>A message from the Dealers....</h6>
-              <p>
-                Chris is happy and calm. The sky is blue, the stars are shining,
-                and the galaxy awaits. Choose a ship and let the journey begin!
-                *wink*!
+              <h4>A message from the Dealers....</h4>
+              <p>The galaxy awaits! Choose a ship and let the journey begin!</p>
+              <p className="small">
+                Disclaimer: All sales are final. Used items are sold in "as is"
+                condition. Vendor is not liable for malfunctioning parts or
+                sudden ejection into space. Exhaust port covers from third-party
+                sellers are HIGHLY recommended.
               </p>
             </div>
           </div>
