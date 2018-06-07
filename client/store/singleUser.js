@@ -77,19 +77,22 @@ const cartUpdate = (newProductObj, cart) => {
           ...productObj,
           quantity: productObj.quantity + newProductObj.quantity
         };
-      } else {return productObj;}
+      } else {
+        return productObj;
+      }
     });
   }
 };
 
-export const removeFromCart = (userId, cart) => dispatch => {
-  axios
-    .put(`/api/users/${userId}`, { cart })
-    .then(_ => {
-      dispatch(aCC(REMOVE_FROM_CART, cart));
-    })
-    .catch(err => console.log(err));
+export const removeFromCart = (userId, cart) => async dispatch => {
+  try {
+    await axios.put(`/api/users/${userId}`, { cart });
+    dispatch(aCC(REMOVE_FROM_CART, cart));
+  } catch (error) {
+    console.log(error);
+  }
 };
+
 /**
  * REDUCER
  */

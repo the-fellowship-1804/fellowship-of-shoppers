@@ -3,22 +3,28 @@ const { User } = require('../db/models');
 module.exports = router;
 
 //Get all users
-router.get('/', (req, res, next) => {
-  User.findAll({
-    // explicitly select only the id and email fields - even though
-    // users' passwords are encrypted, it won't help if we just
-    // send everything to anyone who asks!
-    attributes: ['id', 'email']
-  })
-    .then(users => res.json(users))
-    .catch(next);
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      // explicitly select only the id and email fields - even though
+      // users' passwords are encrypted, it won't help if we just
+      // send everything to anyone who asks!
+      attributes: ['id', 'email']
+    });
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
 });
 
 //Get one user
-router.get('/:id', (req, res, next) => {
-  User.findById(req.params.id)
-    .then(user => res.json(user))
-    .catch(next);
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = User.findById(req.params.id);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
 });
 
 //Update a user's info
@@ -65,12 +71,15 @@ router.put('/:id', async (req, res, next) => {
 });
 
 //Delete a user
-router.delete('/:id', (req, res, next) => {
-  User.destroy({
-    where: {
-      id: req.id
-    }
-  })
-    .then(res.end())
-    .catch(next);
+router.delete('/:id', async (req, res, next) => {
+  try {
+    User.destroy({
+      where: {
+        id: req.id
+      }
+    });
+    res.end();
+  } catch (error) {
+    next(error);
+  }
 });
