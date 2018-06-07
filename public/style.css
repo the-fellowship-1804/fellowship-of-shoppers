@@ -1,9 +1,12 @@
 body {
   font-family: sans-serif;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 a {
   text-decoration: none;
+  z-index: 1000;
 }
 
 label {
@@ -18,6 +21,15 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/* button styling */
+
+button {
+  z-index: 100;
+  border-radius: 10%;
+  height: 30px;
+  background-color: teal;
 }
 
 /* Navbar */
@@ -39,7 +51,6 @@ a {
 /* Landing Page */
 
 .mainlanding {
-  margin-top: 60px;
   margin-left: 20px;
 }
 

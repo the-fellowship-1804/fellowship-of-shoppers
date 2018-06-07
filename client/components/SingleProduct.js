@@ -30,8 +30,7 @@ class SingleProduct extends Component {
       }
       case LOADED: {
         return (
-          <div>
-            <h1>Single Product</h1>
+          <div className="centercontainer">
             <ProductCard product={product} />
             <ul id="single-product-unordered-list">
               {product.weight ? (
@@ -56,11 +55,14 @@ class SingleProduct extends Component {
                 {product.productDescription}
               </p>
             </div>
-            <Link to="/products">
-              <button type="button">back to the future~~</button>
-            </Link>
+            <button type="button">
+              <Link to="/products">Back to All Products</Link>
+            </button>
           </div>
         );
+      }
+      default: {
+        return 'Nothing selected';
       }
     }
   }

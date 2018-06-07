@@ -13,7 +13,7 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
 const ProductCard = props => (
   <div key={props.product.id}>
     {
-      <div>
+      <div className="singleproductcard centercontainer">
         <h2>{props.product.productName}</h2>
         <p>Price: {props.product.price ? props.product.price : '0'} Credits</p>
         <Link to={`/products/${props.product.id}`}>
