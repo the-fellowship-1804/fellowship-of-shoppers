@@ -101,6 +101,11 @@ describe('User model', () => {
         { object: 'You will respond to my questions', prop: 'boop' }
       ]);
     });
+    it(`has an imageUrl field`, () => expect(picard.imageUrl).to.equal(null));
+    it(`accepts a potentially long string as the image URL`, async () => {
+      await picard.update({ imageUrl: `this is a really long image url` });
+      expect(picard.imageUrl).to.equal(`this is a really long image url`);
+    });
     //end describe basic functionailty
   }),
     describe('instanceMethods', () => {

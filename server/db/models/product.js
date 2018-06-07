@@ -4,7 +4,6 @@ const db = require('../db');
 
 const Product = db.define('product', {
   productName: Sequelize.STRING,
-  //seller = user?
   productImageUrl: Sequelize.STRING,
   price: { type: Sequelize.DECIMAL, defaultValue: 0 },
   weight: Sequelize.DECIMAL,
@@ -15,8 +14,6 @@ const Product = db.define('product', {
   acceleration: Sequelize.DECIMAL,
   class: Sequelize.STRING,
   productDescription: Sequelize.TEXT
-  //crew??
-  //passengers??
 });
 
 module.exports = Product;
