@@ -1,22 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ProductCard from './ProductCard';
+import CheckoutCard from './CheckoutCard';
 import { removeFromCart } from '../store/singleUser';
 
 class Checkout extends React.Component {
   constructor() {
     super();
-    this.state = {
-      checkedOut: false,
-    };
+    this.state = {};
   }
-
-  handleClickRemove = (event, productId) => {
-    const updatedCart = this.props.user.cart.filter(
-      productObj => productObj.product.id !== productId
-    );
-    this.props.removeFromCart(this.props.user.id, updatedCart);
-  };
 
   handleCheckout = () => {
     //some bs to actually check the person out:
@@ -36,12 +27,10 @@ class Checkout extends React.Component {
           Checkout!
         </button>
         {this.props.user.id
-          ? this.props.user.cart.map((productObj, index) => (
-              <ProductCard
+          ? this.props.user.cart.map(productObj => (
+              <CheckoutCard
                 key={productObj.product.id}
                 productObj={productObj}
-                onCheckoutPage={true}
-                handleClickRemove={this.handleClickRemove}
               />
             ))
           : null}
@@ -55,7 +44,7 @@ class Checkout extends React.Component {
  */
 const mapState = state => {
   return {
-    user: state.singleUser,
+    user: state.singleUser
   };
 };
 
