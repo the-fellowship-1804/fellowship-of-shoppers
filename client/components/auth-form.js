@@ -76,6 +76,7 @@ export const Login = connect(
   mapLogin,
   mapDispatch
 )(AuthForm);
+
 export const Signup = withRouter(connect(
   mapSignup,
   mapDispatch

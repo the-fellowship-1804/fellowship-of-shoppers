@@ -6,13 +6,13 @@ import { editUser } from '../store/singleUser'
  * COMPONENT
  */
 class EditUser extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      email: '',
-      password: '',
-      address: '',
-      imageUrl: '',
+      email: this.props.user.email,
+      password: this.props.user.password,
+      address: this.props.user.address,
+      imageUrl: this.props.user.imageUrl,
       saved: false
     }
     this.handleChange = this.handleChange.bind(this)
