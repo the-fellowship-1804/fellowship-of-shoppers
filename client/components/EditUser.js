@@ -22,10 +22,11 @@ class EditUser extends Component {
   handleSubmit(event) {
     event.preventDefault()
     const updatedUser = {
-      email: this.state.email,
-      password: this.state.password,
-      address: this.state.address,
-      imageUrl: this.state.imageUrl,
+
+      email: this.state.email ? this.state.email : this.props.user.email,
+      password: this.state.password ? this.state.password : this.props.user.password,
+      address: this.state.address ? this.state.address : this.props.user.address,
+      imageUrl: this.state.imageUrl ? this.state.imageUrl : this.props.user.imageUrl,
     }
 
     const userid = this.props.user.id
@@ -55,20 +56,20 @@ class EditUser extends Component {
         <h1>Edit Account</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='email'>Email</label>
-          <input name='email' type='text' value={this.state.email} onChange={this.handleChange} required />
-          <span class="validity"></span>
+          <input name='email' type='text' value={this.state.email} onChange={this.handleChange} />
+
 
           <label htmlFor='password'>Password</label>
-          <input name='password' type='text' value={this.state.password} onChange={this.handleChange} required />
-          <span class="validity"></span>
+          <input name='password' type='text' value={this.state.password} onChange={this.handleChange} />
+
 
           <label htmlFor='address'>Address</label>
-          <input name='address' type='address' value={this.state.address} onChange={this.handleChange} required />
-          <span class="validity"></span>
+          <input name='address' type='address' value={this.state.address} onChange={this.handleChange} />
+
 
           <label htmlFor='imageUrl'>Image Url</label>
-          <input name='imageUrl' type='imageUrl' value={this.state.imageUrl} onChange={this.handleChange} required />
-          <span class="validity"></span>
+          <input name='imageUrl' type='imageUrl' value={this.state.imageUrl} onChange={this.handleChange} />
+
           <div>
             <button type='submit'>Save Changes</button>
           </div>
