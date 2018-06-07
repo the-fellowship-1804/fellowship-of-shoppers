@@ -62,8 +62,7 @@ router.put('/:id', async (req, res, next) => {
         returning: true,
         plain: true
       });
-      res.json(user[0]);
-      console.log(user);
+      res.json(user)
     }
   } catch (error) {
     console.log(error);
