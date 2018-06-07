@@ -29,8 +29,7 @@ passport.deserializeUser((id, done) =>
   db.models.user
     .findById(id)
     .then(user => done(null, user))
-    .catch(done)
-);
+    .catch(done));
 
 const createApp = () => {
   // logging middleware
@@ -49,7 +48,7 @@ const createApp = () => {
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: false
     })
   );
   app.use(passport.initialize());
@@ -89,8 +88,7 @@ const createApp = () => {
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
-  );
+    console.log(`Mixing it up on http://localhost:${PORT}`));
 
   // set up our socket control center
   const io = socketio(server);

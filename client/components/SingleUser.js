@@ -9,12 +9,16 @@ class SingleUser extends React.Component {
     super(props);
     this.state = {
       displayHistory: false,
-      productInfo: [],
+      productInfo: []
     };
   }
 
-  componentDidMount() {
-    this.props.getProducts().catch(err => console.log(err));
+  async componentDidMount() {
+    try {
+      await this.props.getProducts();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   handleClick = () => {
@@ -23,7 +27,7 @@ class SingleUser extends React.Component {
     );
     this.setState({
       productInfo: tempProductInfo,
-      displayHistory: true,
+      displayHistory: true
     });
   };
 
@@ -58,7 +62,7 @@ class SingleUser extends React.Component {
 const mapState = state => {
   return {
     user: state.singleUser,
-    allProducts: state.allProducts,
+    allProducts: state.allProducts
   };
 };
 
