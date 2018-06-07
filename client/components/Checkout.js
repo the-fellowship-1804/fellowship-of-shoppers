@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CartCard from './CartCard';
-import { removeFromCart } from '../store/singleUser';
 
 class Cart extends React.Component {
   constructor() {
@@ -34,11 +32,13 @@ class Cart extends React.Component {
             : 'Calculating...'}
         </div>
         <button type="button" onClick={this.handleClick}>
-          Checkout!
+          Place Order
         </button>
         {this.props.user.id
           ? this.props.user.cart.map(productObj => (
-              <CartCard key={productObj.product.id} productObj={productObj} />
+              <key={productObj.product.id}
+                productObj={productObj}
+              />
             ))
           : null}
       </div>
