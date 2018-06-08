@@ -9,7 +9,8 @@ import {
   Landing,
   AllProducts,
   SingleProduct,
-  Cart
+  Cart,
+  Checkout
 } from './components';
 import { me } from './store';
 
@@ -31,6 +32,7 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
