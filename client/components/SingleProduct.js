@@ -58,26 +58,31 @@ class SingleProduct extends Component {
       }
       case LOADED: {
         return (
-          <div>
-            <h1>Single Product</h1>
-            <ProductCard product={product} />
-            <ul id="single-product-unordered-list">
-              {product.weight ? (
-                <li id="single-product-weight">Weight: {product.weight}</li>
-              ) : (
-                ''
-              )}
-              <li id="single-product-height"> Height: {product.height} </li>
-              <li id="single-product-width">Width: {product.width}</li>
-              <li id="single-product-length">Length: {product.depth}</li>
-              <li id="single-product-topSpeed">
-                Top Speed: {product.topSpeed}
-              </li>
-              <li id="single-product-acceleration">
-                Acceleration: {product.acceleration}
-              </li>
-              <li id="single-product-class">Class: {product.class}</li>
-            </ul>
+          <div className="centercontainer">
+            <div className="rowcontainerproduct">
+              <div id="singleproductcard">
+                <ProductCard product={product} />
+              </div>
+              <div>
+                <ul id="single-product-unordered-list">
+                  {product.weight ? (
+                    <li id="single-product-weight">Weight: {product.weight}</li>
+                  ) : (
+                    ''
+                  )}
+                  <li id="single-product-height"> Height: {product.height} </li>
+                  <li id="single-product-width">Width: {product.width}</li>
+                  <li id="single-product-length">Length: {product.depth}</li>
+                  <li id="single-product-topSpeed">
+                    Top Speed: {product.topSpeed}
+                  </li>
+                  <li id="single-product-acceleration">
+                    Acceleration: {product.acceleration}
+                  </li>
+                  <li id="single-product-class">Class: {product.class}</li>
+                </ul>
+              </div>
+            </div>
             <div id="single-product-description">
               <h6>Description</h6>
               <p id="single-product-description-p">
@@ -85,7 +90,7 @@ class SingleProduct extends Component {
               </p>
             </div>
             <Link to="/products">
-              <button type="button">back to the future~~</button>
+              <button type="button">Back to All Products</button>
             </Link>
             <label htmlFor="quantity">Quantity:</label>
             <input
@@ -106,8 +111,9 @@ class SingleProduct extends Component {
           </div>
         );
       }
-      default:
-        return <div> sorry man; mistakes were made </div>;
+      default: {
+        return 'Nothing selected';
+      }
     }
   }
 }
