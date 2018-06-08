@@ -12,12 +12,42 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
 ];
 
 class AllProducts extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      filter: false,
+      class: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   componentDidMount() {
     this.props.getProducts();
   }
 
+  handleChange(event) {
+    console.dir(event.target)
+    this.setState({
+      filter: true,
+      shipType: event.target.value,
+    })
+  }
+
+
+  // shipFilter(shipType) {
+  //   console.log(shipType)
+  //   return this.setState({
+  //     filter: true,
+  //     class: shipType
+  //   })
+  // }
+
   render() {
-    const allProducts = this.props.products;
+    const allProducts = this.state.filter
+      ? this.props.products.filter(ship => ship.class === this.state.shipType || this.state.shipType === `all`)
+      : this.props.products
+
     switch (this.props.status) {
       case UNASKED: {
         return <p>We don't want this</p>;
@@ -29,14 +59,20 @@ class AllProducts extends Component {
         return (
           <div>
             <h1 id="allproductsheading">All Products</h1>
-            <select id="filter" name="filter">
-              <option selected="selected" disabled="true">
-                Filter By Class
+
+            <select id="filter" name="filter" onChange={this.handleChange}>
+
+              <option value="all">{!this.state.shipType ? "Filter by Class" : "All"}
               </option>
-              <option value="SpaceStation">Space Stations</option>
-              <option value="Capital">Capital Class</option>
-              <option value="Freighter">Freighters</option>
+
+              <option value="Space Stations">Space Stations</option>
+
+              <option value="Starships">Starships</option>
+
+              <option value="Freighters">Freighters</option>
+
               <option value="Fighter">Fighters</option>
+
             </select>
             {allProducts.map(product => {
               return <ProductCard key={product.id} product={product} />;

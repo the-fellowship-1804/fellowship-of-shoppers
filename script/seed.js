@@ -16,15 +16,17 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       productName: `the Death Star`,
-      price: `9999999`,
+      price: '9 * 10^1,337',
       productImageUrl:
         'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg',
+      class: 'Space Stations'
     }),
     Product.create({
       productName: `Enterprise-D`,
       productImageUrl:
-        'https://vignette.wikia.nocookie.net/memoryalpha/images/0/00/USS_Enterprise-D%2C_TNG_Season_3-7.jpg/revision/latest?cb=20160203203647&path-prefix=en',
+        'https://nerdist.com/wp-content/uploads/2015/03/1754989-970x545.jpg',
       price: 0,
+      class: 'Starships'
     }),
   ]);
   console.log(`seeded ${products.length} products`);
