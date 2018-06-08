@@ -32,7 +32,8 @@ class SingleUser extends React.Component {
   };
 
   render() {
-    const { email, imageUrl, address } = this.props.user;
+    const { id, email, imageUrl, address } = this.props.user;
+    console.log(imageUrl)
     return (
       <div>
         <h3>Welcome, {email}</h3>
@@ -45,6 +46,7 @@ class SingleUser extends React.Component {
         <button onClick={this.handleClick} type="button">
           Show Order History
         </button>
+        <Link to={`/editAccount`}><button type="button">Edit Info</button></Link>
         {this.state.displayHistory ? (
           <OrderHistory
             productInfo={this.state.productInfo}

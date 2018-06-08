@@ -10,7 +10,8 @@ import {
   AllProducts,
   SingleProduct,
   Cart,
-  Checkout
+  Checkout,
+  EditUser
 } from './components';
 import { me } from './store';
 
@@ -39,6 +40,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/user" component={SingleUser} />
+            <Route path="/editAccount" component={EditUser} />
             {/* <Route path="/home" component={UserHome} /> */}
           </Switch>
         )}
