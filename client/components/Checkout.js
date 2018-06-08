@@ -4,6 +4,8 @@ import { Elements } from 'react-stripe-elements';
 
 import CheckoutForm from './CheckoutForm';
 
+import { checkOut } from '../store/singleUser';
+
 class Checkout extends React.Component {
   constructor(props) {
     super(props);
@@ -33,6 +35,16 @@ class Checkout extends React.Component {
     return sum;
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    const updatedOrderHistory = [
+      this.props.user.cart,
+      ...this.props.user.orderHistory
+    ];
+    this.props.checkOut(this.props.user.id, updatedOrderHistory);
+    console.log('reached');
+  };
+
   render() {
     const totalPrice = this.props.user.id ? this.caluculateTotalPrice() : null;
     return (
@@ -42,16 +54,18 @@ class Checkout extends React.Component {
           Your total is:{' '}
           {this.props.user.id ? `${totalPrice} space-cash` : 'Calculating...'}
         </div>
-        <form onChange={this.handleChange}>
+        <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
           <label htmlFor="address">Address:</label>
           <input type="text" name="address" value={this.state.address} />
+          <button type="submit">TESTING BUTTON</button>
         </form>
-        <Elements>
+        {/* <Elements>
           <CheckoutForm
             price={totalPrice}
-            customer={this.props.user.id ? this.props.user.email : null}
+            user={this.props.user.id ? this.props.user : null}
+            checkout={this.props.checkout}
           />
-        </Elements>
+        </Elements> */}
         {this.props.user.id ? ( //this will have to be changed to accomodate for not-logged in users
           <div>
             <h3>Your items:</h3>
@@ -82,7 +96,11 @@ const mapState = state => {
   };
 };
 
+const mapDispatch = dispatch => ({
+  checkOut: (userId, orderHistory) => dispatch(checkOut(userId, orderHistory))
+});
+
 export default connect(
   mapState,
-  null
+  mapDispatch
 )(Checkout);

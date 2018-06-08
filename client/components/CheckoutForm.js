@@ -17,10 +17,13 @@ class CheckoutForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
+    const user = this.props.user;
+    const updatedOrderHistory = user.orderHistory.unshift(user.cart);
     try {
+      // await this.props.checkout(user.id, updatedOrderHistory);
       const stripeToken = await this.props.stripe.createToken({
         type: 'card',
-        name: this.props.customer
+        name: user.email
       });
       await axios.post(`/api/charge/${this.props.price}`, {
         stripeTokenId: stripeToken.token.id
