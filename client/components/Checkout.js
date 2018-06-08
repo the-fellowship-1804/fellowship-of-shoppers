@@ -16,7 +16,6 @@ class Checkout extends React.Component {
     script.async = true;
     script.className = 'stripe-button';
     script.dataset.key = 'pk_test_1BGAQuuZplpLNN1Y5QC5V08o';
-    script.dataset.amount = 99;
     script.dataset.currency = 'usd';
     script.dataset.name = 'The Starship Depot';
     script.dataset.locale = 'auto';
@@ -37,12 +36,8 @@ class Checkout extends React.Component {
     });
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    //should unshift the cart into their order history and clear the cart in both DB model and store-state
-    //and redirect them to confirmation page
-  };
-
+  //should unshift the cart into their order history and clear the cart in both DB model and store-state
+  //and redirect them to confirmation page
   //where they can put in/edit their payment and shipping info and actually buy the item
 
   caluculateTotalPrice = () => {
@@ -64,16 +59,9 @@ class Checkout extends React.Component {
           Your total is:{' '}
           {this.props.user.id ? `${totalPrice} space-cash` : 'Calculating...'}
         </div>
-        {/* ALL THE INFO FOR PAYMENT INFO, ADDRESS */}
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <label htmlFor="address">Address:</label>
           <input type="text" name="address" value={this.state.address} />
-          <label htmlFor="paymentInfo">Payment Information:</label>
-          <input
-            type="text"
-            name="paymentInfo"
-            value={this.state.paymentInfo}
-          />
         </form>
         {/*   <!-- this is copied from the Stripe checkout embed --> */}
         <form

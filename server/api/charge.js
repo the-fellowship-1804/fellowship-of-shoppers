@@ -13,7 +13,6 @@ const charge = req => {
 };
 
 router.post('/:price', async (req, res, next) => {
-  console.log('REQ.BODY\n\n', req.body);
   try {
     const charged = await charge(req);
     console.log('charged\n\n', charged);
