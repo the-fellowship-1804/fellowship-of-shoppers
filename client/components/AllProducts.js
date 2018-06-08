@@ -45,7 +45,7 @@ class AllProducts extends Component {
 
   render() {
     const allProducts = this.state.filter
-      ? this.props.products.filter(ship => ship.class === this.state.shipType || this.state.shipType === `all`)
+      ? this.props.products.filter(ship => ship.class === this.state.shipType || this.state.shipType === `All`)
       : this.props.products
 
     switch (this.props.status) {
@@ -58,11 +58,11 @@ class AllProducts extends Component {
       case LOADED: {
         return (
           <div>
-            <h1 id="allproductsheading">All Products</h1>
+            <h1 id="allproductsheading">All Products {!this.state.shipType ? `` : `> ${this.state.shipType}`}</h1>
 
             <select id="filter" name="filter" onChange={this.handleChange}>
 
-              <option value="all">{!this.state.shipType ? "Filter by Class" : "All"}
+              <option value="All">{!this.state.shipType ? "Filter by Class" : "All"}
               </option>
 
               <option value="Space Stations">Space Stations</option>
