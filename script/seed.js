@@ -22,6 +22,8 @@ async function seed() {
     }),
     Product.create({
       productName: `Enterprise-D`,
+      productImageUrl:
+        'https://vignette.wikia.nocookie.net/memoryalpha/images/0/00/USS_Enterprise-D%2C_TNG_Season_3-7.jpg/revision/latest?cb=20160203203647&path-prefix=en',
       price: 0,
     }),
   ]);

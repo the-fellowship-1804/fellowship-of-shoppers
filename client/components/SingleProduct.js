@@ -16,7 +16,8 @@ class SingleProduct extends Component {
   constructor() {
     super();
     this.state = {
-      quantity: 1
+      quantity: 1,
+      addedtoCart: false,
     };
   }
   componentDidMount() {
@@ -33,7 +34,9 @@ class SingleProduct extends Component {
         product,
         this.state.quantity
       );
-      this.props.history.push('/cart');
+      this.setState({
+        addedtoCart: true
+      })
     } catch (error) {
       console.log(error);
     }
@@ -68,8 +71,8 @@ class SingleProduct extends Component {
                   {product.weight ? (
                     <li id="single-product-weight">Weight: {product.weight}</li>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                   <li id="single-product-height"> Height: {product.height} </li>
                   <li id="single-product-width">Width: {product.width}</li>
                   <li id="single-product-length">Length: {product.depth}</li>
@@ -108,6 +111,18 @@ class SingleProduct extends Component {
             >
               Add to cart
             </button>
+            <div>
+              {this.state.addedtoCart
+                ?
+                <div>
+                  <h3>Added to Cart!</h3>
+                  <Link to="/cart"><button type="button">Proceed to Checkout?</button></Link>
+                </div>
+                :
+                null
+              }
+
+            </div>
           </div>
         );
       }
