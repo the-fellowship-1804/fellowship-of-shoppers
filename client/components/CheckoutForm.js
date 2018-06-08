@@ -45,7 +45,7 @@ class CheckoutForm extends React.Component {
             Card details
             <CardElement />
           </label>
-          <button>Confirm order</button>
+          <button>Pay now</button>
         </form>
       );
     } else if (this.state.error) {
