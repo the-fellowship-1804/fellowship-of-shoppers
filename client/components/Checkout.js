@@ -1,26 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Elements } from 'react-stripe-elements';
+
+import CheckoutForm from './CheckoutForm';
 
 class Checkout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: '',
-      paymentInfo: {}
+      address: ''
     };
-  }
-
-  componentDidMount() {
-    const script = document.createElement('script');
-    script.src = 'https://checkout.stripe.com/checkout.js';
-    script.async = true;
-    script.className = 'stripe-button';
-    script.dataset.key = 'pk_test_1BGAQuuZplpLNN1Y5QC5V08o';
-    script.dataset.currency = 'usd';
-    script.dataset.name = 'The Starship Depot';
-    script.dataset.locale = 'auto';
-    document.getElementById('stripe-form').appendChild(script);
-    console.log(script);
   }
 
   UNSAFE_componentWillReceiveProps(incomingProps) {
@@ -36,10 +25,6 @@ class Checkout extends React.Component {
     });
   };
 
-  //should unshift the cart into their order history and clear the cart in both DB model and store-state
-  //and redirect them to confirmation page
-  //where they can put in/edit their payment and shipping info and actually buy the item
-
   caluculateTotalPrice = () => {
     let sum = 0;
     this.props.user.cart.forEach(productObj => {
@@ -49,8 +34,6 @@ class Checkout extends React.Component {
   };
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
     const totalPrice = this.props.user.id ? this.caluculateTotalPrice() : null;
     return (
       <div>
@@ -59,18 +42,17 @@ class Checkout extends React.Component {
           Your total is:{' '}
           {this.props.user.id ? `${totalPrice} space-cash` : 'Calculating...'}
         </div>
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        <form onChange={this.handleChange}>
           <label htmlFor="address">Address:</label>
           <input type="text" name="address" value={this.state.address} />
         </form>
-        {/*   <!-- this is copied from the Stripe checkout embed --> */}
-        <form
-          action={`/api/charge/${totalPrice}`}
-          method="POST"
-          id="stripe-form"
-        />
-        {/* <!-- end of Stripe embed --> */}
-        {this.props.user.id ? (
+        <Elements>
+          <CheckoutForm
+            price={totalPrice}
+            customer={this.props.user.id ? this.props.user.email : null}
+          />
+        </Elements>
+        {this.props.user.id ? ( //this will have to be changed to accomodate for not-logged in users
           <div>
             <h3>Your items:</h3>
             {this.props.user.cart.length > 0 ? (
