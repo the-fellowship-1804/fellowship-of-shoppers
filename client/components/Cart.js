@@ -10,9 +10,7 @@ class Cart extends React.Component {
   }
 
   handleClick = () => {
-    //redirect user to a checkout component
-    //where they can put in/edit their payment and shipping info and actually buy the item
-    //buying the item should unshift the cart into their order history and clear the cart in both DB model and store-state
+    this.props.history.push('/checkout');
   };
 
   caluculateTotalPrice = () => {
@@ -24,24 +22,25 @@ class Cart extends React.Component {
   };
 
   render() {
+    const user = this.props.user;
     return (
       <div>
         <h3>Cart</h3>
         <div>
           Your total is:{' '}
-          {this.props.user.id
+          {user.id
             ? `${this.caluculateTotalPrice()} space-cash`
-            : 'Calculating...'}
+            : 'Calculating...CHANGE THIS WHEN WE HANDLE VISITORS'}
         </div>
         <button
           type="button"
           onClick={this.handleClick}
-          disabled={this.props.user.cart.length === 0}
+          disabled={user.id ? user.cart.length === 0 : true}
         >
           Checkout!
         </button>
-        {this.props.user.id
-          ? this.props.user.cart.map(productObj => (
+        {user.id
+          ? user.cart.map(productObj => (
               <CartCard key={productObj.product.id} productObj={productObj} />
             ))
           : null}
