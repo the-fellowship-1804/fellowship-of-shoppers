@@ -35,6 +35,7 @@ class Checkout extends React.Component {
 
   render() {
     const totalPrice = this.props.user.id ? this.caluculateTotalPrice() : null;
+    console.log(this.props.user);
     return (
       <div>
         <h3>Checkout</h3>
@@ -42,14 +43,14 @@ class Checkout extends React.Component {
           Your total is:{' '}
           {this.props.user.id ? `${totalPrice} space-cash` : 'Calculating...'}
         </div>
-        <form onChange={this.handleChange}>
+        <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
           <label htmlFor="address">Address:</label>
           <input type="text" name="address" value={this.state.address} />
         </form>
         <Elements>
           <CheckoutForm
             price={totalPrice}
-            customer={this.props.user.id ? this.props.user.email : null}
+            user={this.props.user.id ? this.props.user : null}
           />
         </Elements>
         {this.props.user.id ? ( //this will have to be changed to accomodate for not-logged in users
