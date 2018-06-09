@@ -17,9 +17,13 @@ class CheckoutForm extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
     const user = this.props.user;
-    const updatedOrderHistory = [user.cart, ...user.orderHistory];
+    console.log('USER', user);
+    const updatedOrderHistory = [
+      JSON.stringify(user.cart),
+      ...user.orderHistory
+    ];
+    console.log('UPDATEDORDERHISTORY', updatedOrderHistory);
     try {
-      this.props.checkOut(this.props.user.id, updatedOrderHistory);
       const stripeToken = await this.props.stripe.createToken({
         type: 'card',
         name: user.email
@@ -27,6 +31,7 @@ class CheckoutForm extends React.Component {
       await axios.post(`/api/charge/${this.props.price}`, {
         stripeTokenId: stripeToken.token.id
       });
+      await this.props.checkOut(this.props.user.id, updatedOrderHistory);
       this.setState({
         awaitingPayment: false
       });
@@ -47,7 +52,7 @@ class CheckoutForm extends React.Component {
             Card details
             <CardElement />
           </label>
-          <button>Pay now</button>
+          <button type="submit">Pay now</button>
         </form>
       );
     } else if (this.state.error) {

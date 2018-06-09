@@ -8,22 +8,27 @@ async function seed() {
   console.log('db synced!');
 
   const users = await Promise.all([
-    User.create({ email: 'cody@email.com', password: '123', imageUrl: "https://ih0.redbubble.net/image.192764262.9691/pp%2C185x205-pad%2C210x230%2Cf8f8f8.lite-1u5.jpg" }),
-    User.create({ email: 'murphy@email.com', password: '123' }),
+    User.create({
+      email: 'cody@email.com',
+      password: '123',
+      imageUrl:
+        'https://ih0.redbubble.net/image.192764262.9691/pp%2C185x205-pad%2C210x230%2Cf8f8f8.lite-1u5.jpg'
+    }),
+    User.create({ email: 'murphy@email.com', password: '123' })
   ]);
   console.log(`seeded ${users.length} users`);
 
   const products = await Promise.all([
     Product.create({
       productName: `the Death Star`,
-      price: `9999999`,
+      price: `999`,
       productImageUrl:
-        'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg',
+        'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg'
     }),
     Product.create({
       productName: `Enterprise-D`,
-      price: 0,
-    }),
+      price: '100'
+    })
   ]);
   console.log(`seeded ${products.length} products`);
 }
