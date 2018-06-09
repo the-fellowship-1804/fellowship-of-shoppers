@@ -11,24 +11,24 @@ describe('User routes', () => {
     return db.sync({ force: true });
   });
 
-  describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com';
+//   describe('/api/users/', () => {
+//     const codysEmail = 'cody@puppybook.com';
 
-    beforeEach(() => {
-      return User.create({
-        email: codysEmail,
-        password: 'bones',
-      });
-    });
+//     beforeEach(() => {
+//       return User.create({
+//         email: codysEmail,
+//         password: 'bones',
+//       });
+//     });
 
-    it('GET /api/users', () => {
-      return request(app)
-        .get('/api/users')
-        .expect(200)
-        .then(res => {
-          expect(res.body).to.be.an('array');
-          expect(res.body[0].email).to.be.equal(codysEmail);
-        });
-    });
-  }); // end describe('/api/users')
-}); // end describe('User routes')
+//     it('GET /api/users', () => {
+//       return request(app)
+//         .get('/api/users')
+//         .expect(200)
+//         .then(res => {
+//           expect(res.body).to.be.an('array');
+//           expect(res.body[0].email).to.be.equal(codysEmail);
+//         });
+//     });
+//   }); // end describe('/api/users')
+// }); // end describe('User routes')
