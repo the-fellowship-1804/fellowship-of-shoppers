@@ -28,28 +28,26 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   address: Sequelize.STRING,
-  paymentInfo: {
-    type: Sequelize.JSON,
-    //I don't know well this will work, but mimicking the method the boilerplate uses for pw and salt
-    get() {
-      return () => this.getDataValue('paymentInfo');
-    }
-  },
   cart: {
     type: Sequelize.ARRAY(Sequelize.JSON),
     defaultValue: []
   },
   orderHistory: {
-    type: Sequelize.ARRAY(Sequelize.JSON),
-    // type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.JSON))
-    defaultValue: []
+    type: Sequelize.JSON,
+    defaultValue: '[]',
+    get() {
+      return JSON.parse(this.getDataValue('orderHistory'));
+    },
+    set(value) {
+      this.setDataValue('orderHistory', JSON.stringify(value));
+    }
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
   imageUrl: {
-    type: Sequelize.TEXT,
+    type: Sequelize.TEXT
   }
 });
 
@@ -58,18 +56,18 @@ module.exports = User;
 /**
  * instanceMethods
  */
-User.prototype.correctPassword = function (candidatePwd) {
+User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password();
 };
 
 /**
  * classMethods
  */
-User.generateSalt = function () {
+User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64');
 };
 
-User.encryptPassword = function (plainText, salt) {
+User.encryptPassword = function(plainText, salt) {
   return crypto
     .createHash('RSA-SHA256')
     .update(plainText)
