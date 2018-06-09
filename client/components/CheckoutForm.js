@@ -17,12 +17,7 @@ class CheckoutForm extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
     const user = this.props.user;
-    console.log('USER', user);
-    const updatedOrderHistory = [
-      JSON.stringify(user.cart),
-      ...user.orderHistory
-    ];
-    console.log('UPDATEDORDERHISTORY', updatedOrderHistory);
+    const updatedOrderHistory = [user.cart, ...user.orderHistory];
     try {
       const stripeToken = await this.props.stripe.createToken({
         type: 'card',

@@ -36,6 +36,7 @@ class Checkout extends React.Component {
 
   render() {
     const totalPrice = this.props.user.id ? this.caluculateTotalPrice() : null;
+    console.log(this.props.user);
     return (
       <div>
         <h3>Checkout</h3>

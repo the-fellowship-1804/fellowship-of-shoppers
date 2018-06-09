@@ -40,8 +40,14 @@ const User = db.define('user', {
     defaultValue: []
   },
   orderHistory: {
-    type: Sequelize.ARRAY(Sequelize.JSON),
-    defaultValue: []
+    type: Sequelize.JSON,
+    defaultValue: '[]',
+    get() {
+      return JSON.parse(this.getDataValue('orderHistory'));
+    },
+    set(value) {
+      this.setDataValue('orderHistory', JSON.stringify(value));
+    }
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,

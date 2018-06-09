@@ -11,10 +11,15 @@ async function seed() {
     User.create({
       email: 'cody@email.com',
       password: '123',
+      address: "Cody's House, dog",
       imageUrl:
         'https://ih0.redbubble.net/image.192764262.9691/pp%2C185x205-pad%2C210x230%2Cf8f8f8.lite-1u5.jpg'
     }),
-    User.create({ email: 'murphy@email.com', password: '123' })
+    User.create({
+      email: 'murphy@email.com',
+      password: '123',
+      address: "Murphy's Dog, house"
+    })
   ]);
   console.log(`seeded ${users.length} users`);
 
