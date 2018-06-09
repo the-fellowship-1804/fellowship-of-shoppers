@@ -40,7 +40,9 @@ class CheckoutForm extends React.Component {
   };
 
   render() {
-    if (this.state.awaitingPayment) {
+    if (this.props.user.cart && this.props.user.cart.length === 0) {
+      return null;
+    } else if (this.state.awaitingPayment) {
       return (
         <form onSubmit={this.handleSubmit}>
           <label>
