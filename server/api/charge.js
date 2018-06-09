@@ -5,7 +5,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST_KEY);
 
 const charge = req => {
   return stripe.charges.create({
-    amount: Number(req.params.price),
+    amount: Number(req.params.price) * 100,
     currency: process.env.STRIPE_CCY,
     source: req.body.stripeTokenId
   });
