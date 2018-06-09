@@ -28,25 +28,26 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   address: Sequelize.STRING,
-  paymentInfo: {
-    type: Sequelize.JSON,
-    //I don't know well this will work, but mimicking the method the boilerplate uses for pw and salt
-    get() {
-      return () => this.getDataValue('paymentInfo');
-    }
-  },
   cart: {
     type: Sequelize.ARRAY(Sequelize.JSON),
     defaultValue: []
   },
   orderHistory: {
-    type: Sequelize.ARRAY(Sequelize.JSON),
-    // type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.JSON))
-    defaultValue: []
+    type: Sequelize.JSON,
+    defaultValue: '[]',
+    get() {
+      return JSON.parse(this.getDataValue('orderHistory'));
+    },
+    set(value) {
+      this.setDataValue('orderHistory', JSON.stringify(value));
+    }
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  imageUrl: {
+    type: Sequelize.TEXT
   }
 });
 

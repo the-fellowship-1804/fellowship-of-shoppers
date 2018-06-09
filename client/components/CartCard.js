@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { addToCart, removeFromCart } from '../store/singleUser';
 
-class CheckoutCard extends React.Component {
+class CartCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,4 +99,4 @@ const mapDispatch = dispatch => ({
 export default connect(
   mapState,
   mapDispatch
-)(CheckoutCard);
+)(CartCard);

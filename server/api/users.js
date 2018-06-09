@@ -57,13 +57,13 @@ router.put('/:id', async (req, res, next) => {
       }
       res.end();
     } else {
+      console.log('REQ.BODY', req.body);
       const [, user] = await User.update(req.body, {
         where: { id: req.params.id },
         returning: true,
         plain: true
       });
-      res.json(user[0]);
-      console.log(user);
+      res.json(user);
     }
   } catch (error) {
     console.log(error);

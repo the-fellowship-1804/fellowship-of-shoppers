@@ -1,18 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CheckoutCard from './CheckoutCard';
-import { removeFromCart } from '../store/singleUser';
+import { Elements } from 'react-stripe-elements';
+
+import CheckoutForm from './CheckoutForm';
 
 class Checkout extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      address: ''
+    };
   }
 
-  handleClick = () => {
-    //redirect user to a checkout component
-    //where they can put in/edit their payment and shipping info and actually buy the item
-    //buying the item should unshift the cart into their order history and clear the cart in both DB model and store-state
+  UNSAFE_componentWillReceiveProps(incomingProps) {
+    this.setState({
+      address: incomingProps.user.address
+    });
+  }
+
+  handleChange = event => {
+    console.log(event.target.name, event.target.value);
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   caluculateTotalPrice = () => {
@@ -24,43 +34,56 @@ class Checkout extends React.Component {
   };
 
   render() {
+    const totalPrice = this.props.user.id ? this.caluculateTotalPrice() : null;
+    console.log(this.props.user);
     return (
       <div>
-        <h3>Cart</h3>
+        <h3>Checkout</h3>
         <div>
           Your total is:{' '}
-          {this.props.user.id
-            ? `${this.caluculateTotalPrice()} space-cash`
-            : 'Calculating...'}
+          {this.props.user.id ? `${totalPrice} space-cash` : 'Calculating...'}
         </div>
-        <button type="button" onClick={this.handleClick}>
-          Checkout!
-        </button>
-        {this.props.user.id
-          ? this.props.user.cart.map(productObj => (
-              <CheckoutCard
-                key={productObj.product.id}
-                productObj={productObj}
-              />
-            ))
-          : null}
+        <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+          <label htmlFor="address">Address:</label>
+          <input type="text" name="address" value={this.state.address} />
+        </form>
+        <Elements>
+          <CheckoutForm
+            price={totalPrice}
+            user={this.props.user.id ? this.props.user : null}
+          />
+        </Elements>
+        {this.props.user.id ? ( //this will have to be changed to accomodate for not-logged in users
+          <div>
+            <h3>Your items:</h3>
+            {this.props.user.cart.length > 0 ? (
+              this.props.user.cart.map(productObj => (
+                <ul key={productObj.product.id}>
+                  <h4>Name: {productObj.product.productName}</h4>
+                  <h4>Price per ship: {productObj.product.price}</h4>
+                  <h4>Number of ships: {productObj.quantity}</h4>
+                  <h4>
+                    Total: {productObj.product.price * productObj.quantity}
+                  </h4>
+                </ul>
+              ))
+            ) : (
+              <div> no items </div>
+            )}
+          </div>
+        ) : null}
       </div>
     );
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     user: state.singleUser
   };
 };
 
-const mapProps = { removeFromCart };
-
 export default connect(
   mapState,
-  mapProps
+  null
 )(Checkout);

@@ -9,6 +9,8 @@ const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
 const ADD_TO_CART = 'ADD_TO_CART';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+const UPDATE_USER = 'UPDATE_USER';
+const CHECKOUT_CART = 'CHECKOUT_CART';
 
 /**
  * INITIAL STATE
@@ -20,6 +22,7 @@ const defaultUser = {};
  */
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
+const updateUser = userInfo => ({ type: UPDATE_USER, userInfo });
 
 /**
  * THUNK CREATORS
@@ -30,13 +33,13 @@ export const me = () => dispatch =>
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err));
 
-export const auth = (email, password, method) => dispatch =>
+export const auth = (email, password, method, redirect) => dispatch =>
   axios
     .post(`/auth/${method}`, { email, password })
     .then(
       res => {
         dispatch(getUser(res.data));
-        history.push('/home');
+        history.push(method === 'login' ? '/user' : '/editAccount');
       },
       authError => {
         // rare example: a good use case for parallel (non-catch) error handler
@@ -93,6 +96,27 @@ export const removeFromCart = (userId, cart) => async dispatch => {
   }
 };
 
+export const checkOut = (userId, updatedOrderHistory) => async dispatch => {
+  try {
+    await axios.put(`/api/users/${userId}`, {
+      cart: [],
+      orderHistory: updatedOrderHistory
+    });
+    dispatch(aCC(CHECKOUT_CART, updatedOrderHistory));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const editUser = (userId, userInfo) => async dispatch => {
+  try {
+    const { data } = await axios.put(`api/users/${userId}`, userInfo);
+    dispatch(updateUser(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 /**
  * REDUCER
  */
@@ -109,6 +133,14 @@ export default function(state = defaultUser, action) {
       };
     case REMOVE_FROM_CART:
       return { ...state, cart: action.payload };
+    case UPDATE_USER:
+      return { ...state, ...action.userInfo };
+    case CHECKOUT_CART:
+      return {
+        ...state,
+        orderHistory: action.payload,
+        cart: []
+      };
     default:
       return state;
   }
