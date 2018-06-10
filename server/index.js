@@ -98,20 +98,6 @@ const createApp = () => {
   });
 };
 
-export const cartMerge = (disCart, loggedCart) => {
-  const output = loggedCart;
-  for (let i = 0; i < disCart.length; i++) {
-    let currentItem = disCart[i];
-    let match = loggedCart.find(item => item.id === currentItem.id);
-    if (!match) output.push(disCart[i]);
-    else if (match.quantity >= disCart[i].quantity) continue;
-    else {
-      match.quantity = disCart[i].quantity;
-    }
-  }
-  return output;
-};
-
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () =>

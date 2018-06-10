@@ -3,6 +3,20 @@ const User = require('../db/models/user');
 const cartMerge = require('./index');
 module.exports = router;
 
+const cartMerge = (disCart, loggedCart) => {
+  const output = loggedCart;
+  for (let i = 0; i < disCart.length; i++) {
+    let currentItem = disCart[i];
+    let match = loggedCart.find(item => item.id === currentItem.id);
+    if (!match) output.push(disCart[i]);
+    else if (match.quantity >= disCart[i].quantity) continue;
+    else {
+      match.quantity = disCart[i].quantity;
+    }
+  }
+  return output;
+};
+
 router.post('/login', (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
     .then(user => {
