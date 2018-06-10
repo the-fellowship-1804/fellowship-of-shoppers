@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../db/models/user');
+const cartMerge = require('./index');
 module.exports = router;
 
 router.post('/login', (req, res, next) => {
