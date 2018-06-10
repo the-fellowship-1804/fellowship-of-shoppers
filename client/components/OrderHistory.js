@@ -1,13 +1,25 @@
 import React from 'react';
-import ProductCard from './ProductCard';
+import shortid from 'shortid';
+
+import OrderHistoryCartCard from './OrderHistoryCartCard';
 
 const OrderHistory = props => {
   return (
     <div>
-      <h2>{props.user.email}'s Order History: </h2>
-      {props.productInfo.map(product => (
-        <ProductCard product={product} key={product.id} />
-      ))}
+      <h4>Order History: </h4>
+      {props.user.orderHistory.length > 0 ? (
+        props.user.orderHistory.map((cart, index) => {
+          return (
+            <OrderHistoryCartCard
+              key={shortid.generate()}
+              cart={cart}
+              orderNumber={props.user.orderHistory.length - index}
+            />
+          );
+        })
+      ) : (
+        <div>No orders</div>
+      )}
     </div>
   );
 };
