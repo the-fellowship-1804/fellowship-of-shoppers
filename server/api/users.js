@@ -57,6 +57,7 @@ router.put('/:id', async (req, res, next) => {
       }
       res.end();
     } else {
+      console.log('REQ.BODY', req.body);
       const [, user] = await User.update(req.body, {
         where: { id: req.params.id },
         returning: true,

@@ -1,6 +1,9 @@
 import React from 'react';
 import { injectStripe, CardElement } from 'react-stripe-elements';
+import { connect } from 'react-redux';
 import axios from 'axios';
+
+import { checkOut } from '../store/singleUser';
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -11,20 +14,19 @@ class CheckoutForm extends React.Component {
     };
   }
 
-  //should unshift the cart into their order history and clear the cart in both DB model and store-state
-  //and redirect them to confirmation page
-  //where they can put in/edit their payment and shipping info and actually buy the item
-
   handleSubmit = async event => {
     event.preventDefault();
+    const user = this.props.user;
+    const updatedOrderHistory = [user.cart, ...user.orderHistory];
     try {
       const stripeToken = await this.props.stripe.createToken({
         type: 'card',
-        name: this.props.customer
+        name: user.email
       });
       await axios.post(`/api/charge/${this.props.price}`, {
         stripeTokenId: stripeToken.token.id
       });
+      await this.props.checkOut(this.props.user.id, updatedOrderHistory);
       this.setState({
         awaitingPayment: false
       });
@@ -38,14 +40,16 @@ class CheckoutForm extends React.Component {
   };
 
   render() {
-    if (this.state.awaitingPayment) {
+    if (this.props.user.cart && this.props.user.cart.length === 0) {
+      return null;
+    } else if (this.state.awaitingPayment) {
       return (
         <form onSubmit={this.handleSubmit}>
           <label>
             Card details
             <CardElement />
           </label>
-          <button>Confirm order</button>
+          <button type="submit">Pay now</button>
         </form>
       );
     } else if (this.state.error) {
@@ -56,4 +60,17 @@ class CheckoutForm extends React.Component {
   }
 }
 
-export default injectStripe(CheckoutForm);
+const mapState = state => ({
+  user: state.singleUser
+});
+
+const mapDispatch = dispatch => ({
+  checkOut: (userId, orderHistory) => dispatch(checkOut(userId, orderHistory))
+});
+
+export default injectStripe(
+  connect(
+    mapState,
+    mapDispatch
+  )(CheckoutForm)
+);
