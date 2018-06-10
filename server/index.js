@@ -54,16 +54,29 @@ const createApp = () => {
     })
   );
 
+  // app.get('/', async (req, res, next) => {
+  //   if (!req.session.userId) req.session.userId = -1;
+  //   if (req.session.userId === -1) {
+  //     req.session.currentUser = await User.create({
+  //       email: Date.now() + '@guest.com'
+  //     });
+  //     req.session.userId = req.session.currentUser.id * -1;
+  //   }
+  //   next()
+  // });
 
   app.get('/', async (req, res, next) => {
     // if (!req.session.userId) req.session.userId = -1;
     // if (req.session.userId === -1) {
+
     const userInstance = await User.create({
       email: Date.now() + '@guest.com'
     });
-    // }
     req.session.currentUser = userInstance
     req.session.userId = req.session.currentUser.id * -1;
+
+    // }
+
     next()
   });
 

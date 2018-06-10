@@ -67,6 +67,7 @@ export const findGuest = () => async dispatch => {
   }
 }
 
+
 export const addToCart = (userId, product, quantity) => async dispatch => {
   const productObj = { product, quantity };
   try {
