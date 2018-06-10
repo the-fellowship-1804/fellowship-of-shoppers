@@ -35,8 +35,18 @@ router.post('/login', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   User.create(req.body)
     .then(user => {
-      req.session.userId = user.id;
-      req.login(user, err => (err ? next(err) : res.json(user)));
+      const disCart = req.session.currentUser.cart;
+      User.destroy({ where: { id: req.session.currentId * -1 } });
+      if (disCart.length && user.cart.length) {
+        const cart = cartMerge(disCart, user.cart);
+        user
+          .update({ cart })
+          .then(user =>
+            req.login(user, err => (err ? next(err) : res.json(user)))
+          );
+      } else {
+        req.login(user, err => (err ? next(err) : res.json(user)));
+      }
     })
     .catch(err => {
       if (err.name === 'SequelizeUniqueConstraintError') {
