@@ -11,6 +11,7 @@ const sessionStore = new SequelizeStore({ db });
 const PORT = process.env.PORT || 8080;
 const app = express();
 const socketio = require('socket.io');
+const User = require('./db/models/user');
 module.exports = app;
 
 /**
@@ -29,7 +30,8 @@ passport.deserializeUser((id, done) =>
   db.models.user
     .findById(id)
     .then(user => done(null, user))
-    .catch(done));
+    .catch(done)
+);
 
 const createApp = () => {
   // logging middleware
@@ -53,6 +55,16 @@ const createApp = () => {
   );
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.get('/', async (req, res, next) => {
+    if (!req.session.userId) req.session.userId = -1;
+    if (req.session.userId === -1) {
+      req.session.currentUser = await User.create({
+        email: Date.now + `@notLogged.in`
+      });
+    }
+    next();
+  });
 
   // auth and api routes
   app.use('/auth', require('./auth'));
@@ -88,7 +100,8 @@ const createApp = () => {
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on http://localhost:${PORT}`));
+    console.log(`Mixing it up on http://localhost:${PORT}`)
+  );
 
   // set up our socket control center
   const io = socketio(server);

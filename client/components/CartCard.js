@@ -36,7 +36,7 @@ class CartCard extends React.Component {
   };
 
   handleClickQuantity = async event => {
-    if (this.state.desiredQuantity === '0') {
+    if (this.state.desiredQuantity == '0') {
       this.remover();
     } else {
       await this.props.addToCart(
@@ -71,14 +71,12 @@ class CartCard extends React.Component {
         <button
           type="button"
           onClick={this.handleClickQuantity}
-          disabled={this.state.desiredQuantity < 0}
-        >
+          disabled={this.state.desiredQuantity < 0}>
           Change Quantity
         </button>
         <button
           type="button"
-          onClick={event => this.handleClickRemove(event, product.id)}
-        >
+          onClick={event => this.handleClickRemove(event, product.id)}>
           Remove from Cart
         </button>
       </div>
