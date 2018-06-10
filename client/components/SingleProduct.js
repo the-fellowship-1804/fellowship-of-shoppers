@@ -4,6 +4,7 @@ import { getProducts } from '../store/allProducts';
 import { addToCart } from '../store/singleUser';
 import { withRouter, Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
+import { findGuest } from '../store/singleUser'
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
@@ -21,6 +22,7 @@ class SingleProduct extends Component {
   }
   componentDidMount() {
     this.props.getProducts();
+    this.props.findGuest()
   }
 
   handleClick = async () => {
@@ -68,8 +70,8 @@ class SingleProduct extends Component {
                   {product.weight ? (
                     <li id="single-product-weight">Weight: {product.weight}</li>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                   <li id="single-product-height"> Height: {product.height} </li>
                   <li id="single-product-width">Width: {product.width}</li>
                   <li id="single-product-length">Length: {product.depth}</li>
@@ -126,7 +128,7 @@ const mapSTP = state => {
   };
 };
 
-const mapDTP = { getProducts, addToCart };
+const mapDTP = { getProducts, addToCart, findGuest };
 
 export default withRouter(
   connect(

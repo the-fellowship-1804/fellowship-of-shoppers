@@ -44,7 +44,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.singleUser.id
+    isLoggedIn: !!state.singleUser.id && state.singleUser.email !== 'guest@notloggedin.com'
   };
 };
 

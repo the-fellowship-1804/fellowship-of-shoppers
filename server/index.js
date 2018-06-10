@@ -53,19 +53,22 @@ const createApp = () => {
       saveUninitialized: false
     })
   );
-  app.use(passport.initialize());
-  app.use(passport.session());
+
 
   app.get('/', async (req, res, next) => {
-    if (!req.session.userId) req.session.userId = -1;
-    if (req.session.userId === -1) {
-      req.session.currentUser = await User.create({
-        email: Date.now + `@notLogged.in`
-      });
-      req.session.userId = req.session.currentUser.id * -1;
-    }
-    next();
+    // if (!req.session.userId) req.session.userId = -1;
+    // if (req.session.userId === -1) {
+    const userInstance = await User.create({
+      email: 'guest@notloggedin.com'
+    });
+    // }
+    req.session.currentUser = userInstance
+    req.session.userId = req.session.currentUser.id * -1;
+    next()
   });
+
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   // auth and api routes
   app.use('/auth', require('./auth'));

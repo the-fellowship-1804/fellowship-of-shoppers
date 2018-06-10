@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const User = require('../db/models/user');
-const cartMerge = require('./index');
 module.exports = router;
 
 const cartMerge = (disCart, loggedCart) => {
@@ -16,6 +15,26 @@ const cartMerge = (disCart, loggedCart) => {
   }
   return output;
 };
+
+// router.get('/', async (req, res, next) => {
+//   if (!req.session.userId) req.session.userId = -1;
+//   if (req.session.userId === -1) {
+//     req.session.currentUser = await User.create({
+//       email: Date.now() + '@notloggedin.com'
+//     });
+//     req.session.userId = req.session.currentUser.id * -1;
+//   }
+//   next()
+// });
+
+router.get('/guest', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.session.currentUser.id)
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/login', (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
@@ -45,6 +64,7 @@ router.post('/login', (req, res, next) => {
     })
     .catch(next);
 });
+
 
 router.post('/signup', (req, res, next) => {
   User.create(req.body)
