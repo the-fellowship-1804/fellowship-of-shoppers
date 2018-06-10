@@ -34,15 +34,6 @@ class AllProducts extends Component {
     })
   }
 
-
-  // shipFilter(shipType) {
-  //   console.log(shipType)
-  //   return this.setState({
-  //     filter: true,
-  //     class: shipType
-  //   })
-  // }
-
   render() {
     const allProducts = this.state.filter
       ? this.props.products.filter(ship => ship.class === this.state.shipType || this.state.shipType === `All`)
