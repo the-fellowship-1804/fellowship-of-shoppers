@@ -36,8 +36,6 @@ router.get('/guest', async (req, res, next) => {
   }
 })
 
-
-
 router.post('/login', (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
     .then(user => {
