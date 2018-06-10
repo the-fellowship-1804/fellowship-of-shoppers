@@ -32,6 +32,7 @@ async function seed() {
     }),
     Product.create({
       productName: `Enterprise-D`,
+      productImageUrl: 'https://nerdist.com/wp-content/uploads/2015/03/1754989-970x545.jpg',
       price: '100'
     })
   ]);
