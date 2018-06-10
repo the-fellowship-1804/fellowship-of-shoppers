@@ -59,7 +59,7 @@ const createApp = () => {
     // if (!req.session.userId) req.session.userId = -1;
     // if (req.session.userId === -1) {
     const userInstance = await User.create({
-      email: 'guest@notloggedin.com'
+      email: Date.now() + '@guest.com'
     });
     // }
     req.session.currentUser = userInstance
