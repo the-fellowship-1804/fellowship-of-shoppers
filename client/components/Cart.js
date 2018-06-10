@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CartCard from './CartCard';
 import { removeFromCart } from '../store/singleUser';
+import { findGuest } from '../store/singleUser'
 
 class Cart extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
+
+  componentDidMount() {
+    this.props.findGuest()
   }
 
   handleClick = () => {
@@ -41,8 +42,8 @@ class Cart extends React.Component {
         </button>
         {user.id
           ? user.cart.map(productObj => (
-              <CartCard key={productObj.product.id} productObj={productObj} />
-            ))
+            <CartCard key={productObj.product.id} productObj={productObj} />
+          ))
           : null}
       </div>
     );
@@ -55,7 +56,7 @@ const mapState = state => {
   };
 };
 
-const mapProps = { removeFromCart };
+const mapProps = { removeFromCart, findGuest };
 
 export default connect(
   mapState,
