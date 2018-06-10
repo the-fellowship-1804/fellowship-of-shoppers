@@ -62,6 +62,7 @@ const createApp = () => {
       req.session.currentUser = await User.create({
         email: Date.now + `@notLogged.in`
       });
+      req.session.userId = req.session.currentUser.id * -1;
     }
     next();
   });
@@ -95,6 +96,20 @@ const createApp = () => {
     console.error(err.stack);
     res.status(err.status || 500).send(err.message || 'Internal server error.');
   });
+};
+
+export const cartMerge = (disCart, loggedCart) => {
+  const output = loggedCart;
+  for (let i = 0; i < disCart.length; i++) {
+    let currentItem = disCart[i];
+    let match = loggedCart.find(item => item.id === currentItem.id);
+    if (!match) output.push(disCart[i]);
+    else if (match.quantity >= disCart[i].quantity) continue;
+    else {
+      match.quantity = disCart[i].quantity;
+    }
+  }
+  return output;
 };
 
 const startListening = () => {

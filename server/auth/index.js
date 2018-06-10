@@ -12,8 +12,20 @@ router.post('/login', (req, res, next) => {
         console.log('Incorrect password for user:', req.body.email);
         res.status(401).send('Wrong username and/or password');
       } else {
+        const disCart = req.session.currentUser.cart;
         req.session.userId = user.id; // sets current session to user!
-        req.login(user, err => (err ? next(err) : res.json(user)));
+        User.destroy({ where: { id: req.session.currentId * -1 } });
+        // const cart = user.cart;
+        if (disCart.length && user.cart.length) {
+          const cart = cartMerge(disCart, user.cart);
+          user
+            .update({ cart })
+            .then(user =>
+              req.login(user, err => (err ? next(err) : res.json(user)))
+            );
+        } else {
+          req.login(user, err => (err ? next(err) : res.json(user)));
+        }
       }
     })
     .catch(next);
