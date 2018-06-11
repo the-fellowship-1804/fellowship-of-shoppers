@@ -16,7 +16,7 @@ class AllProducts extends Component {
     super();
     this.state = {
       filter: false,
-      class: ''
+      class: 'All'
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -36,9 +36,7 @@ class AllProducts extends Component {
   render() {
     const allProducts = this.state.filter
       ? this.props.products.filter(
-          ship =>
-            ship.class === this.state.class ||
-            this.state.class === `All Product`
+          ship => ship.class === this.state.class || this.state.class === `All`
         )
       : this.props.products;
 
@@ -53,11 +51,12 @@ class AllProducts extends Component {
         return (
           <div>
             <h1 id="allproductsheading">
-              All Products {!this.state.class ? `` : `> ${this.state.class}s`}
+              All Products{' '}
+              {this.state.class === 'All' ? `` : `> ${this.state.class}s`}
             </h1>
 
             <select id="filter" name="filter" onChange={this.handleChange}>
-              <option value="All Product">
+              <option value="All">
                 {!this.state.class ? 'Filter by Class' : 'All'}
               </option>
 
