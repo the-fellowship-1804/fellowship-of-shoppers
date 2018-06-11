@@ -28,11 +28,14 @@ async function seed() {
       productName: `the Death Star`,
       price: `999`,
       productImageUrl:
-        'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg'
+        'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg',
+      class: 'Space Stations'
     }),
     Product.create({
       productName: `Enterprise-D`,
-      price: '100'
+      productImageUrl: 'https://nerdist.com/wp-content/uploads/2015/03/1754989-970x545.jpg',
+      price: '100',
+      class: 'Starships'
     })
   ]);
   console.log(`seeded ${products.length} products`);
