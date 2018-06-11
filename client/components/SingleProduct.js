@@ -85,9 +85,7 @@ class SingleProduct extends Component {
             </div>
             <div id="single-product-description">
               <h6>Description</h6>
-              <p id="single-product-description-p">
-                {product.productDescription}
-              </p>
+              <p id="single-product-description-p">{product.description}</p>
             </div>
             <Link to="/products">
               <button type="button">Back to All Products</button>
