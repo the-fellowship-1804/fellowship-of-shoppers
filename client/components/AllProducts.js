@@ -59,19 +59,6 @@ class AllProducts extends Component {
               handleChange={this.handleChange}
               class={this.state.class}
             />
-            {/* <select id="filter" name="filter" onChange={this.handleChange}>
-              <option value="All">
-                {this.state.class === 'All' ? 'Filter by Class' : 'All'}
-              </option>
-
-              <option value="Space Station">Space Stations</option>
-
-              <option value="Starship">Starships</option>
-
-              <option value="Freighter">Freighters</option>
-
-              <option value="Fighter">Fighters</option>
-            </select> */}
             {allProducts.map(product => {
               return <ProductCard key={product.id} product={product} />;
             })}
