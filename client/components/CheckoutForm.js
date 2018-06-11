@@ -40,7 +40,11 @@ class CheckoutForm extends React.Component {
   };
 
   render() {
-    if (this.props.user.cart && this.props.user.cart.length === 0) {
+    if (
+      this.props.user.cart &&
+      this.props.user.cart.length === 0 &&
+      this.state.awaitingPayment
+    ) {
       return null;
     } else if (this.state.awaitingPayment) {
       return (
@@ -53,7 +57,7 @@ class CheckoutForm extends React.Component {
         </form>
       );
     } else if (this.state.error) {
-      return <h4>{`Error: ${this.state.error}`}</h4>;
+      return <h4>{`${this.state.error}`}</h4>;
     } else {
       return <h4>Payment Recieved!</h4>;
     }
