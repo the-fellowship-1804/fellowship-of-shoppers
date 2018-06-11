@@ -19,42 +19,47 @@ const SingleProductSpecs = props => {
         ''
       )}
       {product.firepower ? (
-        <li id="single-product-firepower">Firepower: {product.firepower}</li>
+        <li id="single-product-firepower">
+          Firepower: {commafy(product.firepower)}
+        </li>
       ) : (
         ''
       )}
       {product.crew ? (
-        <li id="single-product-crew">Crew: {product.crew}</li>
+        <li id="single-product-crew">Crew: {commafy(product.crew)}</li>
       ) : (
         ''
       )}
       {product.topSpeed ? (
-        <li id="single-product-topspeed">Top Speed: {product.topSpeed}</li>
+        <li id="single-product-topspeed">
+          Top Speed: {commafy(product.topSpeed)}
+        </li>
       ) : (
         ''
       )}
       {product.acceleration ? (
         <li id="single-product-acceleration">
-          Acceleration: {product.acceleration}
+          Acceleration: {commafy(product.acceleration)}
         </li>
       ) : (
         ''
       )}
       {product.weight ? (
-        <li id="single-product-weight">Mass: {product.weight}</li>
+        <li id="single-product-weight">Mass: {commafy(product.weight)} kg</li>
       ) : (
         ''
       )}
       {product.diameter ? (
         <li id="single-product-diameter">
-          Diameter: {commafy(product.diameter)} m
+          Diameter: {commafy(product.diameter)}m
         </li>
       ) : (
         ''
       )}
       {product.length && product.width && product.depth ? (
         <li id="single-product-dimensions">
-          Dimensions: {product.length}L x {product.width}W x {product.depth}D
+          Dimensions(LxWxH): {product.length}m x {product.width}m x{' '}
+          {product.depth}m
         </li>
       ) : (
         ''

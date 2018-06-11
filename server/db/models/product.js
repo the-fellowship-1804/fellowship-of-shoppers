@@ -3,8 +3,8 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Product = db.define('product', {
-  productName: Sequelize.STRING,
-  productImageUrl: Sequelize.STRING,
+  name: Sequelize.STRING,
+  imageUrl: Sequelize.STRING,
   price: { type: Sequelize.DECIMAL, defaultValue: 0 },
   weight: Sequelize.DECIMAL,
   length: Sequelize.DECIMAL,
@@ -16,7 +16,7 @@ const Product = db.define('product', {
   class: Sequelize.STRING,
   crew: Sequelize.INTEGER,
   firepower: Sequelize.INTEGER,
-  productDescription: Sequelize.TEXT
+  description: Sequelize.TEXT
 });
 
 module.exports = Product;

@@ -25,16 +25,21 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      productName: `the Death Star`,
+      name: `The Death Star`,
       price: `999`,
-      productImageUrl:
+      imageUrl:
         'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg',
       class: 'Space Station',
-      diameter: 160000
+      firepower: 50000,
+      crew: 1200000,
+      weight: 134000000000000000,
+      diameter: 160000,
+      description:
+        'The DS-1 Orbital Battle Station comes equipped with a Mk I Superlaser capable of obliterating entire systems. It also boasts a complement of 30,000 stormtroopers, 7,200 TIE class fighters, and an additional complement of 20,000 turbolasers. It is capable of entering hyperspace, with a Class 4 hypderdrive installed. Exhaust port cover highly recommended.'
     }),
     Product.create({
-      productName: `Enterprise-D`,
-      productImageUrl:
+      name: `Enterprise-D`,
+      imageUrl:
         'https://nerdist.com/wp-content/uploads/2015/03/1754989-970x545.jpg',
       price: '100',
       class: 'Starship'

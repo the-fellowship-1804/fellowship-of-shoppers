@@ -59,7 +59,7 @@ class Checkout extends React.Component {
             {this.props.user.cart.length > 0 ? (
               this.props.user.cart.map(productObj => (
                 <ul key={productObj.product.id}>
-                  <h4>Name: {productObj.product.productName}</h4>
+                  <h4>Name: {productObj.product.name}</h4>
                   <h4>Price per ship: {productObj.product.price}</h4>
                   <h4>Number of ships: {productObj.quantity}</h4>
                   <h4>

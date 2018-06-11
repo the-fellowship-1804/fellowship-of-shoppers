@@ -71,14 +71,8 @@ class SingleProduct extends Component {
               <SingleProductSpecs product={product} />
             </div>
             <div id="single-product-description">
-              <h6>Description</h6>
-              <p id="single-product-description-p">
-                {product.productDescription}
-              </p>
+              <p id="single-product-description-p">{product.description}</p>
             </div>
-            <Link to="/products">
-              <button type="button">Back to All Products</button>
-            </Link>
             <label htmlFor="quantity">Quantity:</label>
             <input
               type="number"
@@ -105,6 +99,9 @@ class SingleProduct extends Component {
                 </div>
               ) : null}
             </div>
+            <Link to="/products">
+              <button type="button">Back to All Products</button>
+            </Link>
           </div>
         );
       }

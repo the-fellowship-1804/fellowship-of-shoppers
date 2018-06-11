@@ -26,7 +26,7 @@ class Landing extends Component {
       }
       case LOADED: {
         const deathStar = this.props.products.find(ship => {
-          return ship.productName === 'the Death Star';
+          return ship.name === 'The Death Star';
         });
         if (!deathStar.id) return <h3>No seed</h3>;
         return (

@@ -7,7 +7,7 @@ const OrderHistoryProductCard = props => {
   return (
     <div>
       <Link to={`/products/${product.id}`}>
-        <div>{`${product.productName}, ${quantity}`}</div>
+        <div>{`${product.name}, ${quantity}`}</div>
       </Link>
       <div>Price: {product.price ? product.price : '0'} Credits</div>
     </div>
