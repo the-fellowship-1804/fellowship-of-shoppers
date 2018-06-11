@@ -36,7 +36,7 @@ class CartCard extends React.Component {
   };
 
   handleClickQuantity = async event => {
-    if (this.state.desiredQuantity === '0') {
+    if (this.state.desiredQuantity == '0') {
       this.remover();
     } else {
       await this.props.addToCart(
