@@ -72,10 +72,11 @@ const createApp = () => {
     const userInstance = await User.create({
       email: Date.now() + '@guest.com'
     });
+
     if (!req.session.currentUser) req.session.currentUser = userInstance
-
+    // console.log('SESSION: ', req.session)
     req.session.userId = req.session.currentUser.id * -1;
-
+    // res.json(req.session.currentUser)
     // }
 
     next()
