@@ -57,7 +57,7 @@ class AllProducts extends Component {
 
             <select id="filter" name="filter" onChange={this.handleChange}>
               <option value="All">
-                {!this.state.class ? 'Filter by Class' : 'All'}
+                {this.state.class === 'All' ? 'Filter by Class' : 'All'}
               </option>
 
               <option value="Space Station">Space Stations</option>
