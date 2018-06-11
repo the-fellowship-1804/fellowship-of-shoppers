@@ -1,308 +1,299 @@
-const { expect } = require('chai');
+const { expect, assert } = require('chai');
 const db = require('../index');
 const Product = db.model('product');
 
 describe('Product model', () => {
-  let spaceballOne;
-  beforeEach(() => {
-    return db.sync({ force: true });
+  let TP;
+  beforeEach(async () => {
+    await db.sync({ force: true });
   });
   beforeEach(async () => {
-    spaceballOne = await Product.create({
-      productName: 'Spaceball One',
-      price: 13.37
-    });
+    TP = await Product.create();
   });
+
   describe('Basic functionality for Product model', () => {
     describe('Each desired column exists;', () => {
-      it('has a "productName" column', () =>
-        expect(spaceballOne.productName).to.equal('Spaceball One'));
-      it('has a "productImageUrl" column', () =>
-        expect(spaceballOne.productImageUrl).to.equal(null));
-      it('has a "price" column', () =>
-        expect(spaceballOne.price).to.equal('13.37'));
-      it('has a "weight" column', () =>
-        expect(spaceballOne.weight).to.equal(null));
-      it('has a "length" column', () =>
-        expect(spaceballOne.length).to.equal(null));
-      it('has a "width" column', () =>
-        expect(spaceballOne.width).to.equal(null));
-      it('has a "depth" column', () =>
-        expect(spaceballOne.depth).to.equal(null));
-      it('has a "topSpeed" column', () =>
-        expect(spaceballOne.topSpeed).to.equal(null));
+      it('has a "name" column', () => assert.isDefined(TP.name));
+      it('has a "imageUrl" column', () => assert.isDefined(TP.imageUrl));
+      it('has a "price" column', () => assert.isDefined(TP.price));
+      it('has a "weight" column', () => assert.isDefined(TP.weight));
+      it('has a "length" column', () => assert.isDefined(TP.length));
+      it('has a "width" column', () => assert.isDefined(TP.width));
+      it('has a "depth" column', () => assert.isDefined(TP.depth));
+      it('has a "topSpeed" column', () => assert.isDefined(TP.topSpeed));
       it('has a "acceleration" column', () =>
-        expect(spaceballOne.acceleration).to.equal(null));
-      it('has a "class" column', () =>
-        expect(spaceballOne.class).to.equal(null));
-      it('has a "productDescription" column', () =>
-        expect(spaceballOne.productDescription).to.equal(null));
+        assert.isDefined(TP.acceleration));
+      it('has a "class" column', () => assert.isDefined(TP.class));
+      it('has a "description" column', () => assert.isDefined(TP.description));
     });
 
     describe('Each column accepts only the correct data types', () => {
       let currentColumn;
-      currentColumn = 'productName';
-      it(`has its "${currentColumn}" column accepts only strings`, async () => {
+      let updateObj = {};
+
+      it(`has its "name" column accepts only strings`, async () => {
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = [999];
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          currentColumn = 'name';
+          updateObj[currentColumn] = [0];
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-string datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'string violation: name cannot be an array or an object'
+        );
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = 'a Winnebago';
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          updateObj[currentColumn] = 'string';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a string';
         } catch (e) {
-          testerValue = "it errored where it shouldn't have :(";
+          testerValue = 'Threw error when given a string';
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal('a Winnebago');
+        expect(testerValue).to.equal('No error thrown when given a string');
+        expect(TP[currentColumn]).to.equal('string');
       });
-      currentColumn = `price`;
-      it(`has its "${currentColumn}" column accept only numbers`, async () => {
+
+      it(`has its "price" column accept only numbers`, async () => {
         currentColumn = `price`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = `this shouldn't work`;
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = 'this should error';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-number datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'invalid input syntax for type numeric: "this should error"'
+        );
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = 1000000;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          updateObj[currentColumn] = 0;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a number';
         } catch (e) {
-          testerValue = "it errored where it shouldn't have :(";
+          testerValue = 'Threw error when given a number';
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(1000000);
+        expect(testerValue).to.equal('No error thrown when given a number');
+        expect(TP[currentColumn]).to.equal(0);
       });
-      currentColumn = `weight`;
-      it(`has its "${currentColumn}" column accept only numbers`, async () => {
+
+      it(`has its "weight" column accept only numbers`, async () => {
         currentColumn = `weight`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = `this also shoudln't work`;
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = 'this should error';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-number datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'invalid input syntax for type numeric: "this should error"'
+        );
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = 10;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          updateObj[currentColumn] = 0;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a number';
         } catch (e) {
-          testerValue = "it errored where it shouldn't have :(";
+          testerValue = 'Error thrown when given a number';
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(10);
+        expect(testerValue).to.equal('No error thrown when given a number');
+        expect(TP[currentColumn]).to.equal(0);
       });
-      currentColumn = `length`;
-      it(`has its "${currentColumn}" column accept only numbers`, async () => {
+
+      it(`has its "length" column accept only numbers`, async () => {
         currentColumn = `length`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = `string`;
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = 'this should error';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-number datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'invalid input syntax for type numeric: "this should error"'
+        );
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = 98;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          updateObj[currentColumn] = 0;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a number';
         } catch (e) {
-          testerValue = "it errored where it shouldn't have :(";
+          testerValue = 'Error thrown when given a number';
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(98);
+        expect(testerValue).to.equal('No error thrown when given a number');
+        expect(TP[currentColumn]).to.equal(0);
       });
-      currentColumn = `width`;
-      it(`has its "${currentColumn}" column accept only numbers`, async () => {
+
+      it(`has its "width" column accept only numbers`, async () => {
         currentColumn = `width`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = 'string';
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = 'this should error';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-number datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'invalid input syntax for type numeric: "this should error"'
+        );
         try {
-          let updateObj = {};
           updateObj[currentColumn] = 900;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a number';
         } catch (e) {
           testerValue = "it errored where it shouldn't have :(";
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(900);
+        expect(testerValue).to.equal('No error thrown when given a number');
+        expect(TP[currentColumn]).to.equal(900);
       });
-      currentColumn = `depth`;
-      it(`has its "${currentColumn}" column accept only numbers`, async () => {
+
+      it(`has its "depth" column accept only numbers`, async () => {
         currentColumn = `depth`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = 'string';
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = 'this should error';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-number datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'invalid input syntax for type numeric: "this should error"'
+        );
         try {
-          let updateObj = {};
           updateObj[currentColumn] = 1337;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a number';
         } catch (e) {
           testerValue = "it errored where it shouldn't have :(";
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(1337);
+        expect(testerValue).to.equal('No error thrown when given a number');
+        expect(TP[currentColumn]).to.equal(1337);
       });
-      currentColumn = `topSpeed`;
-      it(`has its "${currentColumn}" column accept only numbers`, async () => {
+
+      it(`has its "topSpeed" column accept only numbers`, async () => {
         currentColumn = `topSpeed`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = `string not a number`;
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = 'this should error';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-number datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'invalid input syntax for type numeric: "this should error"'
+        );
         try {
-          let updateObj = {};
           updateObj[currentColumn] = 9000;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a number';
         } catch (e) {
           testerValue = "it errored where it shouldn't have :(";
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(9000);
+        expect(testerValue).to.equal('No error thrown when given a number');
+        expect(TP[currentColumn]).to.equal(9000);
       });
-      currentColumn = `acceleration`;
-      it(`has its "${currentColumn}" column accept only numbers`, async () => {
+
+      it(`has its "acceleration" column accept only numbers`, async () => {
         currentColumn = `acceleration`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = 'slow computer';
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = 'this should error';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-number datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'invalid input syntax for type numeric: "this should error"'
+        );
         try {
-          let updateObj = {};
           updateObj[currentColumn] = 9002;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a number';
         } catch (e) {
           testerValue = "it errored where it shouldn't have :(";
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(9002);
+        expect(testerValue).to.equal('No error thrown when given a number');
+        expect(TP[currentColumn]).to.equal(9002);
       });
-      currentColumn = `class`;
-      it(`has its "${currentColumn}" column accept only strings`, async () => {
+
+      it(`has its "class" column accept only strings`, async () => {
         currentColumn = `class`;
         let testerValue;
         try {
-          let updateObj = {};
           updateObj[currentColumn] = { 4: 900 };
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-string datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'string violation: class cannot be an array or an object'
+        );
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = `six`;
-          await spaceballOne.update(updateObj);
+          updateObj[currentColumn] = `string`;
+          await TP.update(updateObj);
           testerValue = currentColumn + currentColumn;
         } catch (e) {
           testerValue = "it errored where it shouldn't have :(";
         }
         expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(`six`);
+        expect(TP[currentColumn]).to.equal(`string`);
       });
-      currentColumn = `productDescription`;
-      it(`has its "${currentColumn}" column accept large string inputs`, async () => {
-        currentColumn = `productDescription`;
+
+      it(`has its "description" column accept large string inputs`, async () => {
+        currentColumn = `description`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = [99];
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = [0];
+          await TP.update(updateObj);
+          testerValue =
+            'No error thrown when given a non-large-string datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'string violation: description cannot be an array or an object'
+        );
         try {
-          let updateObj = {};
           updateObj[currentColumn] = longText;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a string';
         } catch (e) {
-          testerValue = "it errored where it shouldn't have :(";
+          testerValue = 'Threw error when given a string';
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(longText);
+        expect(testerValue).to.equal('No error thrown when given a string');
+        expect(TP[currentColumn]).to.equal(longText);
       });
-      currentColumn = `productImageUrl`;
-      it(`has its "${currentColumn}" column accept only strings`, async () => {
-        currentColumn = `productImageUrl`;
+
+      it(`has its "imageUrl" column accept only strings`, async () => {
+        currentColumn = `imageUrl`;
         let testerValue;
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = [90928];
-          await spaceballOne.update(updateObj);
-          testerValue = 'did not error :(';
+          updateObj[currentColumn] = [0];
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a non-string datatype';
         } catch (e) {
-          testerValue = currentColumn;
+          testerValue = e.message;
         }
-        expect(testerValue).to.equal(currentColumn);
+        expect(testerValue).to.equal(
+          'string violation: imageUrl cannot be an array or an object'
+        );
         try {
-          let updateObj = {};
-          updateObj[currentColumn] = `www.rickroll.com`;
-          await spaceballOne.update(updateObj);
-          testerValue = currentColumn + currentColumn;
+          updateObj[currentColumn] = `string`;
+          await TP.update(updateObj);
+          testerValue = 'No error thrown when given a string';
         } catch (e) {
-          testerValue = "it errored where it shouldn't have :(";
+          testerValue = 'Threw error when given a string';
         }
-        expect(testerValue).to.equal(currentColumn + currentColumn);
-        expect(spaceballOne[currentColumn]).to.equal(`www.rickroll.com`);
+        expect(testerValue).to.equal('No error thrown when given a string');
+        expect(TP[currentColumn]).to.equal(`string`);
       });
     });
   });
