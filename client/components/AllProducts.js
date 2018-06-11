@@ -12,13 +12,12 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
 ];
 
 class AllProducts extends Component {
-
   constructor() {
     super();
     this.state = {
       filter: false,
       class: ''
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -27,17 +26,20 @@ class AllProducts extends Component {
   }
 
   handleChange(event) {
-    console.dir(event.target)
+    console.dir(event.target);
     this.setState({
       filter: true,
-      shipType: event.target.value,
-    })
+      shipType: event.target.value
+    });
   }
 
   render() {
     const allProducts = this.state.filter
-      ? this.props.products.filter(ship => ship.class === this.state.shipType || this.state.shipType === `All`)
-      : this.props.products
+      ? this.props.products.filter(
+          ship =>
+            ship.class === this.state.shipType || this.state.shipType === `All`
+        )
+      : this.props.products;
 
     switch (this.props.status) {
       case UNASKED: {
@@ -49,21 +51,23 @@ class AllProducts extends Component {
       case LOADED: {
         return (
           <div>
-            <h1 id="allproductsheading">All Products {!this.state.shipType ? `` : `> ${this.state.shipType}`}</h1>
+            <h1 id="allproductsheading">
+              All Products{' '}
+              {!this.state.shipType ? `` : `> ${this.state.shipType}`}
+            </h1>
 
             <select id="filter" name="filter" onChange={this.handleChange}>
-
-              <option value="All">{!this.state.shipType ? "Filter by Class" : "All"}
+              <option value="All">
+                {!this.state.shipType ? 'Filter by Class' : 'All'}
               </option>
 
-              <option value="Space Stations">Space Stations</option>
+              <option value="Space Station">Space Stations</option>
 
-              <option value="Starships">Starships</option>
+              <option value="Starship">Starships</option>
 
-              <option value="Freighters">Freighters</option>
+              <option value="Freighter">Freighters</option>
 
               <option value="Fighter">Fighters</option>
-
             </select>
             {allProducts.map(product => {
               return <ProductCard key={product.id} product={product} />;
@@ -81,7 +85,7 @@ class AllProducts extends Component {
 const mapSTP = state => {
   return {
     products: state.allProducts.products,
-    status: state.allProducts.status,
+    status: state.allProducts.status
   };
 };
 

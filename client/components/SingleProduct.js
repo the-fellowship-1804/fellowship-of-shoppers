@@ -68,29 +68,25 @@ class SingleProduct extends Component {
               </div>
               <div>
                 <ul id="single-product-unordered-list">
-                  {product.weight ? (
-                    <li id="single-product-weight">Weight: {product.weight}</li>
+                  {product.class ? (
+                    <li id="single-product-class">Class: {product.class}</li>
                   ) : (
                     ''
                   )}
-                  {product.length ? (
-                    <li id="single-product-length">Length: {product.length}</li>
+                  {product.firepower ? (
+                    <li id="single-product-firepower">
+                      Firepower: {product.firepower}
+                    </li>
                   ) : (
                     ''
                   )}
-
-                  {product.width ? (
-                    <li id="single-product-width">Width: {product.width}</li>
-                  ) : (
-                    ''
-                  )}
-                  {product.depth ? (
-                    <li id="single-product-length">Length: {product.depth}</li>
+                  {product.crew ? (
+                    <li id="single-product-crew">Crew: {product.crew}</li>
                   ) : (
                     ''
                   )}
                   {product.topSpeed ? (
-                    <li id="single-product-topSpeed">
+                    <li id="single-product-topspeed">
                       Top Speed: {product.topSpeed}
                     </li>
                   ) : (
@@ -103,8 +99,16 @@ class SingleProduct extends Component {
                   ) : (
                     ''
                   )}
-                  {product.class ? (
-                    <li id="single-product-class">Class: {product.class}</li>
+                  {product.weight ? (
+                    <li id="single-product-weight">Mass: {product.weight}</li>
+                  ) : (
+                    ''
+                  )}
+                  {product.length && product.width && product.depth ? (
+                    <li id="single-product-dimensions">
+                      Dimensions: {product.length}L x {product.width}W x{' '}
+                      {product.depth}D
+                    </li>
                   ) : (
                     ''
                   )}
