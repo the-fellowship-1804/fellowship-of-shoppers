@@ -23,8 +23,8 @@ describe('Product model', () => {
         expect(spaceballOne.productImageUrl).to.equal(null));
       it('has a "weight" column', () =>
         expect(spaceballOne.weight).to.equal(null));
-      it('has a "height" column', () =>
-        expect(spaceballOne.height).to.equal(null));
+      it('has a "length" column', () =>
+        expect(spaceballOne.length).to.equal(null));
       it('has a "width" column', () =>
         expect(spaceballOne.width).to.equal(null));
       it('has a "depth" column', () =>
@@ -113,9 +113,9 @@ describe('Product model', () => {
         expect(testerValue).to.equal(currentColumn + currentColumn);
         expect(spaceballOne[currentColumn]).to.equal(10);
       });
-      currentColumn = `height`;
+      currentColumn = `length`;
       it(`has its "${currentColumn}" column accept only numbers`, async () => {
-        currentColumn = `height`;
+        currentColumn = `length`;
         let testerValue;
         try {
           let updateObj = {};

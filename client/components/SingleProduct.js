@@ -17,7 +17,7 @@ class SingleProduct extends Component {
     super();
     this.state = {
       quantity: 1,
-      addedtoCart: false,
+      addedtoCart: false
     };
   }
   componentDidMount() {
@@ -36,7 +36,7 @@ class SingleProduct extends Component {
       );
       this.setState({
         addedtoCart: true
-      })
+      });
     } catch (error) {
       console.log(error);
     }
@@ -71,18 +71,43 @@ class SingleProduct extends Component {
                   {product.weight ? (
                     <li id="single-product-weight">Weight: {product.weight}</li>
                   ) : (
-                      ''
-                    )}
-                  <li id="single-product-height"> Height: {product.height} </li>
-                  <li id="single-product-width">Width: {product.width}</li>
-                  <li id="single-product-length">Length: {product.depth}</li>
-                  <li id="single-product-topSpeed">
-                    Top Speed: {product.topSpeed}
-                  </li>
-                  <li id="single-product-acceleration">
-                    Acceleration: {product.acceleration}
-                  </li>
-                  <li id="single-product-class">Class: {product.class}</li>
+                    ''
+                  )}
+                  {product.length ? (
+                    <li id="single-product-length">Length: {product.length}</li>
+                  ) : (
+                    ''
+                  )}
+
+                  {product.width ? (
+                    <li id="single-product-width">Width: {product.width}</li>
+                  ) : (
+                    ''
+                  )}
+                  {product.depth ? (
+                    <li id="single-product-length">Length: {product.depth}</li>
+                  ) : (
+                    ''
+                  )}
+                  {product.topSpeed ? (
+                    <li id="single-product-topSpeed">
+                      Top Speed: {product.topSpeed}
+                    </li>
+                  ) : (
+                    ''
+                  )}
+                  {product.acceleration ? (
+                    <li id="single-product-acceleration">
+                      Acceleration: {product.acceleration}
+                    </li>
+                  ) : (
+                    ''
+                  )}
+                  {product.class ? (
+                    <li id="single-product-class">Class: {product.class}</li>
+                  ) : (
+                    ''
+                  )}
                 </ul>
               </div>
             </div>
@@ -112,16 +137,14 @@ class SingleProduct extends Component {
               Add to cart
             </button>
             <div>
-              {this.state.addedtoCart
-                ?
+              {this.state.addedtoCart ? (
                 <div>
                   <h3>Added to Cart!</h3>
-                  <Link to="/cart"><button type="button">Proceed to Checkout?</button></Link>
+                  <Link to="/cart">
+                    <button type="button">Proceed to Checkout?</button>
+                  </Link>
                 </div>
-                :
-                null
-              }
-
+              ) : null}
             </div>
           </div>
         );
