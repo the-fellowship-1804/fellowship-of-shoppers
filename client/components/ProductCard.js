@@ -11,7 +11,7 @@ const ProductCard = props => {
         Price: {props.product.price ? props.product.price : '0'} Credits
       </h4>
       <Link to={`/products/${props.product.id}`}>
-        <img src={props.product.productImageUrl} />
+        <img src={props.product.imageUrl} />
       </Link>
     </div>
   );
