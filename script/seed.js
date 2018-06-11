@@ -29,7 +29,8 @@ async function seed() {
       price: `999`,
       productImageUrl:
         'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg',
-      class: 'Space Station'
+      class: 'Space Station',
+      diameter: 160000
     }),
     Product.create({
       productName: `Enterprise-D`,

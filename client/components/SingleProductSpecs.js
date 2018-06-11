@@ -1,5 +1,14 @@
 import React from 'react';
 
+const commafy = num => {
+  const numArr = num.toString().split('');
+  for (let i = numArr.length; i > 0; i = i - 3) {
+    numArr.splice(i, 0, ',');
+  }
+  const trimmed = numArr.slice(0, numArr.length - 1).join('');
+  return trimmed;
+};
+
 const SingleProductSpecs = props => {
   const product = props.product;
   return (
@@ -37,7 +46,9 @@ const SingleProductSpecs = props => {
         ''
       )}
       {product.diameter ? (
-        <li id="single-product-diameter">Diameter: {product.diameter}</li>
+        <li id="single-product-diameter">
+          Diameter: {commafy(product.diameter)} m
+        </li>
       ) : (
         ''
       )}
