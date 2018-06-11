@@ -29,7 +29,7 @@ class AllProducts extends Component {
     console.dir(event.target);
     this.setState({
       filter: true,
-      shipType: event.target.value
+      class: event.target.value
     });
   }
 
@@ -37,13 +37,14 @@ class AllProducts extends Component {
     const allProducts = this.state.filter
       ? this.props.products.filter(
           ship =>
-            ship.class === this.state.shipType || this.state.shipType === `All`
+            ship.class === this.state.class ||
+            this.state.class === `All Product`
         )
       : this.props.products;
 
     switch (this.props.status) {
       case UNASKED: {
-        return <p>We don't want this</p>;
+        return <p>Nothing has been asked for</p>;
       }
       case LOADING: {
         return <p>LOADING...</p>;
@@ -52,13 +53,12 @@ class AllProducts extends Component {
         return (
           <div>
             <h1 id="allproductsheading">
-              All Products{' '}
-              {!this.state.shipType ? `` : `> ${this.state.shipType}`}
+              All Products {!this.state.class ? `` : `> ${this.state.class}s`}
             </h1>
 
             <select id="filter" name="filter" onChange={this.handleChange}>
-              <option value="All">
-                {!this.state.shipType ? 'Filter by Class' : 'All'}
+              <option value="All Product">
+                {!this.state.class ? 'Filter by Class' : 'All'}
               </option>
 
               <option value="Space Station">Space Stations</option>
