@@ -32,14 +32,14 @@ const SingleProductSpecs = props => {
       )}
       {product.topSpeed ? (
         <li id="single-product-topspeed">
-          Top Speed: {commafy(product.topSpeed)}
+          Top Speed: {commafy(product.topSpeed)} m/s
         </li>
       ) : (
         ''
       )}
       {product.acceleration ? (
         <li id="single-product-acceleration">
-          Acceleration: {commafy(product.acceleration)}
+          Acceleration: {commafy(product.acceleration)} m/s
         </li>
       ) : (
         ''
