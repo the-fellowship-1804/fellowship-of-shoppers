@@ -54,18 +54,21 @@ const createApp = () => {
     })
   );
 
-
   app.get('/', async (req, res, next) => {
-    console.log('Dan KERRRR!: ', req.session);
+    console.log('hit this route');
     if (!req.session.currentUser) {
       const newUser = await User.create({
         email: Date.now() + '@guest.com'
       });
-      req.session.currentUser = newUser
+      req.session.currentUser = newUser;
       req.session.userId = req.session.currentUser.id * -1;
-      next()
+      next();
     } else next();
+  });
 
+  app.get('/destroysession', (req, res, next) => {
+    req.session.destroy();
+    res.redirect('/');
   });
 
   app.use(passport.initialize());
