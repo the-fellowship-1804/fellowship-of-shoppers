@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getProducts } from '../store/allProducts';
 import { withRouter, Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
+import Filters from './AllProductsFilters';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
@@ -54,8 +55,11 @@ class AllProducts extends Component {
               All Products{' '}
               {this.state.class === 'All' ? `` : `> ${this.state.class}s`}
             </h2>
-
-            <select id="filter" name="filter" onChange={this.handleChange}>
+            <Filters
+              handleChange={this.handleChange}
+              class={this.state.class}
+            />
+            {/* <select id="filter" name="filter" onChange={this.handleChange}>
               <option value="All">
                 {this.state.class === 'All' ? 'Filter by Class' : 'All'}
               </option>
@@ -67,7 +71,7 @@ class AllProducts extends Component {
               <option value="Freighter">Freighters</option>
 
               <option value="Fighter">Fighters</option>
-            </select>
+            </select> */}
             {allProducts.map(product => {
               return <ProductCard key={product.id} product={product} />;
             })}
