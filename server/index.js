@@ -54,32 +54,18 @@ const createApp = () => {
     })
   );
 
-  // app.get('/', async (req, res, next) => {
-  //   if (!req.session.userId) req.session.userId = -1;
-  //   if (req.session.userId === -1) {
-  //     req.session.currentUser = await User.create({
-  //       email: Date.now() + '@guest.com'
-  //     });
-  //     req.session.userId = req.session.currentUser.id * -1;
-  //   }
-  //   next()
-  // });
 
   app.get('/', async (req, res, next) => {
-    // if (!req.session.userId) req.session.userId = -1;
-    // if (req.session.userId === -1) {
+    console.log('Dan KERRRR!: ', req.session);
+    if (!req.session.currentUser) {
+      const newUser = await User.create({
+        email: Date.now() + '@guest.com'
+      });
+      req.session.currentUser = newUser
+      req.session.userId = req.session.currentUser.id * -1;
+      next()
+    } else next();
 
-    const userInstance = await User.create({
-      email: Date.now() + '@guest.com'
-    });
-
-    if (!req.session.currentUser) req.session.currentUser = userInstance
-    // console.log('SESSION: ', req.session)
-    req.session.userId = req.session.currentUser.id * -1;
-    // res.json(req.session.currentUser)
-    // }
-
-    next()
   });
 
   app.use(passport.initialize());

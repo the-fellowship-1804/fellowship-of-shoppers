@@ -7,7 +7,7 @@ import { findGuest } from '../store/singleUser'
 class Cart extends React.Component {
 
   componentDidMount() {
-    this.props.findGuest()
+    if (!this.props.isLoggedIn) this.props.findGuest()
   }
 
   handleClick = () => {
@@ -52,7 +52,8 @@ class Cart extends React.Component {
 
 const mapState = state => {
   return {
-    user: state.singleUser
+    user: state.singleUser,
+    isLoggedIn: !!state.singleUser.id && (state.singleUser.email.split('@')[1] !== 'guest.com')
   };
 };
 

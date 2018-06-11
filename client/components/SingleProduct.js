@@ -22,7 +22,7 @@ class SingleProduct extends Component {
   }
   componentDidMount() {
     this.props.getProducts();
-    this.props.findGuest()
+    if (!this.props.isLoggedIn) this.props.findGuest()
   }
 
   handleClick = async () => {
@@ -124,7 +124,8 @@ const mapSTP = state => {
   return {
     products: state.allProducts.products,
     status: state.allProducts.status,
-    user: state.singleUser
+    user: state.singleUser,
+    isLoggedIn: !!state.singleUser.id && (state.singleUser.email.split('@')[1] !== 'guest.com')
   };
 };
 
