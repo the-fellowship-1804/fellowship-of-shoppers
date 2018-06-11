@@ -134,8 +134,9 @@ nav {
   background-color: teal;
 }
 
-a {
+.navlinks > a {
   color: white;
+  text-decoration: none;
 }
 
 /* Landing Page and Product Views*/
