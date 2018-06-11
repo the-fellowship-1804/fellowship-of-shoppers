@@ -15,26 +15,26 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </div>
           <div>
             <Link to="/user">Your Account</Link>
-            <a href="#" onClick={handleClick}>
+            <a href="/" onClick={handleClick}>
               Logout
             </a>
             <Link to="/cart">Cart</Link>
           </div>
         </div>
       ) : (
-          <div className="rowcontainer">
-            <div>
-              <Link to="/">Home</Link>
-              <Link to="/products">All Products</Link>
-            </div>
-            {/* The navbar will show these links before you log in */}
-            <div>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/cart">Cart</Link>
-            </div>
+        <div className="rowcontainer">
+          <div>
+            <Link to="/">Home</Link>
+            <Link to="/products">All Products</Link>
           </div>
-        )}
+          {/* The navbar will show these links before you log in */}
+          <div>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+            <Link to="/cart">Cart</Link>
+          </div>
+        </div>
+      )}
     </nav>
   </div>
 );
@@ -44,7 +44,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.singleUser.id && (state.singleUser.email.split('@')[1] !== 'guest.com')
+    isLoggedIn:
+      !!state.singleUser.id &&
+      state.singleUser.email.split('@')[1] !== 'guest.com'
   };
 };
 
