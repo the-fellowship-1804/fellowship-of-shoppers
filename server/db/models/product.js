@@ -10,6 +10,7 @@ const Product = db.define('product', {
   length: Sequelize.DECIMAL,
   width: Sequelize.DECIMAL,
   depth: Sequelize.DECIMAL,
+  diameter: Sequelize.DECIMAL,
   topSpeed: Sequelize.DECIMAL,
   acceleration: Sequelize.DECIMAL,
   class: Sequelize.STRING,

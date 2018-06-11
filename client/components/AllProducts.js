@@ -50,10 +50,10 @@ class AllProducts extends Component {
       case LOADED: {
         return (
           <div>
-            <h1 id="allproductsheading">
+            <h2 id="allproductsheading">
               All Products{' '}
               {this.state.class === 'All' ? `` : `> ${this.state.class}s`}
-            </h1>
+            </h2>
 
             <select id="filter" name="filter" onChange={this.handleChange}>
               <option value="All">
