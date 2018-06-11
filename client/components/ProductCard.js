@@ -10,7 +10,9 @@ const ProductCard = props => {
       <Link to={`/products/${props.product.id}`}>
         <img src={props.product.productImageUrl} />
       </Link>
-      <h4 id="price">{props.product.price ? props.product.price : '0'} Space Bucks</h4>
+      <h4 id="price">
+        {props.product.price ? props.product.price : '0'} Space Bucks
+      </h4>
     </div>
   );
 };

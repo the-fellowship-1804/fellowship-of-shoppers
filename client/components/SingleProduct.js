@@ -50,11 +50,11 @@ class SingleProduct extends Component {
 
   render() {
     const product = this.props.products.find(
-      product => product.id == this.props.match.params.productId
+      product => product.id === Number(this.props.match.params.productId)
     );
     switch (this.props.status) {
       case UNASKED: {
-        return <p>we dont want this</p>;
+        return <p>Nothing has been asked for</p>;
       }
       case LOADING: {
         return <p>LOADING...</p>;
