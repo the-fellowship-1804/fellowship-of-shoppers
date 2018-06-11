@@ -6,7 +6,7 @@ const Product = db.define('product', {
   productImageUrl: Sequelize.STRING,
   price: { type: Sequelize.DECIMAL, defaultValue: 0 },
   weight: Sequelize.DECIMAL,
-  height: Sequelize.DECIMAL,
+  length: Sequelize.DECIMAL,
   width: Sequelize.DECIMAL,
   depth: Sequelize.DECIMAL,
   topSpeed: Sequelize.DECIMAL,
