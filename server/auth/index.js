@@ -18,10 +18,8 @@ const cartMerge = (disCart, loggedCart) => {
 
 router.get('/guest', async (req, res, next) => {
   try {
-    console.log('IDDDD: ', req.session.currentUser.id);
     const user = await User.findById(req.session.currentUser.id);
     res.json(user);
-    console.log('USERRR: ', user.dataValues.email);
   } catch (err) {
     next(err);
   }
