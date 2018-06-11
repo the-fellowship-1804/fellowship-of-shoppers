@@ -4,7 +4,7 @@ import { getProducts } from '../store/allProducts';
 import { addToCart } from '../store/singleUser';
 import { withRouter, Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
-import { findGuest } from '../store/singleUser'
+import { findGuest } from '../store/singleUser';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
@@ -22,7 +22,7 @@ class SingleProduct extends Component {
   }
   componentDidMount() {
     this.props.getProducts();
-    if (!this.props.isLoggedIn) this.props.findGuest()
+    if (!this.props.isLoggedIn) this.props.findGuest();
   }
 
   handleClick = async () => {
@@ -30,6 +30,7 @@ class SingleProduct extends Component {
       indivProduct => indivProduct.id == this.props.match.params.productId
     );
     try {
+      console.log(this.props.user);
       await this.props.addToCart(
         this.props.user.id,
         product,
@@ -70,8 +71,8 @@ class SingleProduct extends Component {
                   {product.weight ? (
                     <li id="single-product-weight">Weight: {product.weight}</li>
                   ) : (
-                      ''
-                    )}
+                    ''
+                  )}
                   <li id="single-product-height"> Height: {product.height} </li>
                   <li id="single-product-width">Width: {product.width}</li>
                   <li id="single-product-length">Length: {product.depth}</li>
@@ -106,8 +107,7 @@ class SingleProduct extends Component {
             <button
               type="button"
               onClick={this.handleClick}
-              disabled={!this.state.quantity}
-            >
+              disabled={!this.state.quantity}>
               Add to cart
             </button>
           </div>
@@ -125,7 +125,9 @@ const mapSTP = state => {
     products: state.allProducts.products,
     status: state.allProducts.status,
     user: state.singleUser,
-    isLoggedIn: !!state.singleUser.id && (state.singleUser.email.split('@')[1] !== 'guest.com')
+    isLoggedIn:
+      !!state.singleUser.id &&
+      state.singleUser.email.split('@')[1] !== 'guest.com'
   };
 };
 

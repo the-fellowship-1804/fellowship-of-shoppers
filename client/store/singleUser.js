@@ -37,36 +37,33 @@ export const auth = (email, password, method, redirect) => dispatch =>
   axios
     .post(`/auth/${method}`, { email, password })
     .then(
-    res => {
-      dispatch(getUser(res.data));
-      history.push(method === 'login' ? '/user' : '/editAccount');
-    },
-    authError => {
-      // rare example: a good use case for parallel (non-catch) error handler
-      dispatch(getUser({ error: authError }));
-    }
+      res => {
+        dispatch(getUser(res.data));
+        history.push(method === 'login' ? '/user' : '/editAccount');
+      },
+      authError => {
+        // rare example: a good use case for parallel (non-catch) error handler
+        dispatch(getUser({ error: authError }));
+      }
     )
     .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr));
 
-export const logout = () => dispatch =>
+export const logout = () => dispatch => {
+  dispatch(removeUser());
   axios
     .post('/auth/logout')
-    .then(_ => {
-      dispatch(removeUser());
-      history.push('/login');
-    })
+    .then(history.push('/'))
     .catch(err => console.log(err));
-
+};
 
 export const findGuest = () => async dispatch => {
   try {
-    const { data } = await axios.get('/auth/guest')
-    dispatch(getUser(data))
+    const { data } = await axios.get('/auth/guest');
+    dispatch(getUser(data));
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
-
+};
 
 export const addToCart = (userId, product, quantity) => async dispatch => {
   const productObj = { product, quantity };
@@ -131,7 +128,7 @@ export const editUser = (userId, userInfo) => async dispatch => {
 /**
  * REDUCER
  */
-export default function (state = defaultUser, action) {
+export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user;
