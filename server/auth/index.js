@@ -16,27 +16,16 @@ const cartMerge = (disCart, loggedCart) => {
   return output;
 };
 
-// router.get('/', async (req, res, next) => {
-//   if (!req.session.userId) req.session.userId = -1;
-//   if (req.session.userId === -1) {
-//     req.session.currentUser = await User.create({
-//       email: Date.now() + '@notloggedin.com'
-//     });
-//     req.session.userId = req.session.currentUser.id * -1;
-//   }
-//   next()
-// });
-
 router.get('/guest', async (req, res, next) => {
   try {
-    console.log('IDDDD: ', req.session.currentUser)
-    const user = await User.findById(req.session.currentUser.id)
-    res.json(user)
-    console.log('USERRR: ', user)
+    console.log('IDDDD: ', req.session.currentUser);
+    const user = await User.findById(req.session.currentUser.id);
+    res.json(user);
+    console.log('USERRR: ', user);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.post('/login', (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
@@ -53,8 +42,6 @@ router.post('/login', (req, res, next) => {
     })
     .catch(next);
 });
-
-
 
 router.post('/signup', (req, res, next) => {
   User.create(req.body)
@@ -83,7 +70,7 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/logout', (req, res) => {
   req.logout();
-  req.session.destroy()
+  req.session.destroy();
   res.redirect('/');
 });
 
