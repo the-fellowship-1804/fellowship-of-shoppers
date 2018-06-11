@@ -4,11 +4,14 @@ module.exports = router;
 
 const cartMerge = (disCart, loggedCart) => {
   const output = loggedCart;
+  console.log('logged cart is', loggedCart);
   for (let i = 0; i < disCart.length; i++) {
     let currentItem = disCart[i];
     let match = loggedCart.find(item => item.id === currentItem.id);
-    if (!match) output.push(disCart[i]);
-    else if (match.quantity >= disCart[i].quantity) continue;
+    console.log(match);
+    if (!match) {
+      output.push(disCart[i]);
+    } else if (match.quantity >= disCart[i].quantity) continue;
     else {
       match.quantity = disCart[i].quantity;
     }
@@ -39,9 +42,7 @@ router.post('/login', async (req, res, next) => {
         where: { id: req.session.currentUser.id }
       });
       await User.destroy({ where: { id: req.session.currentUser.id } });
-      console.log('reached this point', req.session.currentUser);
       if (req.session.currentUser.cart.length) {
-        console.log('req. session. curruser cart is', req.session.currentUser);
         const updatedUser = await user.update({
           cart: cartMerge(req.session.currentUser.cart, user.cart)
         });
@@ -84,7 +85,7 @@ router.post('/signup', async (req, res, next) => {
 router.post('/logout', (req, res) => {
   req.session.destroy();
   req.logout();
-  res.redirect('/');
+  res.sendStatus(204);
 });
 
 router.get('/me', (req, res) => {

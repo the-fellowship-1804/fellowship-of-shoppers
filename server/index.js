@@ -54,7 +54,7 @@ const createApp = () => {
     })
   );
 
-  app.get('/', async (req, res, next) => {
+  app.get('*', async (req, res, next) => {
     console.log('hit this route');
     console.log(req.session);
     if (!req.session.currentUser) {
