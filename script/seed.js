@@ -121,6 +121,23 @@ async function seed() {
       description:
         "It's the ship that made the Kessel Run in less than 12 parsecs. Fully equipped with deflector shields, 2 CEC AG-2G quad laser cannons, and 2 Arakyd ST2 concussion missile tubes. Cargo capacity of 100 metric tons. We'll throw in the Dejarik table for free!"
     })
+    Product.create({
+      name: `The Kingdom Come`,
+      price: '5',
+      imageUrl:
+        'https://cdna.artstation.com/p/assets/images/images/005/720/180/large/nadia-wendt-counterweight-kingdomcome.jpg?1493261747',
+      class: 'Freighter',
+      firepower: 50,
+      crew: 20,
+      topSpeed: 5000,
+      acceleration: 500,
+      weight: 300000,
+      length: 100,
+      width: 30,
+      depth: 60,
+      description:
+        "The Kingdom Come is a partially-decommissioned OriCon Gazer-class Light Frigate that served as the mobile base of the Chime. Orth Godlove was the Kingdome Come's captain during the Golden War. Since the war, most of the Kingdom Come's weapons and its FTL drive have since been removed, making it unsuitable for large-scale combat and interstellar travel. It is a large ship, capable of housing both the Regent's Brilliance and the Megalophile, and has been retrofitted with a small sickbay with basic operating equipment, a functional kitchen, and beds."
+    })
   ]);
   console.log(`seeded ${products.length} products`);
 }
