@@ -32,10 +32,10 @@ class Landing extends Component {
         return (
           <div>
             <div className="mainlanding">
-              <h1 className="header1">Welcome to the StarShip depot!</h1>
+              <h1 className="header1">Welcome to the StarShip Depot</h1>
             </div>
             <div className="centercontainer">
-              <h2>FLASH SALE!</h2>
+              <h2 id="sale">FLASH SALE!</h2>
               <ProductCard product={deathStar} />
             </div>
             <div className="centercontainer">

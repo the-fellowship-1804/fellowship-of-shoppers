@@ -38,6 +38,7 @@ body {
   font-family: sans-serif;
   padding-top: 50px;
   padding-bottom: 50px;
+  background-image: url('https://onemartialarts.com/after-school/wp-content/uploads/2015/08/off-white-textured-background-1920x10803.jpg');
   background-color: lightgray;
 }
 
@@ -106,6 +107,13 @@ img {
   height: auto;
 }
 
+/* Landing Page */
+
+#sale {
+  color: red;
+  margin-bottom: 0px 0px -40px 0px;
+}
+
 /* All Products */
 
 .centerproductcontainer {
@@ -161,11 +169,14 @@ img {
 /* Buttons */
 
 button {
-  z-index: 100;
+  display: inline-block;
   border-radius: 10px;
-  height: 40px;
-  background-color: teal;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: 5px 5px;
   color: white;
+  background-color: teal;
+  text-shadow: 0 1px 1px #205996;
 }
 
 /* Navbar */
