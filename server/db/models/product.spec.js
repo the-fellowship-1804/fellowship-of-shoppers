@@ -3,275 +3,285 @@ const db = require('../index');
 const Product = db.model('product');
 
 describe('Product model', () => {
-  let TP;
-  before(async () => {
-    await db.sync({ force: true });
+  describe('Basic functionality for Product model', () => {
+    it('The model exists', () => expect(Product).not.to.be.an('undefined'));
   });
-  before(async () => {
-    TP = await Product.create();
+  describe('Each desired column exists', () => {
+    let TP;
+    before(async () => {
+      try {
+        await db.sync({ force: true });
+        TP = await Product.create();
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    it('has a "name" column', () => expect(TP.name).not.to.be.an('undefined'));
+    it('has a "imageUrl" column', () =>
+      expect(TP.imageUrl).not.to.be.an('undefined'));
+    it('has a "price" column', () =>
+      expect(TP.price).not.to.be.an('undefined'));
+    it('has a "weight" column', () =>
+      expect(TP.weight).not.to.be.an('undefined'));
+    it('has a "length" column', () =>
+      expect(TP.length).not.to.be.an('undefined'));
+    it('has a "width" column', () =>
+      expect(TP.width).not.to.be.an('undefined'));
+    it('has a "depth" column', () =>
+      expect(TP.depth).not.to.be.an('undefined'));
+    it('has a "topSpeed" column', () =>
+      expect(TP.topSpeed).not.to.be.an('undefined'));
+    it('has a "acceleration" column', () =>
+      expect(TP.acceleration).not.to.be.an('undefined'));
+    it('has a "class" column', () =>
+      expect(TP.class).not.to.be.an('undefined'));
+    it('has a "description" column', () =>
+      expect(TP.description).not.to.be.an('undefined'));
   });
 
-  describe('Basic functionality for Product model', () => {
-    it('The model exists', () => assert.isDefined(TP));
-    describe('Each desired column exists', () => {
-      it('has a "name" column', () => assert.isDefined(TP.name));
-      it('has a "imageUrl" column', () => assert.isDefined(TP.imageUrl));
-      it('has a "price" column', () => assert.isDefined(TP.price));
-      it('has a "weight" column', () => assert.isDefined(TP.weight));
-      it('has a "length" column', () => assert.isDefined(TP.length));
-      it('has a "width" column', () => assert.isDefined(TP.width));
-      it('has a "depth" column', () => assert.isDefined(TP.depth));
-      it('has a "topSpeed" column', () => assert.isDefined(TP.topSpeed));
-      it('has a "acceleration" column', () =>
-        assert.isDefined(TP.acceleration));
-      it('has a "class" column', () => assert.isDefined(TP.class));
-      it('has a "description" column', () => assert.isDefined(TP.description));
+  describe('Each column accepts only the correct data types', () => {
+    let updateObj = {};
+
+    it(`"name" column accepts only strings`, async () => {
+      let testVal;
+      try {
+        updateObj.name = [];
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'string violation: name cannot be an array or an object'
+      );
+      try {
+        updateObj.name = 'string';
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a string';
+      } catch (error) {
+        testVal = 'Threw error when given a string';
+      }
+      expect(testVal).to.equal('No error thrown when given a string');
+      expect(TP.name).to.equal('string');
     });
 
-    describe('Each column accepts only the correct data types', () => {
-      let updateObj = {};
+    it(`"price" column accepts only numbers`, async () => {
+      let testVal;
+      try {
+        updateObj.price = 'this should error';
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'invalid input syntax for type numeric: "this should error"'
+      );
+      try {
+        updateObj.price = 0;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a number';
+      } catch (error) {
+        testVal = 'Threw error when given a number';
+      }
+      expect(testVal).to.equal('No error thrown when given a number');
+      expect(TP.price).to.equal(0);
+    });
 
-      it(`"name" column accepts only strings`, async () => {
-        let testVal;
-        try {
-          updateObj.name = [];
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'string violation: name cannot be an array or an object'
-        );
-        try {
-          updateObj.name = 'string';
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a string';
-        } catch (error) {
-          testVal = 'Threw error when given a string';
-        }
-        expect(testVal).to.equal('No error thrown when given a string');
-        expect(TP.name).to.equal('string');
-      });
+    it(`"weight" column accepts only numbers`, async () => {
+      let testVal;
+      try {
+        updateObj.weight = 'this should error';
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'invalid input syntax for type numeric: "this should error"'
+      );
+      try {
+        updateObj.weight = 0;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a number';
+      } catch (error) {
+        testVal = 'Error thrown when given a number';
+      }
+      expect(testVal).to.equal('No error thrown when given a number');
+      expect(TP.weight).to.equal(0);
+    });
 
-      it(`"price" column accepts only numbers`, async () => {
-        let testVal;
-        try {
-          updateObj.price = 'this should error';
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'invalid input syntax for type numeric: "this should error"'
-        );
-        try {
-          updateObj.price = 0;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a number';
-        } catch (error) {
-          testVal = 'Threw error when given a number';
-        }
-        expect(testVal).to.equal('No error thrown when given a number');
-        expect(TP.price).to.equal(0);
-      });
+    it(`"length" column accepts only numbers`, async () => {
+      let testVal;
+      try {
+        updateObj.length = 'this should error';
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'invalid input syntax for type numeric: "this should error"'
+      );
+      try {
+        updateObj.length = 0;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a number';
+      } catch (error) {
+        testVal = 'Error thrown when given a number';
+      }
+      expect(testVal).to.equal('No error thrown when given a number');
+      expect(TP.length).to.equal(0);
+    });
 
-      it(`"weight" column accepts only numbers`, async () => {
-        let testVal;
-        try {
-          updateObj.weight = 'this should error';
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'invalid input syntax for type numeric: "this should error"'
-        );
-        try {
-          updateObj.weight = 0;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a number';
-        } catch (error) {
-          testVal = 'Error thrown when given a number';
-        }
-        expect(testVal).to.equal('No error thrown when given a number');
-        expect(TP.weight).to.equal(0);
-      });
+    it(`"width" column accepts only numbers`, async () => {
+      let testVal;
+      try {
+        updateObj.width = 'this should error';
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'invalid input syntax for type numeric: "this should error"'
+      );
+      try {
+        updateObj.width = 0;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a number';
+      } catch (error) {
+        testVal = "it errored where it shouldn't have :(";
+      }
+      expect(testVal).to.equal('No error thrown when given a number');
+      expect(TP.width).to.equal(0);
+    });
 
-      it(`"length" column accepts only numbers`, async () => {
-        let testVal;
-        try {
-          updateObj.length = 'this should error';
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'invalid input syntax for type numeric: "this should error"'
-        );
-        try {
-          updateObj.length = 0;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a number';
-        } catch (error) {
-          testVal = 'Error thrown when given a number';
-        }
-        expect(testVal).to.equal('No error thrown when given a number');
-        expect(TP.length).to.equal(0);
-      });
+    it(`"depth" column accepts only numbers`, async () => {
+      let testVal;
+      try {
+        updateObj.depth = 'this should error';
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'invalid input syntax for type numeric: "this should error"'
+      );
+      try {
+        updateObj.depth = 1337;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a number';
+      } catch (error) {
+        testVal = "it errored where it shouldn't have :(";
+      }
+      expect(testVal).to.equal('No error thrown when given a number');
+      expect(TP.depth).to.equal(1337);
+    });
 
-      it(`"width" column accepts only numbers`, async () => {
-        let testVal;
-        try {
-          updateObj.width = 'this should error';
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'invalid input syntax for type numeric: "this should error"'
-        );
-        try {
-          updateObj.width = 0;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a number';
-        } catch (error) {
-          testVal = "it errored where it shouldn't have :(";
-        }
-        expect(testVal).to.equal('No error thrown when given a number');
-        expect(TP.width).to.equal(0);
-      });
+    it(`"topSpeed" column accepts only numbers`, async () => {
+      let testVal;
+      try {
+        updateObj.topSpeed = 'this should error';
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'invalid input syntax for type numeric: "this should error"'
+      );
+      try {
+        updateObj.topSpeed = 9000;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a number';
+      } catch (error) {
+        testVal = "it errored where it shouldn't have :(";
+      }
+      expect(testVal).to.equal('No error thrown when given a number');
+      expect(TP.topSpeed).to.equal(9000);
+    });
 
-      it(`"depth" column accepts only numbers`, async () => {
-        let testVal;
-        try {
-          updateObj.depth = 'this should error';
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'invalid input syntax for type numeric: "this should error"'
-        );
-        try {
-          updateObj.depth = 1337;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a number';
-        } catch (error) {
-          testVal = "it errored where it shouldn't have :(";
-        }
-        expect(testVal).to.equal('No error thrown when given a number');
-        expect(TP.depth).to.equal(1337);
-      });
+    it(`"acceleration" column accepts only numbers`, async () => {
+      let testVal;
+      try {
+        updateObj.acceleration = 'this should error';
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'invalid input syntax for type numeric: "this should error"'
+      );
+      try {
+        updateObj.acceleration = 9002;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a number';
+      } catch (error) {
+        testVal = "it errored where it shouldn't have :(";
+      }
+      expect(testVal).to.equal('No error thrown when given a number');
+      expect(TP.acceleration).to.equal(9002);
+    });
 
-      it(`"topSpeed" column accepts only numbers`, async () => {
-        let testVal;
-        try {
-          updateObj.topSpeed = 'this should error';
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'invalid input syntax for type numeric: "this should error"'
-        );
-        try {
-          updateObj.topSpeed = 9000;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a number';
-        } catch (error) {
-          testVal = "it errored where it shouldn't have :(";
-        }
-        expect(testVal).to.equal('No error thrown when given a number');
-        expect(TP.topSpeed).to.equal(9000);
-      });
+    it(`"class" column accepts only strings`, async () => {
+      let testVal;
+      try {
+        updateObj.class = {};
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'string violation: class cannot be an array or an object'
+      );
+      try {
+        updateObj.class = `string`;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a string';
+      } catch (error) {
+        testVal = "it errored where it shouldn't have :(";
+      }
+      expect(testVal).to.equal('No error thrown when given a string');
+      expect(TP.class).to.equal(`string`);
+    });
 
-      it(`"acceleration" column accepts only numbers`, async () => {
-        let testVal;
-        try {
-          updateObj.acceleration = 'this should error';
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'invalid input syntax for type numeric: "this should error"'
-        );
-        try {
-          updateObj.acceleration = 9002;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a number';
-        } catch (error) {
-          testVal = "it errored where it shouldn't have :(";
-        }
-        expect(testVal).to.equal('No error thrown when given a number');
-        expect(TP.acceleration).to.equal(9002);
-      });
+    it(`"description" column accepts large string inputs`, async () => {
+      let testVal;
+      try {
+        updateObj.description = [];
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'string violation: description cannot be an array or an object'
+      );
+      try {
+        updateObj.description = longText;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a string';
+      } catch (error) {
+        testVal = 'Threw error when given a string';
+      }
+      expect(testVal).to.equal('No error thrown when given a string');
+      expect(TP.description).to.equal(longText);
+    });
 
-      it(`"class" column accepts only strings`, async () => {
-        let testVal;
-        try {
-          updateObj.class = {};
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'string violation: class cannot be an array or an object'
-        );
-        try {
-          updateObj.class = `string`;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a string';
-        } catch (error) {
-          testVal = "it errored where it shouldn't have :(";
-        }
-        expect(testVal).to.equal('No error thrown when given a string');
-        expect(TP.class).to.equal(`string`);
-      });
-
-      it(`"description" column accepts large string inputs`, async () => {
-        let testVal;
-        try {
-          updateObj.description = [];
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'string violation: description cannot be an array or an object'
-        );
-        try {
-          updateObj.description = longText;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a string';
-        } catch (error) {
-          testVal = 'Threw error when given a string';
-        }
-        expect(testVal).to.equal('No error thrown when given a string');
-        expect(TP.description).to.equal(longText);
-      });
-
-      it(`"imageUrl" column accepts only strings`, async () => {
-        let testVal;
-        try {
-          updateObj.imageUrl = [];
-          await TP.update(updateObj);
-        } catch (error) {
-          testVal = error.message;
-        }
-        expect(testVal).to.equal(
-          'string violation: imageUrl cannot be an array or an object'
-        );
-        try {
-          updateObj.imageUrl = `string`;
-          await TP.update(updateObj);
-          testVal = 'No error thrown when given a string';
-        } catch (error) {
-          testVal = 'Threw error when given a string';
-        }
-        expect(testVal).to.equal('No error thrown when given a string');
-        expect(TP.imageUrl).to.equal(`string`);
-      });
+    it(`"imageUrl" column accepts only strings`, async () => {
+      let testVal;
+      try {
+        updateObj.imageUrl = [];
+        await TP.update(updateObj);
+      } catch (error) {
+        testVal = error.message;
+      }
+      expect(testVal).to.equal(
+        'string violation: imageUrl cannot be an array or an object'
+      );
+      try {
+        updateObj.imageUrl = `string`;
+        await TP.update(updateObj);
+        testVal = 'No error thrown when given a string';
+      } catch (error) {
+        testVal = 'Threw error when given a string';
+      }
+      expect(testVal).to.equal('No error thrown when given a string');
+      expect(TP.imageUrl).to.equal(`string`);
     });
   });
 });
