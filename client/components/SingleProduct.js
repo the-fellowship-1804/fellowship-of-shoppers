@@ -89,7 +89,8 @@ class SingleProduct extends Component {
             <button
               type="button"
               onClick={this.handleClick}
-              disabled={!this.state.quantity}>
+              disabled={!this.state.quantity}
+            >
               Add to cart
             </button>
             <div>
