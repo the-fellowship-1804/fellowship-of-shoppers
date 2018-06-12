@@ -55,7 +55,7 @@ class CartCard extends React.Component {
           {
             <Link to={`/products/${product.id}`}>
               <img src={product.imageUrl} />
-              <p>{product.name}</p>
+              <p id="cartproductname">{product.name}</p>
             </Link>
           }
         </div>
