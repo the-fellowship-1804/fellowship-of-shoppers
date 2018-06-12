@@ -20,7 +20,7 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   'ERROR'
 ];
 
-describe.only('Frontend tests', () => {
+describe('Frontend tests', () => {
   describe('Can render a thing', () => {
     let messageWrapper;
     const productData = [
