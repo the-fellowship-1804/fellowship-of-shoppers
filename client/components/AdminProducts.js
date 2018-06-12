@@ -6,6 +6,7 @@ import { getProducts } from '../store/allProducts';
 import { withRouter, Link } from 'react-router-dom';
 import Filters from './AllProductsFilters';
 import Sort from './AllProductsSort';
+import axios from 'axios';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
@@ -24,6 +25,7 @@ class AdminProducts extends React.Component {
     };
     this.applyFilter = this.applyFilter.bind(this);
     this.applySort = this.applySort.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   componentDidMount() {
@@ -45,11 +47,60 @@ class AdminProducts extends React.Component {
     this.setState({ sort: event.target.value });
   }
 
+  async deleteItem(event) {
+    // event.preventDefault();
+    // console.log(event.target.value);
+    await axios.delete(`/api/products/${event.target.value}`);
+    this.props.getProducts();
+  }
+
   render() {
-    let allProducts = this.props.products;
-    console.log('PROPSSSSS', this.props);
-    // console.log(this.props.user.isAdmin);
-    // console.log('products', this.props.products);
+    let allProducts = this.state.filter
+      ? this.props.products.filter(
+          ship => ship.class === this.state.class || this.state.class === `All`
+        )
+      : this.props.products;
+
+    if (this.state.sort === 'byname') {
+      allProducts = allProducts.sort((ObjA, ObjB) => {
+        const nameA = ObjA.name,
+          nameB = ObjB.name;
+        if (nameA < nameB) return -1;
+        if (nameB < nameA) return 1;
+        return 0;
+      });
+    }
+
+    if (this.state.sort === 'byfirepower') {
+      allProducts = allProducts.sort((ObjA, ObjB) => {
+        const fireA = ObjA.firepower,
+          fireB = ObjB.firepower;
+        if (fireA < fireB) return 1;
+        if (fireB < fireA) return -1;
+        return 0;
+      });
+    }
+
+    if (this.state.sort === 'bypricehightolow') {
+      allProducts = allProducts.sort((ObjA, ObjB) => {
+        const priceA = ObjA.price,
+          priceB = ObjB.price;
+        if (priceA < priceB) return 1;
+        if (priceB < priceA) return -1;
+        return 0;
+      });
+    }
+
+    if (this.state.sort === 'bypricelowtohigh') {
+      allProducts = allProducts.sort((ObjA, ObjB) => {
+        const priceA = ObjA.price,
+          priceB = ObjB.price;
+        if (priceA < priceB) return -1;
+        if (priceB < priceA) return 1;
+        return 0;
+      });
+    }
+
     switch (this.props.status) {
       case UNASKED: {
         return <p>Nothing has been asked for</p>;
@@ -61,7 +112,7 @@ class AdminProducts extends React.Component {
         return (
           <div>
             <h2 id="allproductsheading">
-              All Products{' '}
+              Admin View > All Products{' '}
               {this.state.class === 'All' ? `` : `> ${this.state.class}s`}
             </h2>
             <div>
@@ -76,7 +127,13 @@ class AdminProducts extends React.Component {
                 return (
                   <div key={product.id}>
                     <ProductCard key={product.id} product={product} />
-                    <button type="submit">Delete</button>
+                    <button
+                      value={product.id}
+                      onClick={this.deleteItem}
+                      type="submit"
+                    >
+                      Delete
+                    </button>
                   </div>
                 );
               })}
