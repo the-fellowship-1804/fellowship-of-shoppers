@@ -26,25 +26,29 @@ class Cart extends React.Component {
   render() {
     const user = this.props.user;
     return (
-      <div>
-        <h3>Cart</h3>
-        <div>
-          Your total is:{' '}
-          {user.id
-            ? `${this.caluculateTotalPrice()} space-cash`
-            : 'Calculating... ... ... or error'}
+      <div id="cart">
+        <div id="cartcheckout">
+          <h3>Cart</h3>
+          <div>
+            Your total is:{' '}
+            {user.id
+              ? `${this.caluculateTotalPrice()} Space Cash`
+              : '0 Space Cash'}
+          </div>
+          <button
+            type="button"
+            onClick={this.handleClick}
+            disabled={user.id ? user.cart.length === 0 : true}>
+            Checkout!
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={this.handleClick}
-          disabled={user.id ? user.cart.length === 0 : true}>
-          Checkout!
-        </button>
-        {user.id
-          ? user.cart.map(productObj => (
-              <CartCard key={productObj.product.id} productObj={productObj} />
-            ))
-          : null}
+        <div id="cartitems">
+          {user.id
+            ? user.cart.map(productObj => (
+                <CartCard key={productObj.product.id} productObj={productObj} />
+              ))
+            : null}
+        </div>
       </div>
     );
   }

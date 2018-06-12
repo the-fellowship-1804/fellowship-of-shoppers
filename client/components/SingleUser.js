@@ -8,8 +8,7 @@ class SingleUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayHistory: false,
-      productInfo: []
+      displayHistory: false
     };
   }
 
@@ -22,36 +21,29 @@ class SingleUser extends React.Component {
   }
 
   handleClick = () => {
-    const tempProductInfo = this.state.props.allProducts.products.filter(
-      product => this.state.props.user.OrderHistory.includes(product.id)
-    );
-    this.setState({
-      productInfo: tempProductInfo,
-      displayHistory: true
-    });
+    this.setState(prevState => ({
+      displayHistory: !prevState.displayHistory
+    }));
   };
 
   render() {
-    const { id, email, imageUrl, address } = this.props.user;
-    console.log(imageUrl)
+    const { email, imageUrl, address } = this.props.user;
     return (
       <div>
         <h3>Welcome, {email}</h3>
         <img src={imageUrl} />
         <h4>Your Address: {address}</h4>
-        <button type="button">
-          View Cart
-          <Link to="/cart" />
+        <Link to="/cart">
+          <button type="button">View Cart</button>
+        </Link>
+        <Link to="/editAccount">
+          <button type="button">Edit Info</button>
+        </Link>
+        <button type="button" onClick={this.handleClick}>
+          Order History
         </button>
-        <button onClick={this.handleClick} type="button">
-          Show Order History
-        </button>
-        <Link to={`/editAccount`}><button type="button">Edit Info</button></Link>
         {this.state.displayHistory ? (
-          <OrderHistory
-            productInfo={this.state.productInfo}
-            user={this.props.user}
-          />
+          <OrderHistory user={this.props.user} />
         ) : null}
       </div>
     );
