@@ -55,8 +55,6 @@ const createApp = () => {
   );
 
   app.get('*', async (req, res, next) => {
-    console.log('hit this route');
-    console.log(req.session);
     if (!req.session.currentUser) {
       const newUser = await User.create({
         email: Date.now() + '@guest.com'

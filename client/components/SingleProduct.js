@@ -31,12 +31,12 @@ class SingleProduct extends Component {
     );
     try {
       console.log(this.props.user);
+      this.props.history.push('/cart');
       await this.props.addToCart(
         this.props.user.id,
         product,
         this.state.quantity
       );
-      this.props.history.push('/cart');
     } catch (error) {
       console.log(error);
     }

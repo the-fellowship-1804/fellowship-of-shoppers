@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CartCard from './CartCard';
-import { removeFromCart } from '../store/singleUser';
+import { removeFromCart, addToCart } from '../store/singleUser';
 import { findGuest } from '../store/singleUser';
 
 class Cart extends React.Component {
   componentDidMount() {
-    if (!this.props.isLoggedIn) this.props.findGuest();
+    if (!this.props.isLoggedIn) {
+      this.props.findGuest();
+    }
   }
 
   handleClick = () => {
