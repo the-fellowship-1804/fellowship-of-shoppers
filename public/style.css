@@ -46,6 +46,10 @@ a {
   text-decoration: none;
 }
 
+button > a {
+  color: white;
+}
+
 label {
   display: block;
 }
