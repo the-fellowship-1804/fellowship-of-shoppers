@@ -1,4 +1,4 @@
-const { expect } = require('chai');
+const { expect, assert } = require('chai');
 const db = require('../index');
 const Product = db.model('product');
 const lI = require('lorem-ipsum');
@@ -308,6 +308,7 @@ describe('Product model', () => {
             expect(testVal).to.equal(
               'string violation: description cannot be an array or an object'
             );
+            const longText = lI();
             try {
               updateObj.description = longText;
               await TP.update(updateObj);
