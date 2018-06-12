@@ -25,13 +25,13 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      productName: `the Death Star`,
+      name: `the Death Star`,
       price: `999`,
-      productImageUrl:
+      imageUrl:
         'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg'
     }),
     Product.create({
-      productName: `Enterprise-D`,
+      name: `Enterprise-D`,
       price: '100'
     })
   ]);

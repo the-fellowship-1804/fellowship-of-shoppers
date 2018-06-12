@@ -89,7 +89,7 @@ class SingleProduct extends Component {
             <div id="single-product-description">
               <h6>Description</h6>
               <p id="single-product-description-p">
-                {product.productDescription}
+                {product.description}
               </p>
             </div>
             <Link to="/products">
