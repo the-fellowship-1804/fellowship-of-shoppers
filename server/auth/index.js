@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require('../db/models/user');
 module.exports = router;
 
-const cartMerge = (disCart, loggedCart) => {
+export const cartMerge = (disCart, loggedCart) => {
   const output = loggedCart;
   for (let i = 0; i < disCart.length; i++) {
     let currentItem = disCart[i];
