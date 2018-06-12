@@ -25,17 +25,101 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      productName: `the Death Star`,
-      price: `999`,
-      productImageUrl:
+      name: `The Death Star`,
+      price: `9999`,
+      imageUrl:
         'https://nerdist.com/wp-content/uploads/2017/12/Death-Star-Construction-1.jpg',
-      class: 'Space Stations'
+      class: 'Space Station',
+      firepower: 50000,
+      crew: 1200000,
+      weight: 134000000000000000,
+      diameter: 160000,
+      description:
+        'The DS-1 Orbital Battle Station comes equipped with a Mk I Superlaser capable of obliterating entire systems. It also boasts a complement of 30,000 stormtroopers, 7,200 TIE class fighters, and an additional complement of 20,000 turbolasers. It is capable of entering hyperspace, with a Class 4 hypderdrive installed. Exhaust port cover highly recommended.'
     }),
     Product.create({
-      productName: `Enterprise-D`,
-      productImageUrl: 'https://nerdist.com/wp-content/uploads/2015/03/1754989-970x545.jpg',
-      price: '100',
-      class: 'Starships'
+      name: `USS Enterprise-D`,
+      price: '400',
+      imageUrl:
+        'https://nerdist.com/wp-content/uploads/2015/03/1754989-970x545.jpg',
+      class: 'Starship',
+      firepower: 1500,
+      crew: 1014,
+      topSpeed: 273618466000,
+      weight: 4500000000,
+      length: 642.5,
+      width: 463.73,
+      depth: 195.26,
+      description:
+        'The USS Enterprise will let you boldly go where no man has gone before!'
+    }),
+    Product.create({
+      name: `Imperial-class Star Destroyer`,
+      price: '750',
+      imageUrl:
+        'https://lumiere-a.akamaihd.net/v1/images/Star-Destroyer_ab6b94bb.jpeg?region=0%2C0%2C1600%2C900&width=768',
+      class: 'Starship',
+      firepower: 2500,
+      crew: 45000,
+      topSpeed: 6000,
+      acceleration: 100,
+      weight: 9500000000,
+      length: 1600,
+      width: 700,
+      depth: 350,
+      description:
+        'The preferred capital ship of the Galactic Empire. Carries 72 TIE fighters, 20 AT-AT walkers, and 30 AT-ST walkers. With room for 9,700 stormtroopers in addition to crew, this vessel is perfect for planetary assault. Comes equipped with 120 turbolaser batteries for anti-fighter defense, and an additional 15 heavy turbolasers for engagment with other capital ships and planetary bombardment.'
+    }),
+    Product.create({
+      name: `X-Wing`,
+      price: '20',
+      imageUrl:
+        'http://starwarswallpaperhd.com/web/wallpapers/rogue-one-x-wing-4k-ultra-widescreen-wallpaper-image-no-2/thumbnail/lg.jpg',
+      class: 'Fighter',
+      firepower: 120,
+      crew: 1,
+      topSpeed: 10000,
+      acceleration: 1800,
+      weight: 10000,
+      length: 12.5,
+      width: 6.8,
+      depth: 3.1,
+      description:
+        'The classic T-65 X-Wing starfighter from Incom. One of these destroyed the Death Star. Favorite of the Rebel Alliance. Comes equipped with 4 lasers when depoloyed in attack mode and four engines. Astromech droid sold separately.'
+    }),
+    Product.create({
+      name: `TIE Fighter`,
+      price: '15',
+      imageUrl:
+        'https://www.desktopbackground.org/download/o/2012/09/11/450959_star-wars-star-wars-battlefront-video-games-tie-fighter_2560x1440_h.png',
+      class: 'Fighter',
+      firepower: 80,
+      crew: 1,
+      topSpeed: 10000,
+      acceleration: 2000,
+      weight: 8000,
+      length: 6.3,
+      width: 6.4,
+      depth: 7.5,
+      description:
+        'The TIE (Twin Ion Engine) Series Ln Starfighter boasts a titanium hull and twin P-s4 ion engines. Also carries an armament of two L-s1 laser cannons, and an I-a3b solar ionization reactor (go green!). Bulk discount for the Empire. Shield generator costs extra.'
+    }),
+    Product.create({
+      name: `YT-1300 "Millenium Falcon"`,
+      price: '75',
+      imageUrl:
+        'https://brightcove04pmdo-a.akamaihd.net/3653334524001/3653334524001_5703541606001_5703529855001-vs.jpg?pubId=3653334524001&videoId=5703529855001',
+      class: 'Freighter',
+      firepower: 450,
+      crew: 4,
+      topSpeed: 7500,
+      acceleration: 1400,
+      weight: 110000,
+      length: 34.75,
+      width: 19.4,
+      depth: 7.8,
+      description:
+        "It's the ship that made the Kessel Run in less than 12 parsecs. Fully equipped with deflector shields, 2 CEC AG-2G quad laser cannons, and 2 Arakyd ST2 concussion missile tubes. Cargo capacity of 100 metric tons. We'll throw in the Dejarik table for free!"
     })
   ]);
   console.log(`seeded ${products.length} products`);

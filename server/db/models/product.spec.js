@@ -9,22 +9,22 @@ describe('Product model', () => {
   });
   beforeEach(async () => {
     spaceballOne = await Product.create({
-      productName: 'Spaceball One',
+      name: 'Spaceball One',
       price: 13.37
     });
   });
   describe('Basic functionality for Product model', () => {
     describe('Each desired column exists;', () => {
-      it('has a "productName" column', () =>
-        expect(spaceballOne.productName).to.equal('Spaceball One'));
+      it('has a "name" column', () =>
+        expect(spaceballOne.name).to.equal('Spaceball One'));
       it('has a "price" column', () =>
         expect(spaceballOne.price).to.equal('13.37'));
-      it('has a "productImageUrl" column', () =>
-        expect(spaceballOne.productImageUrl).to.equal(null));
+      it('has a "imageUrl" column', () =>
+        expect(spaceballOne.imageUrl).to.equal(null));
       it('has a "weight" column', () =>
         expect(spaceballOne.weight).to.equal(null));
-      it('has a "height" column', () =>
-        expect(spaceballOne.height).to.equal(null));
+      it('has a "length" column', () =>
+        expect(spaceballOne.length).to.equal(null));
       it('has a "width" column', () =>
         expect(spaceballOne.width).to.equal(null));
       it('has a "depth" column', () =>
@@ -35,15 +35,15 @@ describe('Product model', () => {
         expect(spaceballOne.acceleration).to.equal(null));
       it('has a "class" column', () =>
         expect(spaceballOne.class).to.equal(null));
-      it('has a "productDescription" column', () =>
-        expect(spaceballOne.productDescription).to.equal(null));
+      it('has a "description" column', () =>
+        expect(spaceballOne.description).to.equal(null));
     });
 
     describe('Each column accepts only the correct data types', () => {
       let currentColumn;
-      currentColumn = 'productName';
+      currentColumn = 'name';
       it(`has its "${currentColumn}" column accept only strings`, async () => {
-        currentColumn = 'productName';
+        currentColumn = 'name';
         let testerValue;
         try {
           let updateObj = {};
@@ -113,9 +113,9 @@ describe('Product model', () => {
         expect(testerValue).to.equal(currentColumn + currentColumn);
         expect(spaceballOne[currentColumn]).to.equal(10);
       });
-      currentColumn = `height`;
+      currentColumn = `length`;
       it(`has its "${currentColumn}" column accept only numbers`, async () => {
-        currentColumn = `height`;
+        currentColumn = `length`;
         let testerValue;
         try {
           let updateObj = {};
@@ -257,9 +257,9 @@ describe('Product model', () => {
         expect(testerValue).to.equal(currentColumn + currentColumn);
         expect(spaceballOne[currentColumn]).to.equal(`six`);
       });
-      currentColumn = `productDescription`;
+      currentColumn = `description`;
       it(`has its "${currentColumn}" column accept large string inputs`, async () => {
-        currentColumn = `productDescription`;
+        currentColumn = `description`;
         let testerValue;
         try {
           let updateObj = {};
@@ -281,9 +281,9 @@ describe('Product model', () => {
         expect(testerValue).to.equal(currentColumn + currentColumn);
         expect(spaceballOne[currentColumn]).to.equal(longText);
       });
-      currentColumn = `productImageUrl`;
+      currentColumn = `imageUrl`;
       it(`has its "${currentColumn}" column accept only strings`, async () => {
-        currentColumn = `productImageUrl`;
+        currentColumn = `imageUrl`;
         let testerValue;
         try {
           let updateObj = {};
