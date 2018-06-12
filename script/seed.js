@@ -120,7 +120,7 @@ async function seed() {
       depth: 7.8,
       description:
         "It's the ship that made the Kessel Run in less than 12 parsecs. Fully equipped with deflector shields, 2 CEC AG-2G quad laser cannons, and 2 Arakyd ST2 concussion missile tubes. Cargo capacity of 100 metric tons. We'll throw in the Dejarik table for free!"
-    })
+    }),
     Product.create({
       name: `The Kingdom Come`,
       price: '5',
@@ -137,6 +137,22 @@ async function seed() {
       depth: 60,
       description:
         "The Kingdom Come is a partially-decommissioned OriCon Gazer-class Light Frigate that served as the mobile base of the Chime. Orth Godlove was the Kingdome Come's captain during the Golden War. Since the war, most of the Kingdom Come's weapons and its FTL drive have since been removed, making it unsuitable for large-scale combat and interstellar travel. It is a large ship, capable of housing both the Regent's Brilliance and the Megalophile, and has been retrofitted with a small sickbay with basic operating equipment, a functional kitchen, and beds."
+    }),
+    Product.create({
+      name: `The Pillar of Autumn`,
+      price: '700',
+      imageUrl: 'https://i.stack.imgur.com/fmSWW.jpg',
+      class: 'Starship',
+      firepower: 2000,
+      crew: 40000,
+      topSpeed: 5000,
+      acceleration: 75,
+      weight: 9000000000,
+      length: 1171,
+      width: 352,
+      depth: 414,
+      description:
+        "UNSC Pillar of Autumn (HCS: C-709)[8][9] is a Halcyon-class light cruiser. Prior to the Fall of Reach, Pillar of Autumn was selected to support Operation: RED FLAG. The cruiser was guided to the Soell system by the AI Cortana. It crash-landed on the installation and the ship's sole remaining combat effective SPARTAN-II was forced to detonate Pillar of Autumn's fusion reactor, destroying the ship and the installation. Condition: very good"
     })
   ]);
   console.log(`seeded ${products.length} products`);
