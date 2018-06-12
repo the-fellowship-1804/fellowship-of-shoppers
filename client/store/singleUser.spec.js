@@ -38,15 +38,4 @@ describe('thunk creators', () => {
       });
     });
   });
-
-  describe('logout', () => {
-    it('logout: eventually dispatches the REMOVE_USER action', () => {
-      mockAxios.onPost('/auth/logout').replyOnce(204);
-      return store.dispatch(logout()).then(() => {
-        const actions = store.getActions();
-        expect(actions[0].type).to.be.equal('REMOVE_USER');
-        expect(history.location.pathname).to.be.equal('/login');
-      });
-    });
-  });
 });
