@@ -1,4 +1,4 @@
-const { expect, assert } = require('chai');
+const { expect } = require('chai');
 const db = require('../index');
 const User = db.model('user');
 
@@ -96,14 +96,14 @@ describe('User model', () => {
       expect(testVal).to.be.an('error');
     });
     it('"password" column\'s contents are hidden in a function', () => {
-      assert.isFunction(TU.password);
+      expect(TU.password).to.be.a('function');
     });
 
     it('"salt" column is a string', () => {
       expect(TU.salt()).to.be.a('string'); //cannot use equal to because of random generation
     });
     it('"salt" column\'s contents are hidden in a function', () => {
-      assert.isFunction(TU.salt);
+      expect(TU.salt).to.be.a('function');
     });
 
     // it('"googleId" column is a string', () => {
