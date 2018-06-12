@@ -45,10 +45,7 @@ class Checkout extends React.Component {
           address={this.state.address}
         />
         <Elements>
-          <CheckoutForm
-            price={totalPrice}
-            user={this.props.user.id ? this.props.user : null}
-          />
+          <CheckoutForm user={this.props.user.id ? this.props.user : null} />
         </Elements>
         {this.props.user.id ? ( //this will have to be changed to accomodate for not-logged in users
           <div>
