@@ -38,11 +38,16 @@ body {
   font-family: sans-serif;
   padding-top: 50px;
   padding-bottom: 50px;
+  background-image: url('https://onemartialarts.com/after-school/wp-content/uploads/2015/08/off-white-textured-background-1920x10803.jpg');
   background-color: lightgray;
 }
 
 a {
   text-decoration: none;
+}
+
+button > a {
+  color: white;
 }
 
 label {
@@ -106,20 +111,76 @@ img {
   height: auto;
 }
 
-/* productcard styling */
+/* Landing Page */
+
+#sale {
+  color: red;
+  margin-bottom: 0px 0px -40px 0px;
+}
+
+/* All Products */
+
+.centerproductcontainer {
+  margin: auto;
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Single Product */
+
+#single-product-description {
+  width: 70vw;
+}
+
+/* Product Card */
 
 #price {
   color: red;
 }
 
-/* button styling */
+.productcentercontainer {
+  width: 300px;
+  margin: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#productname {
+  color: teal;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+#producttitle > a {
+  text-decoration: none;
+}
+
+.crop {
+  height: 175px;
+  width: auto;
+  overflow: hidden;
+}
+
+.crop > img {
+  height: 175px;
+  width: auto;
+}
+
+/* Buttons */
 
 button {
-  z-index: 100;
+  display: inline-block;
   border-radius: 10px;
-  height: 40px;
-  background-color: teal;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: 5px 5px;
   color: white;
+  background-color: teal;
+  text-shadow: 0 1px 1px #205996;
 }
 
 /* Navbar */
@@ -134,8 +195,9 @@ nav {
   background-color: teal;
 }
 
-a {
+.navlinks > a {
   color: white;
+  text-decoration: none;
 }
 
 /* Landing Page and Product Views*/
@@ -152,15 +214,65 @@ a {
 
 #allproductsheading {
   margin-left: 20px;
+  color: teal;
+  text-shadow: gray 1px 1px;
 }
 
-#filter {
+select {
   margin-left: 20px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   background-color: teal;
   color: white;
+}
+
+/* Cart */
+
+#cart {
+  display: flex;
+  flex-direction: row;
+  margin-right: 20vw;
+}
+
+#cartcheckout {
+  flex: 1 0 auto;
+}
+
+#cartitems {
+  flex: 2 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* #cartcard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+} */
+
+#cartcard > link > p {
+  margin-left: 20px;
+}
+
+#cartquantity {
+  margin: 2px 2px;
+}
+
+#cartitemscontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cartpricequantity > p {
+  margin: 0px 0px 0px 0px;
+}
+
+#cartproductname {
+  color: teal;
+  text-decoration: none;
 }
 
 /* Small text */

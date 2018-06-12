@@ -2,20 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Elements } from 'react-stripe-elements';
 
+import CheckoutAddress from './CheckoutAddress';
 import CheckoutForm from './CheckoutForm';
 
 class Checkout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: ''
+      address: this.props.user.address
     };
-  }
-
-  UNSAFE_componentWillReceiveProps(incomingProps) {
-    this.setState({
-      address: incomingProps.user.address
-    });
   }
 
   handleChange = event => {
@@ -35,18 +30,20 @@ class Checkout extends React.Component {
 
   render() {
     const totalPrice = this.props.user.id ? this.caluculateTotalPrice() : null;
-    console.log(this.props.user);
+    console.log(this.props.user.address);
+    console.log(this.state);
     return (
       <div>
         <h3>Checkout</h3>
         <div>
           Your total is:{' '}
-          {this.props.user.id ? `${totalPrice} space-cash` : 'Calculating...'}
+          {this.props.user.id ? `${totalPrice} Space Bucks` : 'Calculating...'}
         </div>
-        <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-          <label htmlFor="address">Address:</label>
-          <input type="text" name="address" value={this.state.address} />
-        </form>
+        <CheckoutAddress
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          address={this.state.address}
+        />
         <Elements>
           <CheckoutForm
             price={totalPrice}

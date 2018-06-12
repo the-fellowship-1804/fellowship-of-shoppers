@@ -48,14 +48,22 @@ export const auth = (email, password, method, redirect) => dispatch =>
     )
     .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr));
 
-export const logout = () => dispatch =>
+export const logout = () => dispatch => {
+  dispatch(removeUser());
   axios
     .post('/auth/logout')
-    .then(_ => {
-      dispatch(removeUser());
-      history.push('/login');
-    })
+    .then(history.push('/'))
     .catch(err => console.log(err));
+};
+
+export const findGuest = () => async dispatch => {
+  try {
+    const { data } = await axios.get('/auth/guest');
+    dispatch(getUser(data));
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const addToCart = (userId, product, quantity) => async dispatch => {
   const productObj = { product, quantity };

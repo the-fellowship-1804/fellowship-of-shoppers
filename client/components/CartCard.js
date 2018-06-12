@@ -36,7 +36,7 @@ class CartCard extends React.Component {
   };
 
   handleClickQuantity = async event => {
-    if (this.state.desiredQuantity === '0') {
+    if (this.state.desiredQuantity == '0') {
       this.remover();
     } else {
       await this.props.addToCart(
@@ -50,17 +50,22 @@ class CartCard extends React.Component {
   render() {
     const product = this.props.productObj.product;
     return (
-      <div>
-        {
-          <Link to={`/products/${product.id}`}>
-            <img src={product.imageUrl} />
-            <p>{product.name}</p>
-          </Link>
-        }
-        <p>Price: {product.price ? product.price : 'Free'}</p>
-        <div>Quantity: {this.props.productObj.quantity} </div>
+      <div id="cartitemscontainer">
+        <div id="cartcard">
+          {
+            <Link to={`/products/${product.id}`}>
+              <img src={product.imageUrl} />
+              <p id="cartproductname">{product.name}</p>
+            </Link>
+          }
+        </div>
+        <div id="cartpricequantity">
+          <p>Price: {product.price ? product.price : 'Free'}</p>
+          <p>Quantity: {this.props.productObj.quantity} </p>
+        </div>
         <label htmlFor="desiredQuantity">Change quantity:</label>
         <input
+          id="cartquantity"
           type="number"
           name="desiredQuantity"
           step="1"
