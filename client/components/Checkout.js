@@ -13,18 +13,6 @@ class Checkout extends React.Component {
     };
   }
 
-  // UNSAFE_componentWillReceiveProps(incomingProps) {
-  //   this.setState({
-  //     address: incomingProps.user.address
-  //   });
-  // }
-  // componentDidMount() {
-  //   this.setState({ address: this.props.user.address });
-  // }
-  // static getDerivedStateFromProps(nextProps, prevState) {
-
-  // }
-
   handleChange = event => {
     console.log(event.target.name, event.target.value);
     this.setState({
