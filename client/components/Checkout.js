@@ -49,7 +49,7 @@ class Checkout extends React.Component {
         <h3>Checkout</h3>
         <div>
           Your total is:{' '}
-          {this.props.user.id ? `${totalPrice} space-cash` : 'Calculating...'}
+          {this.props.user.id ? `${totalPrice} Space Bucks` : 'Calculating...'}
         </div>
         <CheckoutAddress
           handleSubmit={this.handleSubmit}
