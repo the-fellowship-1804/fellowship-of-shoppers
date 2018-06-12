@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
       // send everything to anyone who asks!
       attributes: ['id', 'email']
     });
+    // console.log(users);
     res.json(users);
   } catch (error) {
     next(error);
@@ -20,7 +21,9 @@ router.get('/', async (req, res, next) => {
 //Get one user
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id, {
+      attributes: ['id', 'email']
+    });
     res.json(user);
   } catch (error) {
     next(error);
