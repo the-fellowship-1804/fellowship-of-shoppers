@@ -34,7 +34,7 @@ router.put('/:productId', async (req, res, next) => {
   try {
     const [number, updated] = await Product.update(req.body, {
       where: { id: req.params.productId },
-      returning: true,
+      returning: true
     });
     res.json(updated[0]);
   } catch (err) {
@@ -45,7 +45,7 @@ router.put('/:productId', async (req, res, next) => {
 router.delete('/:productId', async (req, res, next) => {
   try {
     await Product.destroy({
-      where: { id: req.params.productId },
+      where: { id: req.params.productId }
     });
     res.sendStatus(204);
   } catch (err) {
