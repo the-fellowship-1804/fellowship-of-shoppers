@@ -41,6 +41,10 @@ describe('Product routes', async () => {
       expect(res.body.name).to.equal('The Death Star');
       expect(res.body.price).to.equal(`9999`);
     });
-    // it('lets you delete a thing with a delete route',)
+    it('lets you delete a thing with a delete route', async () => {
+      await request(app).delete('/api/products/1');
+      const res = await request(app).get('/api/products');
+      expect(res.status).to.equal(200);
+    });
   });
 });

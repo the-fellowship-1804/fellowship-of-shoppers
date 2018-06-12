@@ -13,7 +13,7 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   'ERROR'
 ];
 
-class AllProducts extends Component {
+export class AllProducts extends Component {
   constructor(props) {
     super(props);
     this.state = {

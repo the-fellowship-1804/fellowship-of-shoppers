@@ -4,12 +4,8 @@ module.exports = router;
 
 const cartMerge = (disCart, loggedCart) => {
   const output = loggedCart;
-  console.log('discarding cart:', disCart);
-  console.log('logged cart is', loggedCart);
   for (let i = 0; i < disCart.length; i++) {
     let currentItem = disCart[i];
-    console.log(disCart[i]);
-    console.log('current Item:', currentItem);
     let match = loggedCart.find(
       item => item.product.id === currentItem.product.id
     );
