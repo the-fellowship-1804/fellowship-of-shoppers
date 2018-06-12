@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { cartMerge } = require('../db/models');
 
-describe.only('Helper methods for routes', () => {
+describe('Helper methods for routes', () => {
   describe('the cartMerge function', () => {
     let [
       incomingCart,
