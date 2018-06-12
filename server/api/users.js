@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
 //Get one user
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     res.json(user);
   } catch (error) {
     next(error);
@@ -57,7 +57,6 @@ router.put('/:id', async (req, res, next) => {
       }
       res.end();
     } else {
-      console.log('REQ.BODY', req.body);
       const [, user] = await User.update(req.body, {
         where: { id: req.params.id },
         returning: true,

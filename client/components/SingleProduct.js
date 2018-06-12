@@ -4,6 +4,7 @@ import { getProducts } from '../store/allProducts';
 import { addToCart } from '../store/singleUser';
 import { withRouter, Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
+import { findGuest } from '../store/singleUser';
 import SingleProductSpecs from './SingleProductSpecs';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
@@ -23,6 +24,7 @@ class SingleProduct extends Component {
   }
   componentDidMount() {
     this.props.getProducts();
+    if (!this.props.isLoggedIn) this.props.findGuest();
   }
 
   handleClick = async () => {
@@ -30,6 +32,8 @@ class SingleProduct extends Component {
       indivProduct => indivProduct.id == this.props.match.params.productId
     );
     try {
+      console.log(this.props.user);
+      this.props.history.push('/cart');
       await this.props.addToCart(
         this.props.user.id,
         product,
@@ -116,11 +120,14 @@ const mapSTP = state => {
   return {
     products: state.allProducts.products,
     status: state.allProducts.status,
-    user: state.singleUser
+    user: state.singleUser,
+    isLoggedIn:
+      !!state.singleUser.id &&
+      state.singleUser.email.split('@')[1] !== 'guest.com'
   };
 };
 
-const mapDTP = { getProducts, addToCart };
+const mapDTP = { getProducts, addToCart, findGuest };
 
 export default withRouter(
   connect(

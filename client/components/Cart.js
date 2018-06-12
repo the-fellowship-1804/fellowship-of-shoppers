@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CartCard from './CartCard';
-import { removeFromCart } from '../store/singleUser';
+import { removeFromCart, addToCart } from '../store/singleUser';
+import { findGuest } from '../store/singleUser';
 
 class Cart extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
+  componentDidMount() {
+    if (!this.props.isLoggedIn) {
+      this.props.findGuest();
+    }
   }
 
   handleClick = () => {
@@ -36,8 +38,7 @@ class Cart extends React.Component {
           <button
             type="button"
             onClick={this.handleClick}
-            disabled={user.id ? user.cart.length === 0 : true}
-          >
+            disabled={user.id ? user.cart.length === 0 : true}>
             Checkout!
           </button>
         </div>
@@ -55,11 +56,14 @@ class Cart extends React.Component {
 
 const mapState = state => {
   return {
-    user: state.singleUser
+    user: state.singleUser,
+    isLoggedIn:
+      !!state.singleUser.id &&
+      state.singleUser.email.split('@')[1] !== 'guest.com'
   };
 };
 
-const mapProps = { removeFromCart };
+const mapProps = { removeFromCart, findGuest };
 
 export default connect(
   mapState,

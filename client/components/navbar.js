@@ -15,9 +15,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </div>
           <div className="navlinks">
             <Link to="/user">Your Account</Link>
-            <a href="#" onClick={handleClick}>
+            <Link to="/" onClick={handleClick}>
               Logout
-            </a>
+            </Link>
             <Link to="/cart">Cart</Link>
           </div>
         </div>
@@ -44,7 +44,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.singleUser.id
+    isLoggedIn:
+      !!state.singleUser.id &&
+      state.singleUser.email.split('@')[1] !== 'guest.com'
   };
 };
 

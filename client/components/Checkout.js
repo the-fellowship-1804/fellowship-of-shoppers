@@ -13,18 +13,6 @@ class Checkout extends React.Component {
     };
   }
 
-  // UNSAFE_componentWillReceiveProps(incomingProps) {
-  //   this.setState({
-  //     address: incomingProps.user.address
-  //   });
-  // }
-  // componentDidMount() {
-  //   this.setState({ address: this.props.user.address });
-  // }
-  // static getDerivedStateFromProps(nextProps, prevState) {
-
-  // }
-
   handleChange = event => {
     console.log(event.target.name, event.target.value);
     this.setState({
@@ -49,7 +37,7 @@ class Checkout extends React.Component {
         <h3>Checkout</h3>
         <div>
           Your total is:{' '}
-          {this.props.user.id ? `${totalPrice} space-cash` : 'Calculating...'}
+          {this.props.user.id ? `${totalPrice} Space Bucks` : 'Calculating...'}
         </div>
         <CheckoutAddress
           handleSubmit={this.handleSubmit}
