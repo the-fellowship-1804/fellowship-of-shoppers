@@ -36,8 +36,10 @@ const User = db.define('user', {
     type: Sequelize.JSON,
     defaultValue: '[]',
     get() {
-      if (this.getDataValue('orderHistory'))
-        return JSON.parse(this.getDataValue('orderHistory'));
+      return (
+        this.getDataValue('orderHistory') && //to deal with GET/api/users route failing
+        JSON.parse(this.getDataValue('orderHistory'))
+      );
     },
     set(value) {
       this.setDataValue('orderHistory', JSON.stringify(value));

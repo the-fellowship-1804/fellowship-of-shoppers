@@ -8,6 +8,7 @@ router.get('/', async (req, res, next) => {
     const users = await User.findAll({
       attributes: ['email', 'id']
     });
+    // console.log(users);
     res.json(users);
   } catch (error) {
     next(error);
@@ -17,7 +18,9 @@ router.get('/', async (req, res, next) => {
 //Get one user
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id, {
+      attributes: ['id', 'email']
+    });
     res.json(user);
   } catch (error) {
     next(error);
