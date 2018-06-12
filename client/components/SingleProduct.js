@@ -32,7 +32,6 @@ class SingleProduct extends Component {
       indivProduct => indivProduct.id == this.props.match.params.productId
     );
     try {
-      console.log(this.props.user);
       this.props.history.push('/cart');
       await this.props.addToCart(
         this.props.user.id,
@@ -89,8 +88,7 @@ class SingleProduct extends Component {
             <button
               type="button"
               onClick={this.handleClick}
-              disabled={!this.state.quantity}
-            >
+              disabled={!this.state.quantity}>
               Add to cart
             </button>
             <div>
