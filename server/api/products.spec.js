@@ -19,5 +19,9 @@ describe('Product routes', () => {
       const res = await request(app).get('/api/products');
       expect(res.status).to.equal(200);
     });
+    it('retrieves a proper and correct name for a created product', async () => {
+      const res = await request(app).get('/api/products');
+      expect(res.body[0].name).to.equal('The Death Star');
+    });
   });
 });
