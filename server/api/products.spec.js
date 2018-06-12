@@ -33,5 +33,13 @@ describe('Product routes', () => {
       const { body } = await request(app).get('/api/products');
       expect(body.length).to.equal(2);
     });
+    it('lets you put a thing with a returning put route', async () => {
+      const res = await request(app)
+        .put('/api/products/2')
+        .send({ price: 1701 });
+      expect(res.status).to.equal(200);
+      expect(res.body.name).to.equal('Enterprise-D');
+      expect(res.body.price).to.equal(1701);
+    });
   });
 });
