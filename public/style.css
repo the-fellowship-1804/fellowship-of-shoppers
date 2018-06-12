@@ -117,6 +117,12 @@ img {
   align-items: center;
 }
 
+/* Single Product */
+
+#single-product-description {
+  width: 70vw;
+}
+
 /* Product Card */
 
 #price {
