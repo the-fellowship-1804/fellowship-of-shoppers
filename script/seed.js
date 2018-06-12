@@ -57,7 +57,7 @@ async function seed() {
       name: `Imperial-class Star Destroyer`,
       price: '750',
       imageUrl:
-        'https://vignette.wikia.nocookie.net/starwars/images/b/b8/Imperial_I-class_SD_-_RO.jpg/revision/latest?cb=20160408013958',
+        'https://lumiere-a.akamaihd.net/v1/images/Star-Destroyer_ab6b94bb.jpeg?region=0%2C0%2C1600%2C900&width=768',
       class: 'Starship',
       firepower: 2500,
       crew: 45000,
@@ -74,7 +74,7 @@ async function seed() {
       name: `X-Wing`,
       price: '20',
       imageUrl:
-        'https://vignette.wikia.nocookie.net/starwars/images/b/bd/Battle_of_Yavin.png/revision/latest?cb=20121210202126',
+        'http://starwarswallpaperhd.com/web/wallpapers/rogue-one-x-wing-4k-ultra-widescreen-wallpaper-image-no-2/thumbnail/lg.jpg',
       class: 'Fighter',
       firepower: 120,
       crew: 1,

@@ -113,9 +113,11 @@ class AllProducts extends Component {
               />
               <Sort applySort={this.applySort} sort={this.state.sort} />
             </div>
-            {allProducts.map(product => {
-              return <ProductCard key={product.id} product={product} />;
-            })}
+            <div className="centerproductcontainer">
+              {allProducts.map(product => {
+                return <ProductCard key={product.id} product={product} />;
+              })}
+            </div>
           </div>
         );
       }

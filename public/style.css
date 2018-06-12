@@ -106,19 +106,50 @@ img {
   height: auto;
 }
 
+/* All Products */
+
+.centerproductcontainer {
+  margin: auto;
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 /* Product Card */
 
 #price {
   color: red;
 }
 
+.productcentercontainer {
+  width: 300px;
+  margin: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #productname {
   color: teal;
   text-decoration: none;
+  font-size: 18px;
 }
 
 #producttitle > a {
   text-decoration: none;
+}
+
+.crop {
+  height: 175px;
+  width: auto;
+  overflow: hidden;
+}
+
+.crop > img {
+  height: 175px;
+  width: auto;
 }
 
 /* Buttons */
