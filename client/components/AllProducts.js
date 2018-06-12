@@ -30,7 +30,6 @@ export class AllProducts extends Component {
   }
 
   applyFilter(event) {
-    // console.dir(event.target);
     this.setState({
       ...this.state,
       filter: true,
@@ -40,12 +39,10 @@ export class AllProducts extends Component {
   }
 
   applySort(event) {
-    // console.dir(event.target);
     this.setState({ sort: event.target.value });
   }
 
   render() {
-    console.log(this.state);
     let allProducts = this.state.filter
       ? this.props.products.filter(
           ship => ship.class === this.state.class || this.state.class === `All`
