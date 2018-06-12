@@ -23,5 +23,15 @@ describe('Product routes', () => {
       const res = await request(app).get('/api/products');
       expect(res.body[0].name).to.equal('The Death Star');
     });
+    it('lets you post a thing', async () => {
+      const res = await request(app)
+        .post('/api/products')
+        .send({
+          name: 'Enterprise-D'
+        });
+      expect(res.body.name).to.equal('Enterprise-D');
+      const { body } = await request(app).get('/api/products');
+      expect(body.length).to.equal(2);
+    });
   });
 });
