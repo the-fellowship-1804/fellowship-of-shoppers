@@ -14,7 +14,26 @@ const Product = require('./product.js');
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+const cartMerge = (disCart, loggedCart) => {
+  const output = loggedCart;
+  for (let i = 0; i < disCart.length; i++) {
+    let currentItem = disCart[i];
+    let match = loggedCart.find(
+      item => item.product.id === currentItem.product.id
+    );
+    if (!match) {
+      output.push(disCart[i]);
+    } else if (match.quantity >= disCart[i].quantity) continue;
+    else {
+      match.quantity = disCart[i].quantity;
+    }
+  }
+  return output;
+};
+
 module.exports = {
   User,
   Product,
+  cartMerge
 };

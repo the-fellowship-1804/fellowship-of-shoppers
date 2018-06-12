@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require('../db/models/user');
 module.exports = router;
 
-export const cartMerge = (disCart, loggedCart) => {
+const cartMerge = (disCart, loggedCart) => {
   const output = loggedCart;
   for (let i = 0; i < disCart.length; i++) {
     let currentItem = disCart[i];
@@ -11,7 +11,7 @@ export const cartMerge = (disCart, loggedCart) => {
     );
     if (!match) {
       output.push(disCart[i]);
-    } else if (match.quantity >= disCart.quantity) continue;
+    } else if (match.quantity >= disCart[i].quantity) continue;
     else {
       match.quantity = disCart[i].quantity;
     }
