@@ -232,7 +232,7 @@ select {
 #cart {
   display: flex;
   flex-direction: row;
-  margin-right: 10vw;
+  margin-right: 20vw;
 }
 
 #cartcheckout {
@@ -241,6 +241,38 @@ select {
 
 #cartitems {
   flex: 2 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* #cartcard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+} */
+
+#cartcard > link > p {
+  margin-left: 20px;
+}
+
+#cartquantity {
+  margin: 2px 2px;
+}
+
+#cartitemscontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cartpricequantity > p {
+  margin: 0px 0px 0px 0px;
+}
+
+#cartproductname {
+  color: teal;
+  text-decoration: none;
 }
 
 /* Small text */
