@@ -50,17 +50,22 @@ class CartCard extends React.Component {
   render() {
     const product = this.props.productObj.product;
     return (
-      <div>
-        {
-          <Link to={`/products/${product.id}`}>
-            <img src={product.productImageUrl} />
-            <p>{product.productName}</p>
-          </Link>
-        }
-        <p>Price: {product.price ? product.price : 'Free'}</p>
-        <div>Quantity: {this.props.productObj.quantity} </div>
+      <div id="cartitemscontainer">
+        <div id="cartcard">
+          {
+            <Link to={`/products/${product.id}`}>
+              <img src={product.imageUrl} />
+              <p id="cartproductname">{product.name}</p>
+            </Link>
+          }
+        </div>
+        <div id="cartpricequantity">
+          <p>Price: {product.price ? product.price : 'Free'}</p>
+          <p>Quantity: {this.props.productObj.quantity} </p>
+        </div>
         <label htmlFor="desiredQuantity">Change quantity:</label>
         <input
+          id="cartquantity"
           type="number"
           name="desiredQuantity"
           step="1"
@@ -71,14 +76,12 @@ class CartCard extends React.Component {
         <button
           type="button"
           onClick={this.handleClickQuantity}
-          disabled={this.state.desiredQuantity < 0}
-        >
+          disabled={this.state.desiredQuantity < 0}>
           Change Quantity
         </button>
         <button
           type="button"
-          onClick={event => this.handleClickRemove(event, product.id)}
-        >
+          onClick={event => this.handleClickRemove(event, product.id)}>
           Remove from Cart
         </button>
       </div>
