@@ -4,7 +4,7 @@ const db = require('../db');
 const app = require('../index');
 const Product = db.model('product');
 
-describe('Product routes', () => {
+describe('Product routes', async () => {
   beforeEach(() => {
     return db.sync({ force: true });
   });
@@ -35,11 +35,12 @@ describe('Product routes', () => {
     });
     it('lets you put a thing with a returning put route', async () => {
       const res = await request(app)
-        .put('/api/products/2')
-        .send({ price: 1701 });
+        .put('/api/products/1')
+        .send({ price: 9999 });
       expect(res.status).to.equal(200);
-      expect(res.body.name).to.equal('Enterprise-D');
-      expect(res.body.price).to.equal(1701);
+      expect(res.body.name).to.equal('The Death Star');
+      expect(res.body.price).to.equal(`9999`);
     });
+    // it('lets you delete a thing with a delete route',)
   });
 });
