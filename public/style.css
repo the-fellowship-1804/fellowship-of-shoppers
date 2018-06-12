@@ -227,6 +227,22 @@ select {
   color: white;
 }
 
+/* Cart */
+
+#cart {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10vw;
+}
+
+#cartcheckout {
+  flex: 1 0 auto;
+}
+
+#cartitems {
+  flex: 2 1 auto;
+}
+
 /* Small text */
 
 .small {
