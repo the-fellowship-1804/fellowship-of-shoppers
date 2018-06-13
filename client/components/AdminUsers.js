@@ -25,6 +25,8 @@ class AdminUsers extends React.Component {
   async deleteUser(event) {
     console.log(event.target.value);
     await axios.delete(`/api/users/${event.target.value}`);
+    const { data } = await axios.get(`/api/users`);
+    this.setState({ users: data });
   }
 
   render() {
