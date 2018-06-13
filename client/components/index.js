@@ -16,3 +16,4 @@ export { default as EditUser } from './EditUser';
 export { default as AdminProducts } from './AdminProducts';
 export { default as AdminUsers } from './AdminUsers';
 export { default as AdminProductsAdd } from './AdminProductsAdd';
+export { default as Success } from './AdminProductAddSuccess';

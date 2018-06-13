@@ -35,10 +35,11 @@ export default class AdminsProductsAdd extends React.Component {
     });
   }
 
-  async handleSubmit() {
+  async handleSubmit(evt) {
+    evt.preventDefault();
     try {
       await axios.post('/api/products/', this.state);
-      this.props.history.push('/products');
+      this.props.history.push('/success');
     } catch (err) {
       console.log(err);
     }
@@ -192,11 +193,9 @@ export default class AdminsProductsAdd extends React.Component {
           </p>
           <p>
             Click to Submit:<br />
-            {/* <Link to="/products"> */}
             <button id="submitform" type="submit">
               Submit
             </button>
-            {/* </Link> */}
           </p>
         </form>
       </div>

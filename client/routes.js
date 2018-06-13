@@ -14,7 +14,8 @@ import {
   EditUser,
   AdminProducts,
   AdminUsers,
-  AdminProductsAdd
+  AdminProductsAdd,
+  Success
 } from './components';
 import { me } from './store';
 
@@ -47,6 +48,7 @@ class Routes extends Component {
             <Route exact path="/user" component={SingleUser} />
             <Route exact path="/editAccount" component={EditUser} />
             <Route exact path="/addproduct" component={AdminProductsAdd} />
+            <Route exact path="/success" component={Success} />
           </Switch>
         ) : isLoggedIn ? (
           <Switch>
