@@ -75,7 +75,7 @@ router.delete('/:id', async (req, res, next) => {
   try {
     await User.destroy({
       where: {
-        id: req.id
+        id: req.params.id
       }
     });
     res.end();

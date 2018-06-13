@@ -10,6 +10,7 @@ class AdminUsers extends React.Component {
       sort: 'id'
     };
     this.applySort = this.applySort.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
   async componentDidMount() {
     const res = await axios.get('/api/users');
@@ -19,6 +20,11 @@ class AdminUsers extends React.Component {
 
   applySort(event) {
     this.setState({ sort: event.target.value });
+  }
+
+  async deleteUser(event) {
+    console.log(event.target.value);
+    await axios.delete(`/api/users/${event.target.value}`);
   }
 
   render() {
@@ -47,7 +53,7 @@ class AdminUsers extends React.Component {
 
     return (
       <div id="adminusertitle">
-        <h4>ADMIN > EDIT USERS</h4>
+        <h3>ADMIN > EDIT USERS</h3>
         <div>
           <AdminUsersSort applySort={this.applySort} />
         </div>
@@ -58,7 +64,7 @@ class AdminUsers extends React.Component {
                 <h4>
                   User: [id: {user.id}, email: {user.email}]
                 </h4>
-                <button type="submit" onClick={this.deleteUser}>
+                <button value={user.id} type="submit" onClick={this.deleteUser}>
                   Delete User
                 </button>
               </div>
