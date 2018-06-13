@@ -23,8 +23,9 @@ class CheckoutForm extends React.Component {
         type: 'card',
         name: user.email
       });
-      await axios.post(`/api/charge/${this.props.price}`, {
-        stripeTokenId: stripeToken.token.id
+      await axios.post(`/api/charge`, {
+        stripeTokenId: stripeToken.token.id,
+        cart: user.cart
       });
       await this.props.checkOut(this.props.user.id, updatedOrderHistory);
       this.setState({
