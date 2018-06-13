@@ -210,6 +210,10 @@ nav {
   align-self: flex-start;
 }
 
+#landingimage {
+  width: 90vw;
+}
+
 /* All products */
 
 #allproductsheading {

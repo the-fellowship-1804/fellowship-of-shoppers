@@ -1,7 +1,16 @@
 import React from 'react';
+import axios from 'axios';
 
-const AdminUsers = () => {
-  return <h1>EDIT USERS</h1>;
-};
+class AdminUsers extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      users: []
+    };
+  }
+  render() {
+    return <h1>EDIT USERS</h1>;
+  }
+}
 
 export default AdminUsers;
