@@ -8,20 +8,20 @@ export default class AdminsProductsAdd extends React.Component {
 
     this.state = {
       name: '',
-      price: '',
+      price: 0,
       imageUrl:
         'https://pre00.deviantart.net/8859/th/pre/f/2010/279/d/5/generic_space_wallpaper_1_by_zoken-d3087rr.png',
       class: 'Space Station',
-      firepower: undefined,
-      crew: undefined,
-      topSpeed: undefined,
-      acceleration: undefined,
-      weight: undefined,
-      length: undefined,
-      width: undefined,
-      depth: undefined,
-      diameter: undefined,
-      description: undefined
+      firepower: 0,
+      crew: 0,
+      topSpeed: 0,
+      acceleration: 0,
+      weight: 0,
+      length: 0,
+      width: 0,
+      depth: 0,
+      diameter: 0,
+      description: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
