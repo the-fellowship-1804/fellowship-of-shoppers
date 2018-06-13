@@ -13,9 +13,13 @@ class AdminUsers extends React.Component {
     this.deleteUser = this.deleteUser.bind(this);
   }
   async componentDidMount() {
-    const res = await axios.get('/api/users');
-    const users = res.data;
-    this.setState({ users });
+    try {
+      const res = await axios.get('/api/users');
+      const users = res.data;
+      this.setState({ users });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   applySort(event) {
@@ -23,10 +27,13 @@ class AdminUsers extends React.Component {
   }
 
   async deleteUser(event) {
-    console.log(event.target.value);
-    await axios.delete(`/api/users/${event.target.value}`);
-    const { data } = await axios.get(`/api/users`);
-    this.setState({ users: data });
+    try {
+      await axios.delete(`/api/users/${event.target.value}`);
+      const { data } = await axios.get(`/api/users`);
+      this.setState({ users: data });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {

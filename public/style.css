@@ -48,6 +48,7 @@ a {
 
 button > a {
   color: white;
+  text-decoration: none;
 }
 
 label {
@@ -181,6 +182,7 @@ button {
   color: white;
   background-color: teal;
   text-shadow: 0 1px 1px #205996;
+  text-decoration: none;
 }
 
 /* Navbar */
@@ -304,4 +306,9 @@ select {
 #adminuserinfodelete {
   display: flex;
   flex-direction: row;
+}
+
+/* Admin Products */
+link {
+  text-decoration: none;
 }

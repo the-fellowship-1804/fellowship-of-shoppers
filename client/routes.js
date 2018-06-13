@@ -13,7 +13,8 @@ import {
   Checkout,
   EditUser,
   AdminProducts,
-  AdminUsers
+  AdminUsers,
+  AdminProductsAdd
 } from './components';
 import { me } from './store';
 
@@ -32,7 +33,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={Landing} />
         <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/login" component={Login} />
@@ -45,6 +46,7 @@ class Routes extends Component {
             <Route exact path="/editusers" component={AdminUsers} />
             <Route exact path="/user" component={SingleUser} />
             <Route exact path="/editAccount" component={EditUser} />
+            <Route exact path="/addproduct" component={AdminProductsAdd} />
           </Switch>
         ) : isLoggedIn ? (
           <Switch>

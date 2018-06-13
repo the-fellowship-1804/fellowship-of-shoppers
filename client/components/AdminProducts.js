@@ -33,7 +33,6 @@ class AdminProducts extends React.Component {
   }
 
   applyFilter(event) {
-    // console.dir(event.target);
     this.setState({
       ...this.state,
       filter: true,
@@ -43,15 +42,16 @@ class AdminProducts extends React.Component {
   }
 
   applySort(event) {
-    // console.dir(event.target);
     this.setState({ sort: event.target.value });
   }
 
   async deleteItem(event) {
-    // event.preventDefault();
-    // console.log(event.target.value);
-    await axios.delete(`/api/products/${event.target.value}`);
-    this.props.getProducts();
+    try {
+      await axios.delete(`/api/products/${event.target.value}`);
+      this.props.getProducts();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
@@ -121,6 +121,9 @@ class AdminProducts extends React.Component {
                 class={this.state.class}
               />
               <Sort applySort={this.applySort} sort={this.state.sort} />
+              <button type="button">
+                <Link to="/addproduct">Add Product</Link>
+              </button>
             </div>
             <div className="centerproductcontainer">
               {allProducts.map(product => {
