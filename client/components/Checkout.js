@@ -14,7 +14,6 @@ class Checkout extends React.Component {
   }
 
   handleChange = event => {
-    console.log(event.target.name, event.target.value);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -30,8 +29,6 @@ class Checkout extends React.Component {
 
   render() {
     const totalPrice = this.props.user.id ? this.caluculateTotalPrice() : null;
-    console.log(this.props.user.address);
-    console.log(this.state);
     return (
       <div>
         <h3>Checkout</h3>

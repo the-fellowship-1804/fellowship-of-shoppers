@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Sort = props => {
-  console.log(props);
   return (
     <select id="sort" name="sort" onChange={props.applySort}>
       <option value="byname">

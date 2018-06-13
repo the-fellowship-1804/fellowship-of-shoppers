@@ -4,18 +4,14 @@ module.exports = router;
 
 const cartMerge = (disCart, loggedCart) => {
   const output = loggedCart;
-  console.log('discarding cart:', disCart);
-  console.log('logged cart is', loggedCart);
   for (let i = 0; i < disCart.length; i++) {
     let currentItem = disCart[i];
-    console.log(disCart[i]);
-    console.log('current Item:', currentItem);
     let match = loggedCart.find(
       item => item.product.id === currentItem.product.id
     );
     if (!match) {
       output.push(disCart[i]);
-    } else if (match.quantity >= disCart.quantity) continue;
+    } else if (match.quantity >= disCart[i].quantity) continue;
     else {
       match.quantity = disCart[i].quantity;
     }
@@ -23,11 +19,10 @@ const cartMerge = (disCart, loggedCart) => {
   return output;
 };
 
-router.get('/guest', async (req, res, next) => {
+router.get('/guest', (req, res, next) => {
   try {
-    const user = await User.findById(req.session.currentUser.id);
-    console.log(user);
-    res.json(user);
+    // const user = await User.findById(req.session.currentUser.id);
+    res.json(req.session.currentUser);
   } catch (err) {
     next(err);
   }
