@@ -112,7 +112,7 @@ class AdminProducts extends React.Component {
         return (
           <div>
             <h2 id="allproductsheading">
-              Admin View > All Products{' '}
+              Admin > Add/Edit/Delete Products{' '}
               {this.state.class === 'All' ? `` : `> ${this.state.class}s`}
             </h2>
             <div>

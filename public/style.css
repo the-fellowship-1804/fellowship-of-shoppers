@@ -38,7 +38,7 @@ body {
   font-family: sans-serif;
   padding-top: 50px;
   padding-bottom: 50px;
-  background-image: url('https://onemartialarts.com/after-school/wp-content/uploads/2015/08/off-white-textured-background-1920x10803.jpg');
+  /* background-image: url('https://onemartialarts.com/after-school/wp-content/uploads/2015/08/off-white-textured-background-1920x10803.jpg'); */
   background-color: lightgray;
 }
 
@@ -214,6 +214,9 @@ nav {
   width: 90vw;
 }
 
+.pause {
+}
+
 /* All products */
 
 #allproductsheading {
@@ -283,4 +286,22 @@ select {
 
 .small {
   font-size: 1;
+}
+
+/* Admin Users Page */
+
+#adminusertitle {
+  margin-left: 30px;
+}
+
+#adminuserlist {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 30px;
+}
+
+#adminuserinfodelete {
+  display: flex;
+  flex-direction: row;
 }
