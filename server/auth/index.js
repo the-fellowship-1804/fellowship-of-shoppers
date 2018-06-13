@@ -19,10 +19,10 @@ const cartMerge = (disCart, loggedCart) => {
   return output;
 };
 
-router.get('/guest', (req, res, next) => {
+router.get('/guest', async (req, res, next) => {
   try {
-    // const user = await User.findById(req.session.currentUser.id);
-    res.json(req.session.currentUser);
+    const user = await User.findById(req.session.currentUser.id);
+    res.json(user);
   } catch (err) {
     next(err);
   }
@@ -82,9 +82,13 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-router.post('/logout', (req, res) => {
-  req.session.destroy();
+router.post('/logout', async (req, res) => {
+  req.session.currentUser = null;
   req.logout();
+  const newUser = await User.create({
+    email: Date.now() + '@guest.com'
+  });
+  req.session.currentUser = newUser;
   res.sendStatus(204);
 });
 
