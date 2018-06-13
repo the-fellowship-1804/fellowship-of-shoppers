@@ -312,3 +312,11 @@ select {
 link {
   text-decoration: none;
 }
+
+/* Success Page */
+
+#successcenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

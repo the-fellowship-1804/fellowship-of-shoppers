@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Success = () => {
   return (
-    <div>
+    <div id="successcenter">
       <div className="mainlanding">
         <h1 className="header1">Product successfully added to inventory!</h1>
       </div>

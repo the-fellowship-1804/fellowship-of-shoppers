@@ -52,8 +52,8 @@ class AllProducts extends Component {
 
     if (this.state.sort === 'byname') {
       allProducts = allProducts.sort((ObjA, ObjB) => {
-        const nameA = ObjA.name,
-          nameB = ObjB.name;
+        const nameA = ObjA.name.toLowerCase(),
+          nameB = ObjB.toLowerCase();
         if (nameA < nameB) return -1;
         if (nameB < nameA) return 1;
         return 0;
