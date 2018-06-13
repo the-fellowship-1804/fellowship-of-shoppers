@@ -28,28 +28,54 @@ class Landing extends Component {
         const deathStar = this.props.products.find(ship => {
           return ship.name === 'The Death Star';
         });
-        if (!deathStar.id) return <h3>No seed</h3>;
-        return (
-          <div>
-            <div className="mainlanding">
-              <h1 className="header1">Welcome to the StarShip Depot</h1>
+        if (!deathStar) {
+          return (
+            <div>
+              <div className="mainlanding">
+                <h1 className="header1">Welcome to the StarShip Depot</h1>
+              </div>
+              <div className="centercontainer">
+                <img id="landingimage" src="https://i.gifer.com/7U5F.gif" />
+              </div>
+              <div className="centercontainer">
+                <h4>A message from the Dealers....</h4>
+                <p>
+                  The galaxy awaits! Choose a ship and let the journey begin!
+                </p>
+                <p className="small">
+                  Disclaimer: All sales are final. Used items are sold in "as
+                  is" condition. Vendor is not liable for malfunctioning parts
+                  or sudden ejection into space. Exhaust port covers from
+                  third-party sellers are HIGHLY recommended.
+                </p>
+              </div>
             </div>
-            <div className="centercontainer">
-              <h2 id="sale">FLASH SALE!</h2>
-              <ProductCard product={deathStar} />
+          );
+        } else {
+          return (
+            <div>
+              <div className="mainlanding">
+                <h1 className="header1">Welcome to the StarShip Depot</h1>
+              </div>
+              <div className="centercontainer">
+                <h2 id="sale">FLASH SALE!</h2>
+                <ProductCard product={deathStar} />
+              </div>
+              <div className="centercontainer">
+                <h4>A message from the Dealers....</h4>
+                <p>
+                  The galaxy awaits! Choose a ship and let the journey begin!
+                </p>
+                <p className="small">
+                  Disclaimer: All sales are final. Used items are sold in "as
+                  is" condition. Vendor is not liable for malfunctioning parts
+                  or sudden ejection into space. Exhaust port covers from
+                  third-party sellers are HIGHLY recommended.
+                </p>
+              </div>
             </div>
-            <div className="centercontainer">
-              <h4>A message from the Dealers....</h4>
-              <p>The galaxy awaits! Choose a ship and let the journey begin!</p>
-              <p className="small">
-                Disclaimer: All sales are final. Used items are sold in "as is"
-                condition. Vendor is not liable for malfunctioning parts or
-                sudden ejection into space. Exhaust port covers from third-party
-                sellers are HIGHLY recommended.
-              </p>
-            </div>
-          </div>
-        );
+          );
+        }
       }
       default: {
         return <div>Mistakes were made</div>;

@@ -19,10 +19,10 @@ const cartMerge = (disCart, loggedCart) => {
   return output;
 };
 
-router.get('/guest', async (req, res, next) => {
+router.get('/guest', (req, res, next) => {
   try {
-    const user = await User.findById(req.session.currentUser.id);
-    res.json(user);
+    // const user = await User.findById(req.session.currentUser.id);
+    res.json(req.session.currentUser);
   } catch (err) {
     next(err);
   }

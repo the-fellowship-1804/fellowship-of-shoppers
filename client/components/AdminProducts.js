@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { getProducts } from '../store/allProducts';
-import { withRouter, Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
+import { getProducts } from '../store/allProducts';
+
+import { withRouter, Link } from 'react-router-dom';
 import Filters from './AllProductsFilters';
 import Sort from './AllProductsSort';
+import axios from 'axios';
 
 const [UNASKED, LOADING, LOADED, ERROR] = [
   'UNASKED',
@@ -13,7 +15,7 @@ const [UNASKED, LOADING, LOADED, ERROR] = [
   'ERROR'
 ];
 
-export class AllProducts extends Component {
+class AdminProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +25,7 @@ export class AllProducts extends Component {
     };
     this.applyFilter = this.applyFilter.bind(this);
     this.applySort = this.applySort.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +43,15 @@ export class AllProducts extends Component {
 
   applySort(event) {
     this.setState({ sort: event.target.value });
+  }
+
+  async deleteItem(event) {
+    try {
+      await axios.delete(`/api/products/${event.target.value}`);
+      this.props.getProducts();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
@@ -100,7 +112,7 @@ export class AllProducts extends Component {
         return (
           <div>
             <h2 id="allproductsheading">
-              All Products{' '}
+              Admin > Add/Edit/Delete Products{' '}
               {this.state.class === 'All' ? `` : `> ${this.state.class}s`}
             </h2>
             <div>
@@ -109,10 +121,24 @@ export class AllProducts extends Component {
                 class={this.state.class}
               />
               <Sort applySort={this.applySort} sort={this.state.sort} />
+              <button type="button">
+                <Link to="/addproduct">Add Product</Link>
+              </button>
             </div>
             <div className="centerproductcontainer">
               {allProducts.map(product => {
-                return <ProductCard key={product.id} product={product} />;
+                return (
+                  <div key={product.id}>
+                    <ProductCard key={product.id} product={product} />
+                    <button
+                      value={product.id}
+                      onClick={this.deleteItem}
+                      type="submit"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                );
               })}
             </div>
           </div>
@@ -125,12 +151,11 @@ export class AllProducts extends Component {
   }
 }
 
-const mapSTP = state => {
-  return {
-    products: state.allProducts.products,
-    status: state.allProducts.status
-  };
-};
+const mapSTP = state => ({
+  user: state.singleUser,
+  products: state.allProducts.products,
+  status: state.allProducts.status
+});
 
 const mapDTP = { getProducts };
 
@@ -138,5 +163,5 @@ export default withRouter(
   connect(
     mapSTP,
     mapDTP
-  )(AllProducts)
+  )(AdminProducts)
 );

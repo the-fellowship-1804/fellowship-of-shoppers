@@ -6,7 +6,10 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ['email', 'id']
+      attributes: {
+        include: ['email', 'id'],
+        exclude: ['password', 'googleId', 'address']
+      }
     });
     res.json(users);
   } catch (error) {
@@ -73,7 +76,7 @@ router.delete('/:id', async (req, res, next) => {
   try {
     await User.destroy({
       where: {
-        id: req.id
+        id: req.params.id
       }
     });
     res.end();
