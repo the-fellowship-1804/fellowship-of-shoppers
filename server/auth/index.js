@@ -83,12 +83,12 @@ router.post('/signup', async (req, res, next) => {
 });
 
 router.post('/logout', async (req, res) => {
-  req.session.currentUser = null;
+  req.session.destroy();
   req.logout();
-  const newUser = await User.create({
-    email: Date.now() + '@guest.com'
-  });
-  req.session.currentUser = newUser;
+  // const newUser = await User.create({
+  //   email: Date.now() + '@guest.com'
+  // });
+  // req.session.currentUser = newUser;
   res.sendStatus(204);
 });
 
