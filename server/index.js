@@ -60,6 +60,7 @@ const createApp = () => {
         email: Date.now() + '@guest.com'
       });
       req.session.currentUser = newUser;
+      console.log('HIT THIS IF');
       next();
     } else next();
   });
