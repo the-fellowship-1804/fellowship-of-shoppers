@@ -195,7 +195,7 @@ export default class AdminsProductsAdd extends React.Component {
           <p>
             Click to Submit:<br />
             {/* <Link to="/products"> */}
-            <button id="submitform" type="submit" onClick={this.handleSubmit}>
+            <button id="submitform" type="submit">
               Submit
             </button>
             {/* </Link> */}
