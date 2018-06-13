@@ -60,7 +60,6 @@ const createApp = () => {
         email: Date.now() + '@guest.com'
       });
       req.session.currentUser = newUser;
-      // req.session.userId = req.session.currentUser.id * -1;
       next();
     } else next();
   });

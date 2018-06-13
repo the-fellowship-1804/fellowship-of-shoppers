@@ -19,10 +19,10 @@ const cartMerge = (disCart, loggedCart) => {
   return output;
 };
 
-router.get('/guest', (req, res, next) => {
+router.get('/guest', async (req, res, next) => {
   try {
-    // const user = await User.findById(req.session.currentUser.id);
-    res.json(req.session.currentUser);
+    const user = await User.findById(req.session.currentUser.id);
+    res.json(user);
   } catch (err) {
     next(err);
   }
@@ -83,8 +83,8 @@ router.post('/signup', async (req, res, next) => {
 });
 
 router.post('/logout', (req, res) => {
-  req.session.destroy();
   req.logout();
+  req.session.destroy();
   res.sendStatus(204);
 });
 

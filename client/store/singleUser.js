@@ -59,7 +59,7 @@ export const logout = () => dispatch => {
 export const findGuest = () => async dispatch => {
   try {
     const { data } = await axios.get('/auth/guest');
-    dispatch(getUser(data));
+    dispatch(updateUser(data));
   } catch (err) {
     console.log(err);
   }
