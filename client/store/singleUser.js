@@ -59,7 +59,7 @@ export const logout = () => dispatch => {
 export const findGuest = () => async dispatch => {
   try {
     const { data } = await axios.get('/auth/guest');
-    dispatch(updateUser(data));
+    dispatch(aCC('GUEST_CHECKOUT', data));
   } catch (err) {
     console.log(err);
   }
@@ -149,6 +149,8 @@ export default function(state = defaultUser, action) {
         orderHistory: action.payload,
         cart: []
       };
+    case 'GUEST_CHECKOUT':
+      return action.payload;
     default:
       return state;
   }

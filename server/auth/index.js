@@ -93,7 +93,8 @@ router.post('/logout', async (req, res) => {
 });
 
 router.get('/me', (req, res) => {
-  res.json(req.user);
+  if (req.session.currentUser) res.json(req.session.currentUser);
+  else res.json(req.user);
 });
 
 router.use('/google', require('./google'));
