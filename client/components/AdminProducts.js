@@ -72,33 +72,15 @@ class AdminProducts extends React.Component {
     }
 
     if (this.state.sort === 'byfirepower') {
-      allProducts = allProducts.sort((ObjA, ObjB) => {
-        const fireA = ObjA.firepower,
-          fireB = ObjB.firepower;
-        if (fireA < fireB) return 1;
-        if (fireB < fireA) return -1;
-        return 0;
-      });
+      allProducts = allProducts.sort((a, b) => b.price - a.price);
     }
 
     if (this.state.sort === 'bypricehightolow') {
-      allProducts = allProducts.sort((ObjA, ObjB) => {
-        const priceA = ObjA.price,
-          priceB = ObjB.price;
-        if (priceA < priceB) return 1;
-        if (priceB < priceA) return -1;
-        return 0;
-      });
+      allProducts = allProducts.sort((a, b) => b.price - a.price);
     }
 
     if (this.state.sort === 'bypricelowtohigh') {
-      allProducts = allProducts.sort((ObjA, ObjB) => {
-        const priceA = ObjA.price,
-          priceB = ObjB.price;
-        if (priceA < priceB) return -1;
-        if (priceB < priceA) return 1;
-        return 0;
-      });
+      allProducts = allProducts.sort((a, b) => a.price - b.price);
     }
 
     switch (this.props.status) {
