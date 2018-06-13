@@ -49,8 +49,6 @@ export default class AdminsProductsAdd extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
     return (
       <div id="formcontainer">
         <h3 id="formlabel">Add a New Starship</h3>
