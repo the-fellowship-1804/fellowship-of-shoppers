@@ -83,17 +83,18 @@ router.post('/signup', async (req, res, next) => {
 });
 
 router.post('/logout', async (req, res) => {
-  req.session.currentUser = null;
+  req.session.destroy();
   req.logout();
-  const newUser = await User.create({
-    email: Date.now() + '@guest.com'
-  });
-  req.session.currentUser = newUser;
+  // const newUser = await User.create({
+  //   email: Date.now() + '@guest.com'
+  // });
+  // req.session.currentUser = newUser;
   res.sendStatus(204);
 });
 
 router.get('/me', (req, res) => {
-  res.json(req.user);
+  if (req.session.currentUser) res.json(req.session.currentUser);
+  else res.json(req.user);
 });
 
 router.use('/google', require('./google'));
